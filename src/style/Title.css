@@ -7,6 +7,15 @@
   background: url("/public/images/title.png") no-repeat center;
   background-size: cover;
 }
+.box-text {
+  padding: 50px 100px;
+  background: #3e8e41;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .logo {
   width: 350px;
   height: 150px;
@@ -29,7 +38,6 @@
   min-height: 100vh;
   color: white;
 }
-
 
 .input-title {
   display: flex;

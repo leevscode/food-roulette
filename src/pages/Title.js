@@ -6,14 +6,15 @@ const Title = () => {
   return (
     <div className="bg-box">
       <div className="box">
+        <div className="box-text">
         <div className="logo"></div>
-        <br />
-        <div className="">당신은 누구십니까?</div>
+        <p>당신은 누구십니까?</p>
         <input className="input-title"></input>
         <br />
         <Link to="/main" className="button-submit">
           <button>딸깍</button>
         </Link>
+        </div>
       </div>
     </div>
   );
