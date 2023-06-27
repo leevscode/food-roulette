@@ -17,8 +17,8 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/calender" className="text-white hover:text-orange-600">
-              calender
+            <Link to="/Calendar" className="text-white hover:text-orange-600">
+              Calendar
             </Link>
           </li>
           <li>

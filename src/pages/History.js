@@ -1,7 +1,7 @@
 import React from "react";
 
 const History = () => {
-  return <div style={{ fontWeight: 400 }}>History</div>;
+  return <div>History</div>;
 };
 
 export default History;
