@@ -1,13 +1,43 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@charset "utf-8";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: "omyu_pretty";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  vertical-align: middle;
+  border: 0;
+}
+ul {
+  list-style: none;
+}
+html {
+  font-size: 16px;
+}
+body {
+  font-family: "omyu_pretty", "sans-serif";
+  font-size: 24px;
+  color: #000;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  word-break: keep-all;
+}
+button {
+  border: none;
+  cursor: pointer;
 }
