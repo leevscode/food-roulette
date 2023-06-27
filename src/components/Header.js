@@ -34,7 +34,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/calender"
+                to="/calendar"
                 className={({ isActive }) =>
                   "" + (isActive ? "text-emerald-500" : "text-white")
                 }
