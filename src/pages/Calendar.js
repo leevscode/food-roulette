@@ -58,6 +58,7 @@ const Schedule = () => {
           <Calendar
             onClickDay={handleClickDay}
             calendarType="US"
+            formatDay={(locale, date) => moment(date).format("D")}
             tileContent={showScheduleJSX}
           />
         </div>
