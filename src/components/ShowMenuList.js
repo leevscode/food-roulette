@@ -21,16 +21,14 @@ const ShowMenuList = () => {
           }}
         >
           {showMenu.map((item, index) => (
-            <>
-              <div key={index}>
-                <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
-                <p>태그들 : {item.tag}</p>
-                <button>해시태그수정</button>
-                <br />
-                <button>메뉴삭제</button>
-              </div>
+            <div key={index}>
+              <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
+              <p>태그들 : {item.tag}</p>
+              <button>해시태그수정</button>
+              <br />
+              <button>메뉴삭제</button>
               <hr />
-            </>
+            </div>
           ))}
         </div>
       </div>
