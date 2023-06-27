@@ -1,0 +1,25 @@
+import React from "react";
+import PacmanLoader from "react-spinners/PacmanLoader";
+
+const Loading = () => {
+  const styleObj = {
+    position: "fixed",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    left: 0,
+    top: 0,
+    background: "rgba(0, 0, 0, 0.8)",
+    zIndex: 99999999999999,
+  };
+  return (
+    <div style={styleObj}>
+      로딩중...
+      <PacmanLoader color="rgb(255,242,0)" size={50} />
+    </div>
+  );
+};
+
+export default Loading;
