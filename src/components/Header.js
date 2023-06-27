@@ -1,41 +1,70 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+
+import { Link, Outlet, NavLink } from "react-router-dom";
+
 
 const Header = () => {
   return (
     <>
-      <header className="p-7 bg-black">
+      <header className="p-7 bg-gray-800">
         <div className="flex flex-wrap align-items-center justify-between">
+          <div>
+            <Link to="/" className="text-white hover:text-indigo-600">
+              로그아웃
+            </Link>
+          </div>
           <ul className="flex items-center justify-center gap-4">
             <li>
-              <Link to="/" className="text-white hover:text-orange-600">
-                타이틀화면
-              </Link>
+              <NavLink
+                to="/main"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-lime-500" : "text-white")
+                }
+              >
+                룰렛
+              </NavLink>
             </li>
             <li>
-              <Link to="/main" className="text-white hover:text-orange-600">
-                메인화면=룰렛
-              </Link>
+              <NavLink
+                to="/menu"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-green-500" : "text-white")
+                }
+              >
+                메뉴 설정
+              </NavLink>
             </li>
             <li>
-              <Link to="/Calendar" className="text-white hover:text-orange-600">
-                Calendar
-              </Link>
+              <NavLink
+                to="/calendar"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-emerald-500" : "text-white")
+                }
+              >
+                달력
+              </NavLink>
             </li>
             <li>
-              <Link to="/menu" className="text-white hover:text-yellow-600">
-                메뉴설정
-              </Link>
-            </li>
-            <li>
-              <Link to="/history" className="text-white hover:text-amber-400">
-                History
-              </Link>
+              <NavLink
+                to="/history"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-teal-500" : "text-white")
+                }
+              >
+                히스토리
+              </NavLink>
             </li>
           </ul>
+          <div>
+            <Link to="/" className="text-white hover:text-rose-500">
+              한도
+            </Link>
+          </div>
         </div>
       </header>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };
