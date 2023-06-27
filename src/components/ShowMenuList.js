@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const ShowMenuList = () => {
   return (
-    <div>ShowMenuList</div>
-  )
-}
+    <div>
+      <>메뉴리스트</>
+    </div>
+  );
+};
 
-export default ShowMenuList
+export default ShowMenuList;

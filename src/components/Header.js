@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -13,9 +13,14 @@ const Header = () => {
           </div>
           <ul className="flex items-center justify-center gap-4">
             <li>
-              <Link to="/main" className="text-white hover:text-green-600">
+              <NavLink
+                to="/main"
+                className={({ isActive }) =>
+                  "text-" + (isActive ? "emerald-600" : "white")
+                }
+              >
                 룰렛
-              </Link>
+              </NavLink>
             </li>
             <li>
               <Link to="/menu" className="text-white hover:text-emerald-600">
