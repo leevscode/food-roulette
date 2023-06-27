@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Menu = () => {
   return (
-    <div>Menu</div>
-  )
-}
+    <>
+      <div>Menu</div>
+    </>
+  );
+};
 
-export default Menu
+export default Menu;
