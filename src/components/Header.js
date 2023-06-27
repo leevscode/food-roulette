@@ -4,10 +4,10 @@ import { Link, Outlet, NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <header className="p-7 bg-black">
+      <header className="p-7 bg-gray-800">
         <div className="flex flex-wrap align-items-center justify-between">
           <div>
-            <Link to="/" className="text-white hover:text-orange-600">
+            <Link to="/" className="text-white hover:text-indigo-600">
               로그아웃
             </Link>
           </div>
@@ -16,30 +16,45 @@ const Header = () => {
               <NavLink
                 to="/main"
                 className={({ isActive }) =>
-                  "text-" + (isActive ? "emerald-600" : "white")
+                  "" + (isActive ? "text-lime-500" : "text-white")
                 }
               >
                 룰렛
               </NavLink>
             </li>
             <li>
-              <Link to="/menu" className="text-white hover:text-emerald-600">
+              <NavLink
+                to="/menu"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-green-500" : "text-white")
+                }
+              >
                 메뉴 설정
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/calender" className="text-white hover:text-green-600">
+              <NavLink
+                to="/calender"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-emerald-500" : "text-white")
+                }
+              >
                 달력
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/history" className="text-white hover:text-emerald-400">
+              <NavLink
+                to="/history"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-teal-500" : "text-white")
+                }
+              >
                 히스토리
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <div>
-            <Link to="/" className="text-white hover:text-orange-600">
+            <Link to="/" className="text-white hover:text-rose-500">
               한도
             </Link>
           </div>
