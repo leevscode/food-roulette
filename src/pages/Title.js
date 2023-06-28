@@ -1,22 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../style/Title.css";
+import { Box, TitleBg, TextBox, Logo, TitleInput, TitleButton } from "../style/TitleCSS";
 
 const Title = () => {
   return (
-    <div className="bg-box">
-      <div className="box">
-        <div className="box-text">
-        <div className="logo"></div>
-        <p>당신은 누구십니까?</p>
-        <input className="input-title"></input>
-        <br />
-        <Link to="/main" className="button-submit">
-          <button>딸깍</button>
+    <Box>
+      <TitleBg>
+        <TextBox>
+          <Logo></Logo>
+          <p>당신은 누구십니까?</p>
+          <TitleInput></TitleInput>
+          <br />
+          <Link to="/main">
+          <TitleButton>딸깍</TitleButton>
         </Link>
-        </div>
-      </div>
-    </div>
+        </TextBox>
+      </TitleBg>
+    </Box>
   );
 };
 
