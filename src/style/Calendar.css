@@ -1,11 +1,13 @@
 .react-calendar {
-  width: 700px;
+  width: 1000px;
+  height: 735px;
   max-width: 100%;
   max-height: 100%;
-  background: white;
+  background: #7FFFD4;
+  margin-top: 40px;
   border: 1px solid #a0a096;
   font-family: "omyu_pretty";
-  line-height: 1.125em;
+  line-height: 0.75em;
 }
 
 .react-calendar--doubleView {
@@ -35,6 +37,7 @@
   margin: 0;
   border: 0;
   outline: none;
+  padding: 40px;
 }
 
 .react-calendar button:enabled:hover {
@@ -43,12 +46,12 @@
 
 .react-calendar__navigation {
   display: flex;
-  height: 44px;
+  height: 100px;
   margin-bottom: 1em;
 }
 
 .react-calendar__navigation button {
-  min-width: 44px;
+  min-width: 54px;
   background: none;
 }
 
@@ -65,7 +68,7 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 0.75em;
+  font-size: 1em;
 }
 
 .react-calendar__month-view__weekdays__weekday {
@@ -76,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75em;
+  font-size: 1em;
   font-weight: bold;
 }
 
@@ -140,4 +143,33 @@
 
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
+}
+
+.SelectedSchedule {
+  margin-top: 50px;
+  border-radius: 30px;
+  padding: 20px;
+  background: #7FFFD4;
+}
+
+.calendar-input {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: #333333;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #333333;
+}
+
+.calendar-button {
+  display: flex;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: #333333;
+  padding: 20px;
+  margin-top: 120px;
+  border: 1px solid #333333;
 }

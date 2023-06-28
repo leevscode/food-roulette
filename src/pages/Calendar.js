@@ -10,19 +10,20 @@ const Schedule = () => {
     {
       day: "2023-06-20",
       title: "떡볶이",
-      price: 5000,
       imgPath:
         "https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1644161402/noticon/byp14ppjklohyym0dl6z.png",
     },
     {
       day: "2023-06-16",
-      title: "짜장면",
       price: 10000,
     },
     {
       day: "2023-06-05",
-      title: "햄버거",
       price: 7500,
+    },
+    {
+      day: "2023-06-28",
+      price: 15000,
     },
   ];
 
@@ -52,9 +53,9 @@ const Schedule = () => {
 
   return (
     <>
-      <div className="p-6 mt-5 shadow rounded bg-white flex">
+      <div className="p-6 mt-5 shadow rounded bg-white flex justify-center gap-7">
         <div className="CalendarWarp">
-          <h1>캘린더</h1>
+          <h1>Calendar</h1>
           <Calendar
             onClickDay={handleClickDay}
             calendarType="US"
@@ -63,17 +64,23 @@ const Schedule = () => {
           />
         </div>
         {selectedSchedule && (
+          <>
           <div className="SelectedSchedule">
-            <div>날짜</div>
+            <p>{selectedSchedule.day}</p>
+            <br/>
             <h2>{selectedSchedule.title}</h2>
-            <p>{selectedSchedule.price}</p>
-            <form>
-              <input type="text"></input>
-              <input type="text"></input>
+            <p className="food-name">{selectedSchedule.price}</p>
+            <form className="calendar-input">
+              <input type="text"  placeholder="가격을 입력해주세요" ></input>
             </form>
-
+            <form className="calendar-input">
+              <input type="text"  placeholder="장소를 입력해주세요"></input>
+            </form>
+            <br />
             <img src={selectedSchedule.imgPath} alt="테스트" />
+          <button className="calendar-button">입력</button>
           </div>
+          </>
         )}
       </div>
     </>
