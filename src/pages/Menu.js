@@ -6,6 +6,10 @@ import ShowMenuList from "../components/ShowMenuList";
 const Menu = () => {
   // 로딩 처리
   const [isLoading, setIsLoading] = useState(true);
+  const [toggle, setToggle] = useState(true);
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
   useEffect(() => {
     setIsLoading(false);
   }, []);
@@ -15,9 +19,12 @@ const Menu = () => {
       {isLoading && <Loading />}
       <div>Menu</div>
       <hr />
-      <MenuInput />
+      <button onClick={handleToggle}>메뉴입력</button>
+      <span> {/* */} </span>
+      <button onClick={handleToggle}>메뉴출력</button>
       <hr />
-      <ShowMenuList />
+      {toggle && <MenuInput />}
+      {toggle || <ShowMenuList />}
     </div>
   );
 };

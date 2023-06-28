@@ -16,6 +16,9 @@
   box-sizing: border-box;
   outline-style: none;
 }
+abbr {
+  text-decoration: none;
+}
 a {
   text-decoration: none;
 }
