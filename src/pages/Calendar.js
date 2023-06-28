@@ -53,8 +53,8 @@ const Schedule = () => {
 
   return (
     <>
-      <div className="p-6 mt-5 shadow rounded bg-white flex justify-center gap-7">
-        <div className="CalendarWarp">
+      <div className="p-6 mt-5 bg-white flex justify-center gap-7">
+        <div>
           <h1>Calendar</h1>
           <Calendar
             onClickDay={handleClickDay}
@@ -63,25 +63,44 @@ const Schedule = () => {
             tileContent={showScheduleJSX}
           />
         </div>
-        {selectedSchedule && (
-          <>
-          <div className="SelectedSchedule">
-            <p>{selectedSchedule.day}</p>
-            <br/>
-            <h2>{selectedSchedule.title}</h2>
-            <p className="food-name">{selectedSchedule.price}</p>
-            <form className="calendar-input">
-              <input type="text"  placeholder="가격을 입력해주세요" ></input>
-            </form>
-            <form className="calendar-input">
-              <input type="text"  placeholder="장소를 입력해주세요"></input>
-            </form>
-            <br />
-            <img src={selectedSchedule.imgPath} alt="테스트" />
-          <button className="calendar-button">입력</button>
-          </div>
-          </>
-        )}
+
+        <div className="calendar-menubox">
+          <p className="calendar-menutext">
+            날짜를 <br /> 선택해주세요!
+          </p>
+
+          {selectedSchedule && (
+            <>
+              <div className="selected-schedule">
+                <div>
+                  <p>{selectedSchedule.day}</p>
+                  <br />
+                </div>
+                <div>
+                  <h2>{selectedSchedule.title}</h2>
+                  <p className="food-name">{selectedSchedule.price}</p>
+                  <form className="calendar-input">
+                    <input
+                      type="text"
+                      placeholder="가격을 입력해주세요"
+                    ></input>
+                  </form>
+                  <form className="calendar-input">
+                    <input
+                      type="text"
+                      placeholder="장소를 입력해주세요"
+                    ></input>
+                  </form>
+                  <br />
+                  <img src={selectedSchedule.imgPath} alt="테스트" />
+                </div>
+                <div className="calendar-bt">
+                  <button className="calendar-button">입력</button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   );
