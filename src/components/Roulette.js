@@ -7,7 +7,7 @@ const Roulette = () => {
   const [startSpin, setStartSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
-  //const [spinResult, set]
+  const [spinResult, setSpinResult] = useState("");
 
   const data = [
     { id: 1, option: 10 },
@@ -29,6 +29,7 @@ const Roulette = () => {
     setPrizeNumber(newPrizeNumber);
     setStartSpin(true);
     setIsSpinning(true);
+    setSpinResult(data[prizeNumber].option);
   };
 
   // JSX
@@ -73,6 +74,10 @@ const Roulette = () => {
       <button onClick={handleSpinRoulette} disabled={isSpinning}>
         SPIN
       </button>
+      <br />
+      {!startSpin
+        ? `오늘의 결과는? ${spinResult}`
+        : "룰렛이 돌아가고 있습니다..."}
     </RouletteBox>
   );
 };
