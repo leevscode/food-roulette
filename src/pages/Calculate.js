@@ -1,8 +1,8 @@
 import React from "react";
-import { Limit } from "../style/HistoryCSS";
+import { Limit } from "../style/CalculateCSS";
 import ShowMonth from "../components/ShowMonth";
 
-const History = () => {
+const Calculate = () => {
   return (
     <>
       <Limit>
@@ -24,4 +24,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default Calculate;

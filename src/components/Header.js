@@ -46,12 +46,12 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/history"
+                to="/calculate"
                 className={({ isActive }) =>
                   "" + (isActive ? "text-teal-500" : "text-white")
                 }
               >
-                히스토리
+                소비 실적
               </NavLink>
             </li>
           </ul>

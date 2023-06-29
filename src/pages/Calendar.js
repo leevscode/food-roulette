@@ -92,23 +92,57 @@ const Schedule = () => {
                 </div>
                 <div>
                   <form onSubmit={onSubmitForm}>
-                    <h2>{selectedSchedule.title}</h2>
-                    <p className="food-name">{selectedSchedule.price}</p>
-                    <div className="calendar-input">
-                      <input
-                        type="text"
-                        placeholder="가격을 입력해주세요"
-                      ></input>
+                    <div className="calendar-scroll">
+                      <h2>{selectedSchedule.title}</h2>
+                      <p className="food-name">{selectedSchedule.price}</p>
+                      <div className="calendar-input">
+                        <input
+                          type="text"
+                          placeholder="가격을 입력해주세요"
+                        ></input>
+                      </div>
+                      <div className="calendar-input">
+                        <input
+                          type="text"
+                          placeholder="장소를 입력해주세요"
+                        ></input>
+                      </div>
+                      <br />
+                      <img src={selectedSchedule.imgPath} alt="테스트" />
+                      <h2>{selectedSchedule.title}</h2>
+                      <p className="food-name">{selectedSchedule.price}</p>
+                      <div className="calendar-input">
+                        <input
+                          type="text"
+                          placeholder="가격을 입력해주세요"
+                        ></input>
+                      </div>
+                      <div className="calendar-input">
+                        <input
+                          type="text"
+                          placeholder="장소를 입력해주세요"
+                        ></input>
+                      </div>
+                      <br />
+                      <img src={selectedSchedule.imgPath} alt="테스트" />
+                      <h2>{selectedSchedule.title}</h2>
+                      <p className="food-name">{selectedSchedule.price}</p>
+                      <div className="calendar-input">
+                        <input
+                          type="text"
+                          placeholder="가격을 입력해주세요"
+                        ></input>
+                      </div>
+                      <div className="calendar-input">
+                        <input
+                          type="text"
+                          placeholder="장소를 입력해주세요"
+                        ></input>
+                      </div>
+                      <br />
+                      <img src={selectedSchedule.imgPath} alt="테스트" />
                     </div>
-                    <div className="calendar-input">
-                      <input
-                        type="text"
-                        placeholder="장소를 입력해주세요"
-                      ></input>
-                    </div>
-                    <br />
-                    <img src={selectedSchedule.imgPath} alt="테스트" />
-
+                    
                     <div className="calendar-bt">
                       <button className="calendar-button">입력</button>
                     </div>

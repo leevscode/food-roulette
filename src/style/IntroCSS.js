@@ -27,12 +27,19 @@ export const IntroBg = styled.div`
 `;
 
 export const TextBox = styled.div`
-  padding: 50px 100px;
-  background: #3e8e41;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #bffff3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: auto;
+  width: 550px;
+  height: 435px;
+  z-index: 999;
+  border-radius: 30px;
 `;
 
 export const Logo = styled.div`
@@ -47,6 +54,7 @@ export const IntroInput = styled.input`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   background-color: #f2f2f2;
+  text-align: center;
   color: #333333;
   padding: 10px;
   margin-top: 20px;
@@ -57,7 +65,8 @@ export const IntroInput = styled.input`
 `;
 
 export const IntroForm = styled.form`
-  display: contents;`
+  display: contents;
+`;
 
 export const IntroButton = styled.button`
   margin-top: 50px;

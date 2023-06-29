@@ -30,21 +30,23 @@ const Intro = () => {
   return (
     <>
       <IntroBox>
-        <IntroBg>
-          <TextBox>
-            <Logo></Logo>
-            <p>당신은 누구십니까?</p>
-            <IntroForm onSubmit={onSubmitForm}>
-              <IntroInput></IntroInput>
-              <br />
-              <Link to="/main">
-                <IntroButton type="button" onClick={handleButtonClick}>
-                  딸깍
-                </IntroButton>
-              </Link>
-            </IntroForm>
-          </TextBox>
-        </IntroBg>
+        <IntroBg></IntroBg>
+        <TextBox>
+          <Logo></Logo>
+          <p>당신은 누구십니까?</p>
+          <IntroForm onSubmit={onSubmitForm}>
+            <IntroInput
+              type="text"
+              placeholder="닉네임을 입력해주세요"
+            ></IntroInput>
+            <br />
+            <Link to="/main">
+              <IntroButton type="button" onClick={handleButtonClick}>
+                딸깍
+              </IntroButton>
+            </Link>
+          </IntroForm>
+        </TextBox>
       </IntroBox>
     </>
   );

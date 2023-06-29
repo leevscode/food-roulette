@@ -1,45 +1,26 @@
 import React, { useState } from "react";
-import { Form, Input, Select } from "antd";
+import { Form, Select } from "antd";
 
 const { Option } = Select;
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
-
-const App: React.FC = () => {
+const App = () => {
   const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState("");
 
+  const options = [
+    { value: "1", label: "1월" },
+    { value: "2", label: "2월" },
+    { value: "3", label: "3월" },
+    { value: "4", label: "4월" },
+  ];
+
   const onGenderChange = (value) => {
-    setSelectedOption(value); // 선택된 옵션 값을 업데이트
-    switch (value) {
-      case "male":
-        form.setFieldsValue({ note: "" });
-        break;
-      case "female":
-        form.setFieldsValue({ note: "" });
-        break;
-      case "other":
-        form.setFieldsValue({ note: "" });
-        break;
-      default:
-    }
+    setSelectedOption(value);
   };
 
   return (
     <div>
-      <Form
-        {...layout}
-        form={form}
-        name="control-hooks"
-        style={{ width: "500px" }}
-      >
+      <Form form={form} name="control-hooks" style={{ width: "500px" }}>
         <Form.Item
           style={{
             display: "flex",
@@ -54,28 +35,12 @@ const App: React.FC = () => {
             onChange={onGenderChange}
             allowClear
           >
-            <Option value="1월">1월</Option>
-            <Option value="2월">2월</Option>
-            <Option value="3월">3월</Option>
+            {options.map((option) => (
+              <Option key={option.value} value={option.value}>
+                {option.label}
+              </Option>
+            ))}
           </Select>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues.gender !== currentValues.gender
-          }
-        >
-          {({ getFieldValue }) =>
-            getFieldValue("gender") === "other" ? (
-              <Form.Item
-                name="customizeGender"
-                label="Customize Gender"
-                rules={[{ required: true }]}
-              >
-                <Input />
-              </Form.Item>
-            ) : null
-          }
         </Form.Item>
       </Form>
       <div>{selectedOption && `${selectedOption}`}</div>
