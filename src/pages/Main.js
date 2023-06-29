@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import LimitSetting from "../components/LimitSetting";
+import Roulette from "../components/Roulette";
+import { MainContainer, RouletteArea } from "../style/MainCSS";
 
 const Main = () => {
   // 룰렛 결과 저장 = 선택된 메뉴
@@ -27,10 +29,10 @@ const Main = () => {
   return (
     <>
       {isLimit || <LimitSetting setIsLimit={setIsLimit} />}
-      <div>
+      <MainContainer>
         <Banner />
         <br />
-        <div style={{ border: "1px solid red" }}>
+        <RouletteArea style={{ border: "1px solid red" }}>
           <p>룰렛 영역 = 00 님의 룰렛</p>
           <div>
             <img
@@ -40,7 +42,9 @@ const Main = () => {
             <span style={{ fontSize: 18 }}>(룰렛이 들어갈 영역)</span>
           </div>
           <button onClick={handleRotateRoulette}>룰렛시작</button>
-        </div>
+          <hr />
+          <Roulette />
+        </RouletteArea>
         <br />
         <div style={{ border: "1px solid green" }}>
           <p>해시태그 검색영역</p>
@@ -71,7 +75,7 @@ const Main = () => {
             <span> 1 / 8 </span>
           </div>
         </div>
-      </div>
+      </MainContainer>
     </>
   );
 };

@@ -8,6 +8,7 @@ const LimitSetting = ({ setIsLimit }) => {
     width: "100%",
     height: "100%",
     backgroundColor: "pink",
+    zIndex: 99999,
   };
   const inputContainer = {
     width: "100%",
