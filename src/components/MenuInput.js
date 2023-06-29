@@ -6,18 +6,29 @@ const MenuInput = () => {
   const inputMenu = useRef(null);
   const inputTags = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
+
+  // 정규표현식 = 스페이스바, 특수문자, 빈 값 금지
+  const regex = /^[a-zA-Z가-힣0-9]+$/;
+
   const handleAddTag = e => {
     const tag = inputTags.current.value;
-    setInputTagArr([...inputTagArr, tag]);
-    console.log(inputTagArr);
+    if (regex.test(tag)) {
+      setInputTagArr([...inputTagArr, tag]);
+      console.log("올바른 값");
+    } else {
+      console.log("잘못된 값");
+    }
     inputTags.current.value = null;
   };
   const handleAddTagEnter = e => {
     if (e.key === "Enter") {
-      console.log(e.target.value);
       let copyItem = e.target.value;
-      setInputTagArr([...inputTagArr, copyItem]);
-      console.log(inputTagArr);
+      if (regex.test(copyItem)) {
+        setInputTagArr([...inputTagArr, copyItem]);
+        console.log("올바른 값");
+      } else {
+        console.log("잘못된 값");
+      }
       e.target.value = null;
     }
   };
@@ -28,11 +39,15 @@ const MenuInput = () => {
   };
   const handleSaveMenu = () => {
     let menuname = inputMenu.current.value.trim();
-    console.log("태그 저장 & 메뉴 저장");
-    console.log("메뉴 = " + menuname);
-    console.log(inputTagArr);
-    setInputTagArr([]);
-    inputMenu.current.value = null;
+    if (regex.test(menuname)) {
+      console.log("태그 저장 & 메뉴 저장");
+      console.log("메뉴 = " + menuname);
+      console.log(inputTagArr);
+      setInputTagArr([]);
+      inputMenu.current.value = null;
+    } else {
+      console.log("메뉴를 입력해주세요");
+    }
   };
   return (
     <div>
