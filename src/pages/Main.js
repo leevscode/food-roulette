@@ -24,7 +24,6 @@ const Main = () => {
 
   const handleTagSearch = () => {};
   const handleMakeRoulette = () => {};
-  const handleRotateRoulette = () => {};
 
   return (
     <>
@@ -32,15 +31,13 @@ const Main = () => {
       <MainContainer>
         <Banner />
         <br />
-        <RouletteArea style={{ border: "1px solid red" }}>
-          <p>룰렛 영역 = 00 님의 룰렛</p>
-          <div>
-            <span style={{ fontSize: 18 }}>(룰렛이 들어갈 영역)</span>
-          </div>
-          <button onClick={handleRotateRoulette}>룰렛시작</button>
-          <hr />
-          <Roulette />
-        </RouletteArea>
+        <div>
+          <RouletteArea style={{ border: "1px solid red" }}>
+            <p>룰렛 영역 = 00 님의 룰렛</p>
+            <hr />
+            <Roulette />
+          </RouletteArea>
+        </div>
         <br />
         <div style={{ border: "1px solid green" }}>
           <p>해시태그 검색영역</p>

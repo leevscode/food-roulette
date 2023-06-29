@@ -7,23 +7,33 @@ const Roulette = () => {
   const [startSpin, setStartSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
+  //const [spinResult, set]
 
   const data = [
     { id: 1, option: 10 },
-    { id: 2, option: -30 },
-    { id: 3, option: 50 },
-    { id: 4, option: 30 },
-    { id: 5, option: 40 },
-    { id: 6, option: 20 },
-    { id: 7, option: 40 },
-    { id: 8, option: 20 },
+    { id: 2, option: 20 },
+    { id: 3, option: 30 },
+    { id: 4, option: 40 },
+    { id: 5, option: 50 },
+    { id: 6, option: 60 },
+    { id: 7, option: 70 },
+    { id: 8, option: 80 },
   ];
+
+  const handleSpinRoulette = () => {
+    if (isSpinning) {
+      return; // 룰렛이 돌아가는 동안은 중복 클릭을 방지
+    }
+    // 0에서 data.length - 1 까지의 랜덤한 숫자 생성
+    const newPrizeNumber = Math.floor(Math.random() * data.length);
+    setPrizeNumber(newPrizeNumber);
+    setStartSpin(true);
+    setIsSpinning(true);
+  };
 
   // JSX
   return (
     <RouletteBox>
-      <h1>Rotate Roulette!</h1>
-      <hr />
       <Wheel
         mustStartSpinning={startSpin}
         prizeNumber={prizeNumber}
@@ -50,6 +60,7 @@ const Roulette = () => {
         spinDuration={[0.5]}
         onStopSpinning={() => {
           setStartSpin(false);
+          setIsSpinning(false);
         }}
         pointerProps={{
           src: "/images/pointer.png",
@@ -58,6 +69,10 @@ const Roulette = () => {
           },
         }}
       />
+
+      <button onClick={handleSpinRoulette} disabled={isSpinning}>
+        SPIN
+      </button>
     </RouletteBox>
   );
 };
