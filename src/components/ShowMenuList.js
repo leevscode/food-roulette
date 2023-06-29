@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
-const ShowMenuList = () => {
+const ShowMenuList = ({ menuList }) => {
   const [showMenu, setShowMenu] = useState([
-    { menu: "자장면", tag: ["마차이", "중식"] },
-    { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
-    { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
-    { menu: "자장면", tag: ["마차이", "중식"] },
-    { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
-    { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
+    // { menu: "자장면", tag: ["마차이", "중식"] },
+    // { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
+    // { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
+    // { menu: "자장면", tag: ["마차이", "중식"] },
+    // { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
+    // { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
   ]);
+
+  useEffect(() => {
+    setShowMenu(menuList);
+  }, []);
 
   return (
     <div>
@@ -30,15 +34,13 @@ const ShowMenuList = () => {
               <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
               <p>
                 태그들 :
-                {item.tag.map((item, index) => (
+                {/* {item.tag.map((item, index) => (
                   <span key={index}>
                     <span>{` #${item}`}</span>
-                    <span> {/* */} </span>
                   </span>
-                ))}
+                ))} */}
+                #지금은 #없음
               </p>
-              <button>해시태그수정</button>
-              <br />
               <button>메뉴삭제</button>
               <hr />
             </div>
