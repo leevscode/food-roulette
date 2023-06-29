@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
-import Title from "./pages/Title";
+import Intro from "./pages/Intro";
 import Main from "./pages/Main";
 import Calendar from "./pages/Calendar";
 import Menu from "./pages/Menu";
@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Title />} />
+        <Route path="/" element={<Intro />} />
         <Route path="/" element={<Header />}>
           <Route path="/menu" element={<Menu />} />
           <Route path="/calendar" element={<Calendar />} />

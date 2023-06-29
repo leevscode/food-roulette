@@ -1,16 +1,16 @@
 import styled from "@emotion/styled";
 
-export const Box = styled.div`
+export const IntroBox = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("/images/title.png") no-repeat center;
+  background: url("/images/Intro.png") no-repeat center;
   background-size: cover;
 `;
 
-export const TitleBg = styled.div`
+export const IntroBg = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -24,7 +24,6 @@ export const TitleBg = styled.div`
   opacity: 0.8;
   min-height: 100vh;
   color: white;
-  z-index: 99999;
 `;
 
 export const TextBox = styled.div`
@@ -34,7 +33,6 @@ export const TextBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  opacity: 1;
 `;
 
 export const Logo = styled.div`
@@ -44,7 +42,7 @@ export const Logo = styled.div`
   background-size: contain;
 `;
 
-export const TitleInput = styled.input`
+export const IntroInput = styled.input`
   display: flex;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
@@ -58,7 +56,10 @@ export const TitleInput = styled.input`
   }
 `;
 
-export const TitleButton = styled.button`
+export const IntroForm = styled.form`
+  display: contents;`
+
+export const IntroButton = styled.button`
   margin-top: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   background-color: #4caf50;

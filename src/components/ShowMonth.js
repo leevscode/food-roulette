@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState("");
 
-  const onGenderChange = (value: string) => {
+  const onGenderChange = (value) => {
     setSelectedOption(value); // 선택된 옵션 값을 업데이트
     switch (value) {
       case "male":
@@ -57,15 +57,6 @@ const App: React.FC = () => {
             <Option value="1월">1월</Option>
             <Option value="2월">2월</Option>
             <Option value="3월">3월</Option>
-            <Option value="4월">4월</Option>
-            <Option value="5월">5월</Option>
-            <Option value="6월">6월</Option>
-            <Option value="7월">7월</Option>
-            <Option value="8월">8월</Option>
-            <Option value="9월">9월</Option>
-            <Option value="10월">10월</Option>
-            <Option value="11월">11월</Option>
-            <Option value="12월">12월</Option>
           </Select>
         </Form.Item>
         <Form.Item

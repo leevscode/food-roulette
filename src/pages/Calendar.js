@@ -1,41 +1,49 @@
 import moment from "moment/moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "../style/Calendar.css";
 
 const Schedule = () => {
   const [selectedSchedule, setSelectedSchedule] = useState(null);
+  const [scheduleData, setScheduleData] = useState([]);
 
-  const 서버정보 = [
-    {
-      day: "2023-06-20",
-      title: "떡볶이",
-      imgPath:
-        "https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1644161402/noticon/byp14ppjklohyym0dl6z.png",
-    },
-    {
-      day: "2023-06-16",
-      price: 10000,
-    },
-    {
-      day: "2023-06-05",
-      price: 7500,
-    },
-    {
-      day: "2023-06-28",
-      price: 15000,
-    },
-  ];
+  useEffect(() => {
+    // 서버에서 받아오는 axios 데이터 샘플
+    const server = [
+      {
+        day: "2023-06-20",
+        title: "떡볶이",
+        price: 4000,
+      },
+      {
+        day: "2023-06-16",
+        title: "짜장면",
+        price: 10000,
+      },
+      {
+        day: "2023-06-05",
+        title: "햄버거",
+        price: 7500,
+      },
+      {
+        day: "2023-06-28",
+        price: 15000,
+        title: "피자",
+      },
+    ];
+
+    setScheduleData(server);
+  }, []);
 
   const handleClickDay = value => {
-    const 날짜 = moment(value).format("YYYY-MM-DD");
-    const result = 서버정보.find(item => item.day === 날짜);
+    const day = moment(value).format("YYYY-MM-DD");
+    const result = scheduleData.find(item => item.day === day);
     setSelectedSchedule(result);
   };
 
   const showScheduleJSX = ({ date }) => {
-    const 날짜 = moment(date).format("YYYY-MM-DD");
-    const result = 서버정보.find(item => item.day === 날짜);
+    const day = moment(date).format("YYYY-MM-DD");
+    const result = scheduleData.find(item => item.day === day);
 
     if (result) {
       return (
@@ -49,6 +57,12 @@ const Schedule = () => {
         </div>
       );
     }
+  };
+
+  const onSubmitForm = e => {
+    e.preventDefault();
+    // 서버연동 예정
+    console.log(e.target);
   };
 
   return (
@@ -77,25 +91,28 @@ const Schedule = () => {
                   <br />
                 </div>
                 <div>
-                  <h2>{selectedSchedule.title}</h2>
-                  <p className="food-name">{selectedSchedule.price}</p>
-                  <form className="calendar-input">
-                    <input
-                      type="text"
-                      placeholder="가격을 입력해주세요"
-                    ></input>
+                  <form onSubmit={onSubmitForm}>
+                    <h2>{selectedSchedule.title}</h2>
+                    <p className="food-name">{selectedSchedule.price}</p>
+                    <div className="calendar-input">
+                      <input
+                        type="text"
+                        placeholder="가격을 입력해주세요"
+                      ></input>
+                    </div>
+                    <div className="calendar-input">
+                      <input
+                        type="text"
+                        placeholder="장소를 입력해주세요"
+                      ></input>
+                    </div>
+                    <br />
+                    <img src={selectedSchedule.imgPath} alt="테스트" />
+
+                    <div className="calendar-bt">
+                      <button className="calendar-button">입력</button>
+                    </div>
                   </form>
-                  <form className="calendar-input">
-                    <input
-                      type="text"
-                      placeholder="장소를 입력해주세요"
-                    ></input>
-                  </form>
-                  <br />
-                  <img src={selectedSchedule.imgPath} alt="테스트" />
-                </div>
-                <div className="calendar-bt">
-                  <button className="calendar-button">입력</button>
                 </div>
               </div>
             </>
