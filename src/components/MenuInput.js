@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
+import { HashTag } from "../style/MenuCSS";
 
 const MenuInput = () => {
   const inputMenu = useRef(null);
@@ -55,10 +56,10 @@ const MenuInput = () => {
         <br />
         {inputTagArr.map((item, index) => {
           return (
-            <div key={index} className="hash-item">
+            <HashTag key={index}>
               <span>{item}</span>
-              <button onClick={handleRemoveTag}>X</button>
-            </div>
+              <button onClick={handleRemoveTag}></button>
+            </HashTag>
           );
         })}
         <br />
