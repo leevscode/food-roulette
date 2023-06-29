@@ -6,6 +6,9 @@ const ShowMenuList = () => {
     { menu: "자장면", tag: ["마차이", "중식"] },
     { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
     { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
+    { menu: "자장면", tag: ["마차이", "중식"] },
+    { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
+    { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
   ]);
 
   return (
@@ -18,19 +21,27 @@ const ShowMenuList = () => {
             border: "1px solid red",
             padding: 8,
             background: "pink",
+            maxHeight: 500,
+            overflowY: "scroll",
           }}
         >
           {showMenu.map((item, index) => (
-            <>
-              <div key={index}>
-                <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
-                <p>태그들 : {item.tag}</p>
-                <button>해시태그수정</button>
-                <br />
-                <button>메뉴삭제</button>
-              </div>
+            <div key={index}>
+              <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
+              <p>
+                태그들 :
+                {item.tag.map((item, index) => (
+                  <span key={index}>
+                    <span>{` #${item}`}</span>
+                    <span> {/* */} </span>
+                  </span>
+                ))}
+              </p>
+              <button>해시태그수정</button>
+              <br />
+              <button>메뉴삭제</button>
               <hr />
-            </>
+            </div>
           ))}
         </div>
       </div>
