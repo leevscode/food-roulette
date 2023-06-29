@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
+import { RouletteBox } from "../style/MainCSS";
 
 const Roulette = () => {
   // 룰렛데이터
@@ -20,7 +21,7 @@ const Roulette = () => {
 
   // JSX
   return (
-    <div>
+    <RouletteBox>
       <h1>Rotate Roulette!</h1>
       <hr />
       <Wheel
@@ -51,14 +52,13 @@ const Roulette = () => {
           setStartSpin(false);
         }}
         pointerProps={{
-          // src: "/images/pointer.png",
+          src: "/images/pointer.png",
           style: {
-            transform: "rotate(2deg)",
-            // transform: "rotate(45.75deg) translateX(-6px) translateY(18px)",
+            transform: "rotate(45.75deg) translateX(-6px) translateY(24px)",
           },
         }}
       />
-    </div>
+    </RouletteBox>
   );
 };
 

@@ -11,3 +11,10 @@ export const MainContainer = styled.div`
 export const RouletteArea = styled.div`
   width: 600px;
 `;
+
+export const RouletteBox = styled.div`
+  & > div {
+    display: inline-block;
+    transform: rotate(-45deg);
+  }
+`;

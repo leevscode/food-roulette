@@ -35,10 +35,6 @@ const Main = () => {
         <RouletteArea style={{ border: "1px solid red" }}>
           <p>룰렛 영역 = 00 님의 룰렛</p>
           <div>
-            <img
-              src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1586271105/noticon/eyjidxvaivj5xh1vitnn.gif"
-              alt="룰렛이 들어갈 영역"
-            />
             <span style={{ fontSize: 18 }}>(룰렛이 들어갈 영역)</span>
           </div>
           <button onClick={handleRotateRoulette}>룰렛시작</button>
