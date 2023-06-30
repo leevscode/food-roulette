@@ -169,6 +169,7 @@
   padding: 10px;
   margin-top: 20px;
   border: 1px solid #333333;
+  margin-right: 15px;
 }
 
 .calendar-button {
@@ -216,6 +217,22 @@
   height: 500px;
   overflow: auto; 
 }
+
+.calendar-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.calendar-scroll::-webkit-scrollbar-track {
+  background-color: #59B2A2;
+  border-radius: 20px;
+}
+
+.calendar-scroll::-webkit-scrollbar-thumb {
+  background-color: #7FFFD4;
+  border-radius: 20px;
+}
+
+
+
 .empty-space{
  margin-top: 10px;
 }
@@ -223,11 +240,17 @@
 .calendar-info{
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #59B2A2;
 }
 
 .pepe-score{
+  margin-top: 20px;
   display: flex;
-  width: 55px;
-  height: 55px
+  justify-content: space-evenly;
+  
+}
+.pepe-score-raido{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
 }

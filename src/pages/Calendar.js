@@ -13,23 +13,23 @@ const Schedule = () => {
     const server = [
       {
         day: "2023-06-20",
-        // title: "테스트1",
-        price: 4000,
+        title: "햄버거",
+        // price: 4000,
       },
       {
         day: "2023-06-16",
-        // title: "테스트2",
-        price: 10000,
+        title: "피자",
+        // price: 10000,
       },
       {
         day: "2023-06-05",
-        // title: "테스트3",
-        price: 7500,
+        title: "샤브샤브",
+        // price: 7500,
       },
       {
         day: "2023-06-28",
-        // title: "테스트4",
-        price: 15000,
+        title: "돈까스",
+        // price: 15000,
       },
     ];
 
@@ -68,9 +68,9 @@ const Schedule = () => {
                     style={{ backgroundColor: "#7FFFD4" }}
                     onClick={() => setSelectedSchedule(result)}
                   >
-                    {/* <div>{result.title}</div> */}
                     <div className="empty-space" />
-                    <div>{result.price}</div>
+                    <div>{result.title}</div>
+                    {/* <div>{result.price}</div> */}
                   </div>
                 );
               }
@@ -109,13 +109,14 @@ const Schedule = () => {
                           ></input>
                         </div>
                         <br />
+                        <h2>페페 스코어</h2>
                         {/* <img src={selectedSchedule.imgPath} alt="테스트" /> */}
                         <div className="pepe-score">
                         <img src="/images/1점.png" alt="울음" />
                         <img src="/images/2점.png" alt="무난" />
                         <img src="/images/3점.png" alt="행복" />
                         </div>
-                        <Radio.Group>
+                        <Radio.Group className="pepe-score-raido">
                           <Radio value={1}>1점</Radio>
                           <Radio value={2}>2점</Radio>
                           <Radio value={3}>3점</Radio>
