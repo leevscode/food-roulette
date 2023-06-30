@@ -10,7 +10,7 @@ const CaluclateChart = () => {
 
   return (
     <div className="p-6 mt-5 shadow rounded bg-white">
-      <h2>이달의 통계</h2>
+      {/* <h2>이달의 통계</h2> */}
       <div
         style={{
           height: "400px",
