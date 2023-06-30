@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Select } from "antd";
+import CaluclateChart from "./CaluclateChart";
 
 const { Option } = Select;
 
@@ -14,7 +15,7 @@ const App = () => {
     { value: "4", label: "4월" },
   ];
 
-  const onGenderChange = (value) => {
+  const onGenderChange = value => {
     setSelectedOption(value);
   };
 
@@ -35,7 +36,7 @@ const App = () => {
             onChange={onGenderChange}
             allowClear
           >
-            {options.map((option) => (
+            {options.map(option => (
               <Option key={option.value} value={option.value}>
                 {option.label}
               </Option>
@@ -43,7 +44,10 @@ const App = () => {
           </Select>
         </Form.Item>
       </Form>
-      <div>{selectedOption && `${selectedOption}`}</div>
+      <div>
+        {selectedOption && `${selectedOption}`}
+        {`${selectedOption}` && <CaluclateChart/>}
+      </div>
     </div>
   );
 };

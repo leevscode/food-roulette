@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Limit, ProgressContainer, ProgressFill, ProgressFillInner, ProgressText } from "../style/CalculateCSS";
 import ShowMonth from "../components/ShowMonth";
 
+
 // useState 훅을 사용하여 remainingBalance 상태를 관리하고, 
 // 초기값으로 500000을 설정. 
 // progressPercent 상태도 useState 훅을 이용해 관리
