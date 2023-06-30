@@ -16,17 +16,39 @@ const TagSearch = () => {
     { id: 12, menu: "참외", tags: ["테스트", "노랑", "맛있다"] },
   ];
   // const searched = ["시트러스"];
+  // 받아온 배열의 해시태그 배열만 따로 빼어냄
+  const taglist = tempData.map(item => item.tags);
+  // 인덱스를 담을 배열
+  const idxList = [];
 
   // user가 검색 - 1개 태그만 검색
   const [userInput, setUserInput] = useState("");
+  // 검색결과
   const [searchedResult, setSearchedResult] = useState([]);
+  const results = [];
 
   const handleGetValue = e => {
     setUserInput(e.target.value.toLowerCase());
   };
   const handleSearchTag = () => {
+    // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
+    taglist.forEach((items, idx) => {
+      let temp = items.filter(item => item.includes("시트러스"));
+      if (temp.length) {
+        idxList.push(idx);
+        console.log(idxList);
+      }
+    });
+    idxList.forEach(item => {
+      console.log(tempData[item].menu);
+      results.push(tempData[item].menu);
+    });
+    setSearchedResult(results);
+    console.log(results);
+
+    //
+    /*
     // 1. 받아온 메뉴 목록(tempData)에서 태그들만 모인 배열을 만든다
-    let taglist = tempData.map(item => item.tags);
     console.log("태그리스트");
     console.log(taglist);
     // 2. 검색값과 일치하는 인덱스를 반환한다
@@ -38,12 +60,13 @@ const TagSearch = () => {
     const searchedItems = taglist.map(item => {
       item.filter(item => item.toLowerCase().includes(userInput));
     });
-    console.log(searchedItems);
+    // console.log(searchedItems);
     // 3. tempData 에서 해당 인덱스의 메뉴만 출력한다
 
     ///////////////////////////////
     // const searchedItems = menuData.filter(item=>item.tags.toLowerCase().includes(userInput))
     // setSearchedResult();
+    */
   };
   const handleMakeRoulette = () => {};
 
@@ -64,13 +87,25 @@ const TagSearch = () => {
         <p>검색결과 출력</p>
         <div>
           {/* 일치하는 태그를 가지는 메뉴를 출력 */}
-          <p>
-            <input type="checkbox" name="roulette" id="1" value="1" />
+          <div>
+            {/* <input type="checkbox" name="roulette" id="1" value="1" />
             <label htmlFor="1">자장면</label>
             <br />
             <input type="checkbox" name="roulette" id="2" value="2" />
-            <label htmlFor="2">탕수육</label>
-          </p>
+            <label htmlFor="2">탕수육</label> */}
+
+            {searchedResult.map((item, index) => (
+              <p key={index}>
+                <input
+                  type="checkbox"
+                  name="roulette"
+                  id={index}
+                  value={index}
+                />
+                <label htmlFor={index}>{item}</label>
+              </p>
+            ))}
+          </div>
         </div>
         <button onClick={handleMakeRoulette}>룰렛생성</button>
         <span> 1 / 8 </span>
