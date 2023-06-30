@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const TagSearch = () => {
   const tempData = [
@@ -16,37 +16,66 @@ const TagSearch = () => {
     { id: 12, menu: "참외", tags: ["테스트", "노랑", "맛있다"] },
   ];
   // const searched = ["시트러스"];
+  // 받아온 배열의 해시태그 배열만 따로 빼어냄
+  const taglist = tempData.map(item => item.tags);
+  // 인덱스를 담을 배열
+  const idxList = [];
 
   // user가 검색 - 1개 태그만 검색
   const [userInput, setUserInput] = useState("");
+  // 검색결과
   const [searchedResult, setSearchedResult] = useState([]);
+  const results = [];
 
   const handleGetValue = e => {
     setUserInput(e.target.value.toLowerCase());
   };
   const handleSearchTag = () => {
-    // 1. 받아온 메뉴 목록(tempData)에서 태그들만 모인 배열을 만든다
-    let taglist = tempData.map(item => item.tags);
-    console.log("태그리스트");
-    console.log(taglist);
-    // 2. 검색값과 일치하는 인덱스를 반환한다
-    // const searchedItems = taglist.filter(item =>
-    //   // item.toLowerCase().includes(userInput),
-    //   // console.log(item),
-    //   item.filter(item => item.toLowerCase().includes(userInput)),
-    // );
-    const searchedItems = taglist.map(item => {
-      item.filter(item => item.toLowerCase().includes(userInput));
+    // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
+    taglist.forEach((items, idx) => {
+      let temp = items.filter(item => item.includes(userInput));
+      if (temp.length) {
+        idxList.push(idx);
+      }
     });
-    console.log(searchedItems);
-    // 3. tempData 에서 해당 인덱스의 메뉴만 출력한다
+    idxList.forEach(item => {
+      results.push(tempData[item].menu);
+    });
+    setSearchedResult(results);
 
-    ///////////////////////////////
-    // const searchedItems = menuData.filter(item=>item.tags.toLowerCase().includes(userInput))
-    // setSearchedResult();
   };
-  const handleMakeRoulette = () => {};
 
+  // 체크박스
+  const [countCheck, setCountCheck] = useState(0);
+  const [checkedList, setCheckedList] = useState([]);
+
+  const handleCheckEvent = () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let count = 0;
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        count++;
+      }
+    });
+    if (count > 8) {
+      event.target.checked = false;
+      setCountCheck(count - 1);
+      window.alert(`최대 8개까지만 선택할 수 있습니다.`);
+    } else {
+      setCountCheck(count);
+    }
+  };
+  // 체크된 체크박스의 값을 저장
+  const handleMakeRoulette = () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkedValues = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value);
+    setCheckedList(checkedValues);
+    console.log(checkedList);
+  };
+
+  //JSX
   return (
     <div>
       <div style={{ border: "1px solid green" }}>
@@ -61,19 +90,26 @@ const TagSearch = () => {
       </div>
 
       <div style={{ border: "1px solid green" }}>
-        <p>검색결과 출력</p>
+        <p>검색결과 출력 영역</p>
         <div>
           {/* 일치하는 태그를 가지는 메뉴를 출력 */}
-          <p>
-            <input type="checkbox" name="roulette" id="1" value="1" />
-            <label htmlFor="1">자장면</label>
-            <br />
-            <input type="checkbox" name="roulette" id="2" value="2" />
-            <label htmlFor="2">탕수육</label>
-          </p>
+          <div className="check-area">
+            {searchedResult.map((item, index) => (
+              <p key={index}>
+                <input
+                  type="checkbox"
+                  name="roulette"
+                  id={index}
+                  value={item}
+                  onChange={handleCheckEvent}
+                />
+                <label htmlFor={index}>{item}</label>
+              </p>
+            ))}
+          </div>
         </div>
         <button onClick={handleMakeRoulette}>룰렛생성</button>
-        <span> 1 / 8 </span>
+        <span> {countCheck} / 8 </span>
       </div>
     </div>
   );

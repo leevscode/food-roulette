@@ -9,32 +9,36 @@ const Menu = () => {
   // 로딩 처리
   const [isLoading, setIsLoading] = useState(true);
   const [toggle, setToggle] = useState(true);
+  const [menuList, setMenuList] = useState([]);
   const handleToggle = () => {
     setToggle(!toggle);
   };
   useEffect(() => {
+    // 임시데이터 보관하여 axios 테스트
+    axios
+      .get("http://192.168.0.144:5003/menu/1")
+      .then(res => res.data)
+      .then(result => {
+        console.log(result);
+        setMenuList(result);
+      })
+      .catch(err => console.log(err));
     setIsLoading(false);
   }, []);
-  const testAxios = () => {
-    axios
-      .get("http://192.168.0.144:5003/menus/1/menus")
-      .then(res => res.data)
-      .then(result => console.log(result))
-      .catch(err => console.log(err));
-  };
 
   return (
     <div>
       {isLoading && <Loading />}
       <div>Menu</div>
       <hr />
-      <button onClick={handleToggle}>메뉴입력</button>
-      <span> {/* */} </span>
-      <button onClick={handleToggle}>메뉴출력</button>
+      <button onClick={handleToggle}>
+        {toggle ? "메뉴출력하기" : "메뉴입력하기"}
+      </button>
+      {/* <button onClick={handleToggle}>메뉴출력</button> */}
       <hr />
       {toggle && <MenuInput />}
-      {toggle || <ShowMenuList />}
-      <button onClick={testAxios}>통신 테스트</button>
+      {toggle || <ShowMenuList menuList={menuList} />}
+      {/* <button onClick={testAxios}>통신 테스트</button> */}
     </div>
   );
 };
