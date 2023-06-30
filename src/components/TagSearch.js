@@ -43,27 +43,6 @@ const TagSearch = () => {
     });
     setSearchedResult(results);
 
-    //
-    /*
-    // 1. 받아온 메뉴 목록(tempData)에서 태그들만 모인 배열을 만든다
-    console.log("태그리스트");
-    console.log(taglist);
-    // 2. 검색값과 일치하는 인덱스를 반환한다
-    // const searchedItems = taglist.filter(item =>
-    //   // item.toLowerCase().includes(userInput),
-    //   // console.log(item),
-    //   item.filter(item => item.toLowerCase().includes(userInput)),
-    // );
-    const searchedItems = taglist.map(item => {
-      item.filter(item => item.toLowerCase().includes(userInput));
-    });
-    // console.log(searchedItems);
-    // 3. tempData 에서 해당 인덱스의 메뉴만 출력한다
-
-    ///////////////////////////////
-    // const searchedItems = menuData.filter(item=>item.tags.toLowerCase().includes(userInput))
-    // setSearchedResult();
-    */
   };
 
   // 체크박스
