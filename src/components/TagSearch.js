@@ -65,16 +65,37 @@ const TagSearch = () => {
     // setSearchedResult();
     */
   };
-  const handleMakeRoulette = () => {};
 
   // 체크박스
   const [countCheck, setCountCheck] = useState(0);
-  const [isChecked, setIsChecked] = useState([]);
+  const [checkedList, setCheckedList] = useState([]);
 
-  const handleCheckEvent = e => {
-    console.log(e);
-    console.log(e.target.checked);
+  const handleCheckEvent = () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let count = 0;
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        count++;
+      }
+    });
+    if (count > 8) {
+      event.target.checked = false;
+      setCountCheck(count - 1);
+      window.alert(`최대 8개까지만 선택할 수 있습니다.`);
+    } else {
+      setCountCheck(count);
+    }
   };
+  // 체크된 체크박스의 값을 저장
+  const handleMakeRoulette = () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkedValues = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value);
+    setCheckedList(checkedValues);
+    console.log(checkedList);
+  };
+
   //JSX
   return (
     <div>
