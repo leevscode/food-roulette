@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const TagSearch = () => {
   const tempData = [
@@ -33,18 +33,15 @@ const TagSearch = () => {
   const handleSearchTag = () => {
     // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
     taglist.forEach((items, idx) => {
-      let temp = items.filter(item => item.includes("시트러스"));
+      let temp = items.filter(item => item.includes(userInput));
       if (temp.length) {
         idxList.push(idx);
-        console.log(idxList);
       }
     });
     idxList.forEach(item => {
-      console.log(tempData[item].menu);
       results.push(tempData[item].menu);
     });
     setSearchedResult(results);
-    console.log(results);
 
     //
     /*
@@ -70,6 +67,15 @@ const TagSearch = () => {
   };
   const handleMakeRoulette = () => {};
 
+  // 체크박스
+  const [countCheck, setCountCheck] = useState(0);
+  const [isChecked, setIsChecked] = useState([]);
+
+  const handleCheckEvent = e => {
+    console.log(e);
+    console.log(e.target.checked);
+  };
+  //JSX
   return (
     <div>
       <div style={{ border: "1px solid green" }}>
@@ -84,23 +90,18 @@ const TagSearch = () => {
       </div>
 
       <div style={{ border: "1px solid green" }}>
-        <p>검색결과 출력</p>
+        <p>검색결과 출력 영역</p>
         <div>
           {/* 일치하는 태그를 가지는 메뉴를 출력 */}
-          <div>
-            {/* <input type="checkbox" name="roulette" id="1" value="1" />
-            <label htmlFor="1">자장면</label>
-            <br />
-            <input type="checkbox" name="roulette" id="2" value="2" />
-            <label htmlFor="2">탕수육</label> */}
-
+          <div className="check-area">
             {searchedResult.map((item, index) => (
               <p key={index}>
                 <input
                   type="checkbox"
                   name="roulette"
                   id={index}
-                  value={index}
+                  value={item}
+                  onChange={handleCheckEvent}
                 />
                 <label htmlFor={index}>{item}</label>
               </p>
@@ -108,7 +109,7 @@ const TagSearch = () => {
           </div>
         </div>
         <button onClick={handleMakeRoulette}>룰렛생성</button>
-        <span> 1 / 8 </span>
+        <span> {countCheck} / 8 </span>
       </div>
     </div>
   );
