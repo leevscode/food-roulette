@@ -27,12 +27,11 @@ const Roulette = () => {
     }
     // 0에서 data.length - 1 까지의 랜덤한 숫자 생성
     const newPrizeNumber = Math.floor(Math.random() * data.length);
-    setPrizeNumber(newPrizeNumber);
     setStartSpin(true);
+    setPrizeNumber(newPrizeNumber);
     setIsSpinning(true);
-    // state는 비동기로 저장되어 실시간 반영이 안됨 - 추후 수정 필요
     setSpinResult(data[prizeNumber].option);
-    console.log(spinResult);
+    showModal();
   };
 
   // 모달 관련 state
@@ -42,9 +41,12 @@ const Roulette = () => {
   };
   const handleOk = () => {
     setIsModalOpen(false);
+    console.log(spinResult);
+    console.log(data[prizeNumber].option);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    console.log("다시선택");
   };
 
   // JSX
@@ -86,23 +88,26 @@ const Roulette = () => {
             },
           }}
         />
-
         <button onClick={handleSpinRoulette} disabled={isSpinning}>
           SPIN
         </button>
         <br />
-        {!startSpin
-          ? `오늘의 결과는? ${data[prizeNumber].option}`
-          : "룰렛이 돌아가고 있습니다..."}
+        {!startSpin ? `오늘의 결과는?` : "룰렛이 돌아가고 있습니다..."}
       </RouletteBox>
-      <Modal
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        centered
-      >
-        <p>{spinResult}</p>
-      </Modal>
+      {!startSpin ? (
+        <Modal
+          open={isModalOpen}
+          onOk={handleOk}
+          okText="이걸로 할게요"
+          onCancel={handleCancel}
+          cancelText="다시 돌릴래요"
+          centered
+          closable={false}
+          maskClosable={false}
+        >
+          <p>{data[prizeNumber].option}</p>
+        </Modal>
+      ) : null}
     </>
   );
 };
