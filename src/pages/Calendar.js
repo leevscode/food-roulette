@@ -1,6 +1,7 @@
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
+import { Radio } from "antd";
 import "../style/Calendar.css";
 
 const Schedule = () => {
@@ -12,23 +13,23 @@ const Schedule = () => {
     const server = [
       {
         day: "2023-06-20",
-        title: "떡볶이",
+        // title: "테스트1",
         price: 4000,
       },
       {
         day: "2023-06-16",
-        title: "짜장면",
+        // title: "테스트2",
         price: 10000,
       },
       {
         day: "2023-06-05",
-        title: "햄버거",
+        // title: "테스트3",
         price: 7500,
       },
       {
         day: "2023-06-28",
+        // title: "테스트4",
         price: 15000,
-        title: "피자",
       },
     ];
 
@@ -39,24 +40,6 @@ const Schedule = () => {
     const day = moment(value).format("YYYY-MM-DD");
     const result = scheduleData.find(item => item.day === day);
     setSelectedSchedule(result);
-  };
-
-  const showScheduleJSX = ({ date }) => {
-    const day = moment(date).format("YYYY-MM-DD");
-    const result = scheduleData.find(item => item.day === day);
-
-    if (result) {
-      return (
-        <div
-          className="schedule-box"
-          onClick={() => setSelectedSchedule(result)}
-        >
-          <div>{result.title}</div>
-          <div>{result.price}</div>
-          <div></div>
-        </div>
-      );
-    }
   };
 
   const onSubmitForm = e => {
@@ -74,7 +57,24 @@ const Schedule = () => {
             onClickDay={handleClickDay}
             calendarType="US"
             formatDay={(locale, date) => moment(date).format("D")}
-            tileContent={showScheduleJSX}
+            tileContent={({ date }) => {
+              const day = moment(date).format("YYYY-MM-DD");
+              const result = scheduleData.find(item => item.day === day);
+
+              if (result) {
+                return (
+                  <div
+                    className="schedule-box"
+                    style={{ backgroundColor: "#7FFFD4" }}
+                    onClick={() => setSelectedSchedule(result)}
+                  >
+                    {/* <div>{result.title}</div> */}
+                    <div className="empty-space" />
+                    <div>{result.price}</div>
+                  </div>
+                );
+              }
+            }}
           />
         </div>
 
@@ -84,72 +84,51 @@ const Schedule = () => {
           </p>
 
           {selectedSchedule && (
-            <>
-              <div className="selected-schedule">
-                <div>
-                  <p>{selectedSchedule.day}</p>
-                  <br />
-                </div>
-                <div>
-                  <form onSubmit={onSubmitForm}>
-                    <div className="calendar-scroll">
-                      <h2>{selectedSchedule.title}</h2>
-                      <p className="food-name">{selectedSchedule.price}</p>
-                      <div className="calendar-input">
-                        <input
-                          type="text"
-                          placeholder="가격을 입력해주세요"
-                        ></input>
-                      </div>
-                      <div className="calendar-input">
-                        <input
-                          type="text"
-                          placeholder="장소를 입력해주세요"
-                        ></input>
-                      </div>
-                      <br />
-                      <img src={selectedSchedule.imgPath} alt="테스트" />
-                      <h2>{selectedSchedule.title}</h2>
-                      <p className="food-name">{selectedSchedule.price}</p>
-                      <div className="calendar-input">
-                        <input
-                          type="text"
-                          placeholder="가격을 입력해주세요"
-                        ></input>
-                      </div>
-                      <div className="calendar-input">
-                        <input
-                          type="text"
-                          placeholder="장소를 입력해주세요"
-                        ></input>
-                      </div>
-                      <br />
-                      <img src={selectedSchedule.imgPath} alt="테스트" />
-                      <h2>{selectedSchedule.title}</h2>
-                      <p className="food-name">{selectedSchedule.price}</p>
-                      <div className="calendar-input">
-                        <input
-                          type="text"
-                          placeholder="가격을 입력해주세요"
-                        ></input>
-                      </div>
-                      <div className="calendar-input">
-                        <input
-                          type="text"
-                          placeholder="장소를 입력해주세요"
-                        ></input>
-                      </div>
-                      <br />
-                      <img src={selectedSchedule.imgPath} alt="테스트" />
-                    </div>
-                    
-                    <div className="calendar-bt">
-                      <button className="calendar-button">입력</button>
-                    </div>
-                  </form>
-                </div>
+            <div className="selected-schedule">
+              <div>
+                <p>{selectedSchedule.day}</p>
+                <br />
               </div>
-            </>
+              <div>
+                <form onSubmit={onSubmitForm}>
+                  <div className="calendar-scroll">
+                    {[...Array(3)].map((_, index) => (
+                      <div className="calendar-info" key={index}>
+                        <h2>{selectedSchedule.title}</h2>
+                        <p className="food-name">{selectedSchedule.price}</p>
+                        <div className="calendar-input">
+                          <input
+                            type="text"
+                            placeholder="가격을 입력해주세요"
+                          ></input>
+                        </div>
+                        <div className="calendar-input">
+                          <input
+                            type="text"
+                            placeholder="장소를 입력해주세요"
+                          ></input>
+                        </div>
+                        <br />
+                        {/* <img src={selectedSchedule.imgPath} alt="테스트" /> */}
+                        <div className="pepe-score">
+                        <img src="/images/1점.png" alt="울음" />
+                        <img src="/images/2점.png" alt="무난" />
+                        <img src="/images/3점.png" alt="행복" />
+                        </div>
+                        <Radio.Group>
+                          <Radio value={1}>1점</Radio>
+                          <Radio value={2}>2점</Radio>
+                          <Radio value={3}>3점</Radio>
+                        </Radio.Group>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="calendar-bt">
+                    <button className="calendar-button">입력</button>
+                  </div>
+                </form>
+              </div>
+            </div>
           )}
         </div>
       </div>

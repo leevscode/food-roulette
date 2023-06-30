@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import MenuInput from "../components/MenuInput";
 import ShowMenuList from "../components/ShowMenuList";
-import { axiosInstance } from "../api/axios";
+import { axiosInstance } from "../api/fetch";
 import axios from "axios";
 
 const Menu = () => {

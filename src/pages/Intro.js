@@ -14,7 +14,7 @@ import axios from "axios";
 const Intro = () => {
   const handleButtonClick = async () => {
     try {
-      const response = await axios.get();
+      const response = await axios.get("");
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -24,6 +24,7 @@ const Intro = () => {
   const onSubmitForm = e => {
     e.preventDefault();
     // 서버연동 예정
+    
     console.log(e.target);
   };
 
