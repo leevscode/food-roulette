@@ -1,10 +1,13 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { HashTag } from "../style/MenuCSS";
+import axios from "axios";
+import { axiosInstance } from "../api/axios";
 
 const MenuInput = () => {
   const inputMenu = useRef(null);
   const inputTags = useRef(null);
+  const testInput = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
 
   // 정규표현식 = 스페이스바, 특수문자, 빈 값 금지
@@ -46,9 +49,35 @@ const MenuInput = () => {
       setInputTagArr([]);
       inputMenu.current.value = null;
     } else {
-      console.log("메뉴를 입력해주세요");
+      console.log("메뉴와 해시태그를 입력해주세요");
     }
   };
+
+  /* */
+  const [test, setTest] = useState("");
+  const handleTest = async () => {
+    let aaa = testInput.current.value;
+    console.log(aaa);
+    setTest(aaa);
+    // const header = { "Content-Type": "application/json" };
+    // // post
+    // axios
+    //   .post("http://192.168.0.144:5003/menu/1", test, header)
+    //   .then(res => res.data)
+    //   .then(result => {
+    //     console.log(result);
+    //   })
+    //   .catch(err => console.log(err));
+    try {
+      const res = await axiosInstance.post("/menu/1", test);
+      const data = res.data;
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // JSX
   return (
     <div>
       <h2>메뉴등록</h2>
@@ -81,6 +110,10 @@ const MenuInput = () => {
         <button style={{ border: "1px solid black" }} onClick={handleSaveMenu}>
           완료(db에 저장)
         </button>
+        <hr />
+        <p>post 테스트중</p>
+        <input type="text" ref={testInput} />
+        <button onClick={handleTest}>테스트</button>
       </div>
     </div>
   );

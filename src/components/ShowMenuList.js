@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import axios from "axios";
 
 const ShowMenuList = ({ menuList }) => {
   const [showMenu, setShowMenu] = useState([
@@ -10,6 +11,17 @@ const ShowMenuList = ({ menuList }) => {
     // { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
     // { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
   ]);
+
+  const handleMenuDelete = (_id) => {
+    console.log("삭제버튼");
+    axios
+      .delete(`http://192.168.0.144:5003/menu/1`)
+      .then(res => res.data)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => console.log(err));
+  };
 
   useEffect(() => {
     setShowMenu(menuList);
@@ -41,7 +53,9 @@ const ShowMenuList = ({ menuList }) => {
                 ))} */}
                 #지금은 #없음
               </p>
-              <button>메뉴삭제</button>
+              <button onClick={() => handleMenuDelete(item.iusermenu)}>
+                메뉴삭제
+              </button>
               <hr />
             </div>
           ))}
