@@ -20,7 +20,14 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Form form={form} name="control-hooks" style={{ width: "500px" }}>
         <Form.Item
           style={{
@@ -44,9 +51,16 @@ const App = () => {
           </Select>
         </Form.Item>
       </Form>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          ustifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         {selectedOption && `${selectedOption}`}
-        {`${selectedOption}` && <CaluclateChart/>}
+        {`${selectedOption}` && <CaluclateChart />}
       </div>
     </div>
   );

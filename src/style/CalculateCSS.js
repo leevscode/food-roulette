@@ -11,7 +11,7 @@ export const Limit = styled.div`
 `;
 
 export const ProgressContainer = styled.div`
-  width: 200px; /* 막대기의 길이를 조정하세요 */
+  width: 230px; /* 막대기의 길이 */
   height: 30px;
   background-color: #e5e5e5;
   border-radius: 5px;
@@ -27,17 +27,19 @@ export const ProgressFill = styled.div`
 `;
 
 export const ProgressFillInner = styled.div`
+  display: flex;
+  position: relative;
   width: 100%;
 `;
 
 export const ProgressText = styled.p`
-  margin: 0;
-  font-size: 14px;
-  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-left: 22px;
+  font-size: 16px;
+  color: white;
   text-align: center;
   width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
+
