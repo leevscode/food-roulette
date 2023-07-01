@@ -1,5 +1,14 @@
 import styled from "@emotion/styled";
 
+export const CalculateBg = styled.div`
+  margin: 0 auto;
+  border-radius: 30px;
+  width: 50%;
+  height: auto;
+  min-height: 755px;
+  padding-bottom: 50px;
+  background: aqua;
+`;
 export const Limit = styled.div`
   display: flex;
   font-size: 50px;
@@ -42,4 +51,3 @@ export const ProgressText = styled.p`
   text-align: center;
   width: 100%;
 `;
-

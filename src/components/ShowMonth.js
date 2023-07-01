@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Select } from "antd";
-import CaluclateChart from "./CaluclateChart";
+import CalculateChart from "./CalculateChart";
 
 const { Option } = Select;
 
@@ -13,9 +13,12 @@ const App = () => {
     { value: "2", label: "2월" },
     { value: "3", label: "3월" },
     { value: "4", label: "4월" },
+    { value: "5", label: "5월" },
+    { value: "6", label: "6월" },
+    { value: "7", label: "7월" },
   ];
 
-  const onGenderChange = value => {
+  const onMonthChange = (value) => {
     setSelectedOption(value);
   };
 
@@ -40,10 +43,10 @@ const App = () => {
           <Select
             style={{ width: "300px" }}
             placeholder="달을 선택해주세요"
-            onChange={onGenderChange}
+            onChange={onMonthChange}
             allowClear
           >
-            {options.map(option => (
+            {options.map((option) => (
               <Option key={option.value} value={option.value}>
                 {option.label}
               </Option>
@@ -54,13 +57,13 @@ const App = () => {
       <div
         style={{
           display: "flex",
-          ustifyContent: "center",
+          justifyContent: "center",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        {selectedOption && `${selectedOption}`}
-        {`${selectedOption}` && <CaluclateChart />}
+        {selectedOption && `${selectedOption}월`}
+        {selectedOption && <CalculateChart month={selectedOption} />}
       </div>
     </div>
   );
