@@ -61,9 +61,9 @@ const Roulette = ({ checkedList }) => {
           data={data}
           outerBorderColor={["#eee"]}
           outerBorderWidth={[5]}
-          innerBorderColor={["#000"]}
-          innerBorderWidth={[10]}
-          radiusLineColor={["#dedede"]}
+          innerBorderColor={["#323232"]}
+          innerBorderWidth={[8]}
+          radiusLineColor={["transparent"]}
           radiusLineWidth={[2]}
           textColors={["#ffffff"]}
           fontSize={[30]}

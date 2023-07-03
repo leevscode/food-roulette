@@ -69,9 +69,10 @@ const MenuInput = () => {
     //   })
     //   .catch(err => console.log(err));
     try {
-      const res = await axiosInstance.post("/menu/1", test);
-      const data = res.data;
-      console.log(data);
+      // const res = await axiosInstance.post("/menu/1", test);
+      // const data = res.data;
+      // console.log(data);
+      console.log("성공적");
     } catch (error) {
       console.error(error);
     }
@@ -111,9 +112,9 @@ const MenuInput = () => {
           완료(db에 저장)
         </button>
         <hr />
-        <p>post 테스트중</p>
+        {/* <p>post 테스트중</p>
         <input type="text" ref={testInput} />
-        <button onClick={handleTest}>테스트</button>
+        <button onClick={handleTest}>테스트</button> */}
       </div>
     </div>
   );
