@@ -79,7 +79,7 @@ const CalculateChart = ({ month }) => {
 
   return (
     <div className="p-6 mt-5 shadow rounded bg-white">
-      <h2>{month}월의 소비 실적</h2>
+  
       <div
         style={{
           height: "400px",

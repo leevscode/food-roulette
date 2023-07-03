@@ -12,12 +12,12 @@ const Schedule = () => {
     // 서버에서 받아오는 axios 데이터 샘플
     const server = [
       {
-        day: "2023-06-20",
+        day: "2023-07-02",
         title: "햄버거",
         // price: 4000,
       },
       {
-        day: "2023-06-16",
+        day: "2023-07-03",
         title: "피자",
         // price: 10000,
       },

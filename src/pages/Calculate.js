@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Backgroundimg,
   Limit,
   ProgressContainer,
   ProgressFill,
@@ -33,20 +34,21 @@ const Calculate = () => {
 
   return (
     <CalculateBg>
-    <>
-      <Limit>
-        <h1>이달의 한도</h1>
-        <ProgressContainer>
-          <ProgressFill style={{ width: `${progressPercent}%` }}>
-          <ProgressText>{`${progressPercent}%`}</ProgressText>
-            <ProgressFillInner></ProgressFillInner>
-          </ProgressFill>
-        </ProgressContainer>
-      </Limit>
+      <>
+        <Backgroundimg />
+        <Limit>
+          <h1>이달의 한도</h1>
+          <ProgressContainer>
+            <ProgressFill style={{ width: `${progressPercent}%` }}>
+              <ProgressText>{`${progressPercent}%`}</ProgressText>
+              <ProgressFillInner></ProgressFillInner>
+            </ProgressFill>
+          </ProgressContainer>
+        </Limit>
         <br/>
-        <ShowMonth/>
-    </>
-        </CalculateBg>
+        <ShowMonth />
+      </>
+    </CalculateBg>
   );
 };
 
