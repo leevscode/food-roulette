@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import MenuInput from "../components/MenuInput";
 import ShowMenuList from "../components/ShowMenuList";
-import { axiosInstance } from "../api/fetch";
+import { getMenus } from "../api/fetch";
 import axios from "axios";
 import { Switch } from "antd";
 
@@ -24,6 +24,7 @@ const Menu = () => {
     //     setMenuList(result);
     //   })
     //   .catch(err => console.log(err));
+    getMenus();
     setIsLoading(false);
   }, []);
   const onChange = checked => {
@@ -44,7 +45,6 @@ const Menu = () => {
       <hr />
       {toggle && <MenuInput />}
       {toggle || <ShowMenuList menuList={menuList} />}
-      {/* <button onClick={testAxios}>통신 테스트</button> */}
     </div>
   );
 };
