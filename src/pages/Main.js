@@ -63,14 +63,17 @@ const Main = () => {
       results.push(tempData[item].menu);
     });
     setSearchedResult(results);
+    handleClearAllChecks();
   };
 
-  // 체크박스
+  // 체크박스 state 변수
   const [countCheck, setCountCheck] = useState(0);
-  const [checkedList, setCheckedList] = useState([]);
+  const [checkedList, setCheckedList] = useState([""]);
+  // 하나 이상 체크되어 있어야 룰렛생성 버튼이 활성화 됨
+  const [canCheck, setCanCheck] = useState(false);
 
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const handleCheckEvent = () => {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     let count = 0;
     checkboxes.forEach(checkbox => {
       if (checkbox.checked) {
@@ -82,18 +85,29 @@ const Main = () => {
       setCountCheck(count - 1);
       window.alert(`최대 8개까지만 선택할 수 있습니다.`);
     } else {
+      setCanCheck(true);
       setCountCheck(count);
     }
   };
-  // 체크된 체크박스의 값을 저장
+  // 체크된 체크박스의 값을 저장 + 값을 하나 이상 선택했는지 여부 확인
   const handleMakeRoulette = () => {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    console.log(checkboxes[0].checked);
     const checkedValues = Array.from(checkboxes)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value);
-    setCheckedList(checkedValues);
-    console.log(checkedList);
+    if (checkedValues.length === 0) {
+      alert("메뉴를 선택해주세요");
+      return;
+    } else {
+      setCheckedList(checkedValues);
+      console.log(checkedList);
+    }
   };
+  // 체크 전체 해제
+  const handleClearAllChecks = () => {
+    checkboxes.forEach(item => (item.checked = false));
+  };
+
   /* * * * * * * * * * * * */
   return (
     <>
@@ -109,7 +123,7 @@ const Main = () => {
           <RouletteArea style={{ border: "1px solid red" }}>
             <p>룰렛 영역 = 00 님의 룰렛</p>
             <hr />
-            <Roulette />
+            <Roulette checkedList={checkedList} />
           </RouletteArea>
         </div>
         <br />
@@ -146,7 +160,13 @@ const Main = () => {
                   ))}
                 </div>
               </div>
-              <button onClick={handleMakeRoulette}>룰렛생성</button>
+              <button onClick={handleMakeRoulette} disabled={!canCheck}>
+                룰렛생성
+              </button>
+              <br />
+              <button onClick={handleClearAllChecks} disabled={!canCheck}>
+                체크전체해제
+              </button>
               <span> {countCheck} / 8 </span>
             </div>
           </div>

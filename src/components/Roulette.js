@@ -3,14 +3,16 @@ import { Wheel } from "react-custom-roulette";
 import { RouletteBox } from "../style/MainCSS";
 import Modal from "antd/es/modal/Modal";
 
-const Roulette = () => {
+const Roulette = ({ checkedList }) => {
+  console.log(checkedList);
+
   // 룰렛데이터
   const [startSpin, setStartSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [spinResult, setSpinResult] = useState("");
 
-  const data = [
+  const dataa = [
     { id: 1, option: 10 },
     { id: 2, option: 20 },
     { id: 3, option: 30 },
@@ -20,11 +22,20 @@ const Roulette = () => {
     { id: 7, option: 70 },
     { id: 8, option: 80 },
   ];
+  let data = checkedList.map((item, idx) => {
+    return { id: idx + 1, option: item };
+  });
 
   const handleSpinRoulette = () => {
     if (isSpinning) {
       return; // 룰렛이 돌아가는 동안은 중복 클릭을 방지
     }
+    // 메뉴를 체크 안 했을 때도 룰렛 못 돌림
+    if (checkedList[0] === "") {
+      window.alert("메뉴를 선택해주세요!");
+      return;
+    }
+
     // 0에서 data.length - 1 까지의 랜덤한 숫자 생성
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setStartSpin(true);
