@@ -15,15 +15,6 @@ const Menu = () => {
     setToggle(!toggle);
   };
   useEffect(() => {
-    // 임시데이터 보관하여 axios 테스트
-    // axios
-    //   .get("http://192.168.0.144:5003/menu/1")
-    //   .then(res => res.data)
-    //   .then(result => {
-    //     console.log(result);
-    //     setMenuList(result);
-    //   })
-    //   .catch(err => console.log(err));
     getMenus();
     setIsLoading(false);
   }, []);
