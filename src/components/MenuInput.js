@@ -11,7 +11,9 @@ const MenuInput = () => {
   const [inputTagArr, setInputTagArr] = useState([]);
 
   // 정규표현식 = 스페이스바, 특수문자, 빈 값 금지
-  const regex = /^[a-zA-Z가-힣0-9]+$/;
+  const regex = /^[a-zA-Z가-힣ㄱ-ㅎ0-9]+$/;
+  // 글자 사이에 공백 허용할지는 고민
+  // const regex = /^[a-zA-Z가-힣ㄱ-ㅎ0-9\s]+$/;
 
   const handleAddTag = e => {
     const tag = inputTags.current.value;
