@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { HashTag } from "../style/MenuCSS";
 import axios from "axios";
-import { axiosInstance } from "../api/fetch";
+import { axiosInstance, postMenus } from "../api/fetch";
 
 const MenuInput = () => {
   const inputMenu = useRef(null);
