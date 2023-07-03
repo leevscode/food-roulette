@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 
 const getMenus = async () => {
   try {
-    const res = await axiosInstance.get("/api/menu/1");
+    const res = await axiosInstance.get("/api/menu/2");
     const result = res.data;
     console.log(result);
   } catch (error) {
@@ -19,4 +19,15 @@ const getMenus = async () => {
   }
 };
 
-export { getMenus };
+const postMenus = async item => {
+  const headers = { "Content-Type": "multipart/form-data" };
+  try {
+    const res = await axiosInstance.post("/api/menu/2", item, headers);
+    const result = res.data;
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { axiosInstance, getMenus, postMenus };

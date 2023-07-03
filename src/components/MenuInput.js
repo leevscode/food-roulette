@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { HashTag } from "../style/MenuCSS";
 import axios from "axios";
-import { axiosInstance } from "../api/fetch";
+import { axiosInstance, postMenus } from "../api/fetch";
 
 const MenuInput = () => {
   const inputMenu = useRef(null);
@@ -59,23 +59,31 @@ const MenuInput = () => {
     let aaa = testInput.current.value;
     console.log(aaa);
     setTest(aaa);
+    postMenus(test);
     // const header = { "Content-Type": "application/json" };
     // // post
     // axios
-    //   .post("http://192.168.0.144:5003/menu/1", test, header)
+    //   .post("http://192.168.0.144:5003/api/menu/1", test)
     //   .then(res => res.data)
     //   .then(result => {
     //     console.log(result);
     //   })
     //   .catch(err => console.log(err));
-    try {
-      // const res = await axiosInstance.post("/menu/1", test);
-      // const data = res.data;
-      // console.log(data);
-      console.log("성공적");
-    } catch (error) {
-      console.error(error);
-    }
+
+    // await axiosInstance
+    //   .post("/api/menu/1", test)
+    //   .then(res => res.data)
+    //   .then(data => console.log(data))
+    //   .catch(error => console.error(error));
+
+    // try {
+    //   // const res = await axiosInstance.post("/api/menu/1", test);
+    //   // const data = res.data;
+    //   // console.log(data);
+    //   console.log("성공적");
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   // JSX
@@ -112,9 +120,9 @@ const MenuInput = () => {
           완료(db에 저장)
         </button>
         <hr />
-        {/* <p>post 테스트중</p>
+        <p>axios post 테스트중</p>
         <input type="text" ref={testInput} />
-        <button onClick={handleTest}>테스트</button> */}
+        <button onClick={handleTest}>테스트</button>
       </div>
     </div>
   );
