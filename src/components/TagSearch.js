@@ -42,7 +42,6 @@ const TagSearch = () => {
       results.push(tempData[item].menu);
     });
     setSearchedResult(results);
-
   };
 
   // 체크박스

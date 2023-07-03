@@ -46,3 +46,7 @@ button {
   border: none;
   cursor: pointer;
 }
+
+.ant-switch.css-dev-only-do-not-override-12upa3x {
+  background-color: coral !important;
+}

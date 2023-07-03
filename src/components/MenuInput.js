@@ -11,7 +11,9 @@ const MenuInput = () => {
   const [inputTagArr, setInputTagArr] = useState([]);
 
   // 정규표현식 = 스페이스바, 특수문자, 빈 값 금지
-  const regex = /^[a-zA-Z가-힣0-9]+$/;
+  const regex = /^[a-zA-Z가-힣ㄱ-ㅎ0-9]+$/;
+  // 글자 사이에 공백 허용할지는 고민
+  // const regex = /^[a-zA-Z가-힣ㄱ-ㅎ0-9\s]+$/;
 
   const handleAddTag = e => {
     const tag = inputTags.current.value;
@@ -59,22 +61,31 @@ const MenuInput = () => {
     let aaa = testInput.current.value;
     console.log(aaa);
     setTest(aaa);
+    postMenus(test);
     // const header = { "Content-Type": "application/json" };
     // // post
     // axios
-    //   .post("http://192.168.0.144:5003/menu/1", test, header)
+    //   .post("http://192.168.0.144:5003/api/menu/1", test)
     //   .then(res => res.data)
     //   .then(result => {
     //     console.log(result);
     //   })
     //   .catch(err => console.log(err));
-    try {
-      const res = await axiosInstance.post("/menu/1", test);
-      const data = res.data;
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+
+    // await axiosInstance
+    //   .post("/api/menu/1", test)
+    //   .then(res => res.data)
+    //   .then(data => console.log(data))
+    //   .catch(error => console.error(error));
+
+    // try {
+    //   // const res = await axiosInstance.post("/api/menu/1", test);
+    //   // const data = res.data;
+    //   // console.log(data);
+    //   console.log("성공적");
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   // JSX
@@ -111,7 +122,7 @@ const MenuInput = () => {
           완료(db에 저장)
         </button>
         <hr />
-        <p>post 테스트중</p>
+        <p>axios post 테스트중</p>
         <input type="text" ref={testInput} />
         <button onClick={handleTest}>테스트</button>
       </div>
