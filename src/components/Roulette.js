@@ -2,26 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
 import { RouletteBox } from "../style/MainCSS";
 import Modal from "antd/es/modal/Modal";
+import { useNavigate } from "react-router-dom";
 
 const Roulette = ({ checkedList }) => {
-  console.log(checkedList);
-
+  const navigate = useNavigate();
   // 룰렛데이터
   const [startSpin, setStartSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [spinResult, setSpinResult] = useState("");
 
-  const dataa = [
-    { id: 1, option: 10 },
-    { id: 2, option: 20 },
-    { id: 3, option: 30 },
-    { id: 4, option: 40 },
-    { id: 5, option: 50 },
-    { id: 6, option: 60 },
-    { id: 7, option: 70 },
-    { id: 8, option: 80 },
-  ];
   let data = checkedList.map((item, idx) => {
     return { id: idx + 1, option: item };
   });
@@ -54,6 +44,7 @@ const Roulette = ({ checkedList }) => {
     setIsModalOpen(false);
     console.log(spinResult);
     console.log(data[prizeNumber].option);
+    navigate("/calendar");
   };
   const handleCancel = () => {
     setIsModalOpen(false);
