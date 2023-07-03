@@ -15,7 +15,7 @@
   padding: 0;
   box-sizing: border-box;
   outline-style: none;
-  cursor: url(/public/images/cursor.png), auto;
+  /* cursor: url(/public/images/cursor.png), auto; */
 }
 
 abbr {
