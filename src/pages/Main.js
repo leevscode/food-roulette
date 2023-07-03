@@ -3,20 +3,20 @@ import Banner from "../components/Banner";
 import LimitSetting from "../components/LimitSetting";
 import Roulette from "../components/Roulette";
 import { MainContainer, RouletteArea } from "../style/MainCSS";
+import Loading from "../components/Loading";
 
 const Main = () => {
-  // 룰렛 결과 저장 = 선택된 메뉴
-  const [rouletteResult, setRouletteResult] = useState();
-  // 전체 메뉴+해시태그 불러옴 = 검색을 위함
-  const [menuList, setMenuList] = useState([]);
-  // 검색 결과에 맞는 메뉴+해시태그 저장
-  const [selectedMenu, setSelectedMenu] = useState([]);
-
   // 한도 설정 여부 확인
   const [isLimit, setIsLimit] = useState(false);
   // db에서 한도 설정 값 받아와야 함
   const limit = 10;
+  // 로딩
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    setInterval(() => {
+      setIsLoading(false);
+    }, 1800);
+
     if (limit > 0) {
       setIsLimit(true);
     }
@@ -37,9 +37,8 @@ const Main = () => {
     { id: 11, menu: "포도", tags: ["테스트", "보라", "신선함"] },
     { id: 12, menu: "참외", tags: ["테스트", "노랑", "맛있다"] },
   ];
-  // const searched = ["시트러스"];
   // 받아온 배열의 해시태그 배열만 따로 빼어냄
-  const taglist = tempData.map(item => item.tags);
+  const tagList = tempData.map(item => item.tags);
   // 인덱스를 담을 배열
   const idxList = [];
 
@@ -54,7 +53,7 @@ const Main = () => {
   };
   const handleSearchTag = () => {
     // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
-    taglist.forEach((items, idx) => {
+    tagList.forEach((items, idx) => {
       let temp = items.filter(item => item.includes(userInput));
       if (temp.length) {
         idxList.push(idx);
@@ -98,8 +97,11 @@ const Main = () => {
   /* * * * * * * * * * * * */
   return (
     <>
-      {/* ? <Loading /> : */}
-      {isLimit || <LimitSetting setIsLimit={setIsLimit} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        isLimit || <LimitSetting setIsLimit={setIsLimit} />
+      )}
       <MainContainer>
         <Banner />
         <br />

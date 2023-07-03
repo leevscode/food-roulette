@@ -12,11 +12,10 @@ const Loading = () => {
     left: 0,
     top: 0,
     background: "rgba(0, 0, 0, 0.8)",
-    zIndex: 99999999999999,
+    zIndex: 99999,
   };
   return (
     <div style={styleObj}>
-      로딩중...
       {/* <PacmanLoader color="rgb(255,242,0)" size={50} /> */}
       <img
         src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1586271105/noticon/eyjidxvaivj5xh1vitnn.gif"
