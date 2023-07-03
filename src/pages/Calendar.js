@@ -53,29 +53,31 @@ const Schedule = () => {
       <div className="p-6 mt-5 bg-white flex justify-center gap-7">
         <div>
           <h1>Calendar</h1>
-          <Calendar
-            onClickDay={handleClickDay}
-            calendarType="US"
-            formatDay={(locale, date) => moment(date).format("D")}
-            tileContent={({ date }) => {
-              const day = moment(date).format("YYYY-MM-DD");
-              const result = scheduleData.find(item => item.day === day);
+          <div style={{ border: "1px solid" }}>
+            <Calendar
+              onClickDay={handleClickDay}
+              calendarType="US"
+              formatDay={(locale, date) => moment(date).format("D")}
+              tileContent={({ date }) => {
+                const day = moment(date).format("YYYY-MM-DD");
+                const result = scheduleData.find(item => item.day === day);
 
-              if (result) {
-                return (
-                  <div
-                    className="schedule-box"
-                    style={{ backgroundColor: "#7FFFD4" }}
-                    onClick={() => setSelectedSchedule(result)}
-                  >
-                    <div className="empty-space" />
-                    <div>{result.title}</div>
-                    {/* <div>{result.price}</div> */}
-                  </div>
-                );
-              }
-            }}
-          />
+                if (result) {
+                  return (
+                    <div
+                      className="schedule-box"
+                      style={{ backgroundColor: "#7FFFD4" }}
+                      onClick={() => setSelectedSchedule(result)}
+                    >
+                      <div className="empty-space" />
+                      <div>{result.title}</div>
+                      {/* <div>{result.price}</div> */}
+                    </div>
+                  );
+                }
+              }}
+            />
+          </div>
         </div>
 
         <div className="calendar-menubox">
@@ -112,9 +114,9 @@ const Schedule = () => {
                         <h2>페페 스코어</h2>
                         {/* <img src={selectedSchedule.imgPath} alt="테스트" /> */}
                         <div className="pepe-score">
-                        <img src="/images/1점.png" alt="울음" />
-                        <img src="/images/2점.png" alt="무난" />
-                        <img src="/images/3점.png" alt="행복" />
+                          <img src="/images/1점.png" alt="울음" />
+                          <img src="/images/2점.png" alt="무난" />
+                          <img src="/images/3점.png" alt="행복" />
                         </div>
                         <Radio.Group className="pepe-score-raido">
                           <Radio value={1}>1점</Radio>

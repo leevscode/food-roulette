@@ -1,85 +1,103 @@
 import React, { useState, useEffect } from "react";
-import { ResponsiveBar } from "@nivo/bar";
+import { ResponsivePie } from "@nivo/pie";
 
 const CalculateChart = ({ month }) => {
   const [data, setData] = useState([]);
-
+  const colors = ["#DFFFF9", "#7FFFD4", "#59B2A2", "#FF6CC4", "red", "yellow"];
   useEffect(() => {
     let calculateData = [];
 
     if (month === "1") {
       calculateData = [
-        { bottle: "365", 피자: 3500, 햄버거: 1200, 짜장면: 4500},
-        { bottle: "500", 피자: 2500, 치킨: 2300 },
-        { bottle: "1000", 피자: 3500, 치킨: 3300 },
+        {
+          id: "샤브샤브",
+          label: "45000",
+          value: 342,
+        },
+        {
+          id: "짜장면",
+          label: "25000",
+          value: 282,
+        },
+        {
+          id: "피자",
+          label: "65000",
+          value: 396,
+        },
+        {
+          id: "돈까스",
+          label: "33000",
+          value: 276,
+        },
+        {
+          id: "소바",
+          label: "19000",
+          value: 236,
+        },
       ];
     } else if (month === "2") {
       calculateData = [
-        { bottle: "365", 피자: 1400, 햄버거: 1100, 치킨: 1200 },
-        { bottle: "500", 피자: 2400, 햄버거: 2100, 치킨: 2200 },
-        { bottle: "1000", 피자: 3400, 햄버거: 3100, 치킨: 3200 },
+        {
+          id: "양장피",
+          label: "65000",
+          value: 342,
+        },
+        {
+          id: "짜장면",
+          label: "18000",
+          value: 282,
+        },
+        {
+          id: "돈까스",
+          label: "36000",
+          value: 396,
+        },
+        {
+          id: "삼겹살",
+          label: "48000",
+          value: 276,
+        },
+        {
+          id: "소바",
+          label: "19000",
+          value: 236,
+        },
       ];
     } else if (month === "3") {
       calculateData = [
-        { bottle: "365", 피자: 1600, 햄버거: 1300, 치킨: 1400 },
-        { bottle: "500", 피자: 2600, 햄버거: 2300, 치킨: 2400 },
-        { bottle: "1000", 피자: 3600, 햄버거: 3300, 치킨: 3400 },
-      ];
-    } else if (month === "4") {
-      calculateData = [
-        { bottle: "365", 피자: 1700, 햄버거: 1400, 치킨: 3500 },
-        { bottle: "500", 피자: 2700, 햄버거: 2400, 치킨: 2500 },
-        { bottle: "1000", 피자: 3700, 햄버거: 3400, 치킨: 3500 },
-      ];
-    } else if (month === "5") {
-      calculateData = [
-        { bottle: "365", 피자: 1700, 햄버거: 1400, 치킨: 3500 },
-        { bottle: "500", 피자: 2700, 햄버거: 2400, 치킨: 2500 },
-        { bottle: "1000", 피자: 3700, 햄버거: 3400, 치킨: 3500 },
-      ];
-    } else if (month === "6") {
-      calculateData = [
-        { bottle: "365", 피자: 1700, 햄버거: 1400, 치킨: 3500 },
-        { bottle: "500", 피자: 2700, 햄버거: 2400, 치킨: 2500 },
-        { bottle: "1000", 피자: 3700, 햄버거: 3400, 치킨: 3500 },
+        {
+          id: "치킨",
+          label: "65000",
+          value: 342,
+        },
+        {
+          id: "짜장면",
+          label: "18000",
+          value: 282,
+        },
+        {
+          id: "돈까스",
+          label: "34000",
+          value: 396,
+        },
+        {
+          id: "샤브샤브",
+          label: "58000",
+          value: 276,
+        },
+        {
+          id: "카레",
+          label: "22000",
+          value: 236,
+        },
       ];
     }
 
     setData(calculateData);
   }, [month]);
 
-  const theme = {
-    labels: {
-      text: {
-        fontSize: 14,
-        fill: "#000000",
-      },
-    },
-    legends: {
-      text: {
-        fontSize: 10,
-        fill: "#ff0000",
-      },
-    },
-    axes: {
-      legend: {
-        text: {
-          fontSize: 20,
-          fill: "#ffff00",
-        },
-      },
-      ticks: {
-        text: {
-          fontSize: 16,
-          fill: "#0000ff",
-        },
-      },
-    },
-  };
-
   return (
     <div className="p-6 mt-5 shadow rounded bg-white">
-  
       <div
         style={{
           height: "400px",
@@ -88,21 +106,53 @@ const CalculateChart = ({ month }) => {
           justifyContent: "center",
         }}
       >
-        <ResponsiveBar
+        <ResponsivePie
           data={data}
-          keys={["피자", "햄버거", "치킨", "짜장면"]}
-          indexBy="bottle"
-          padding={0.3}
-          colors={["blue", "brown", "hotpink", "black"]}
-          colorBy="id"
-          theme={theme}
-          axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
+          margin={{ top: 0, right: 80, bottom: 0, left: 80 }}
+          startAngle={360}
+          endAngle={-360}
+          innerRadius={0}
+          padAngle={0.7}
+          cornerRadius={3}
+          activeOuterRadiusOffset={8}
+          borderWidth={1}
+          borderColor={{
+            from: "color",
+            modifiers: [["darker", 0.2]],
           }}
-          enableGridY={true}
-          enableLabel={false}
+          colors={colors}
+          arcLinkLabelsSkipAngle={10}
+          arcLinkLabelsTextColor="#fffff"
+          arcLinkLabelsThickness={2}
+          arcLinkLabelsColor={{ from: "color" }}
+          arcLabel="id"
+          arcLinkLabel="label"
+          arcLabelsSkipAngle={10}
+          arcLabelsTextColor={{
+            from: "color",
+            modifiers: [["darker", 2]],
+            fontSize: "40px",
+          }}
+          defs={[
+            {
+              id: "dots",
+              type: "patternDots",
+              background: "inherit",
+              color: "rgba(255, 255, 255, 0.3)",
+              size: 4,
+              padding: 1,
+              stagger: true,
+            },
+            {
+              id: "lines",
+              type: "patternLines",
+              background: "inherit",
+              color: "rgba(255, 255, 255, 0.3)",
+              rotation: -45,
+              lineWidth: 6,
+              spacing: 10,
+            },
+          ]}
         />
       </div>
     </div>

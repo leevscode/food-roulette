@@ -25,7 +25,7 @@ export const Backgroundimg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.3;
+  opacity: 0.4;
 `;
 
 export const Limit = styled.div`
