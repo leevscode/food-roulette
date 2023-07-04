@@ -12,7 +12,7 @@ const ShowMenuList = ({ menuList }) => {
     // { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
   ]);
 
-  const handleMenuDelete = (_id) => {
+  const handleMenuDelete = _id => {
     console.log("삭제버튼");
     // axios
     //   .delete(`http://192.168.0.144:5003/menu/1`)
@@ -41,19 +41,18 @@ const ShowMenuList = ({ menuList }) => {
             overflowY: "scroll",
           }}
         >
-          {showMenu.map((item, index) => (
-            <div key={index}>
+          {showMenu.map(item => (
+            <div key={item.iuserMenu}>
               <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
               <p>
                 태그들 :
-                {/* {item.tag.map((item, index) => (
-                  <span key={index}>
-                    <span>{` #${item}`}</span>
+                {item.tags.map(item => (
+                  <span key={item.itag}>
+                    <span>{` #${item.tag}`}</span>
                   </span>
-                ))} */}
-                #지금은 #없음
+                ))}
               </p>
-              <button onClick={() => handleMenuDelete(item.iusermenu)}>
+              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
                 메뉴삭제
               </button>
               <hr />

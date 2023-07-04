@@ -15,27 +15,22 @@ const Menu = () => {
     setToggle(!toggle);
   };
   useEffect(() => {
-    getMenus();
+    getMenus(setMenuList);
     setIsLoading(false);
   }, []);
-  const onChange = checked => {
-    console.log(`switch to ${checked}`);
-  };
+
   return (
     <div>
       {isLoading && <Loading />}
       <div>Menu</div>
       <hr />
-      <button onClick={handleToggle}>
-        {toggle ? "메뉴출력하기" : "메뉴입력하기"}
-      </button>
-      <hr />
       메뉴입력하기
       <Switch onChange={handleToggle} />
       메뉴출력하기
       <hr />
-      {toggle && <MenuInput />}
-      {toggle || <ShowMenuList menuList={menuList} />}
+      {toggle ? <MenuInput /> : <ShowMenuList menuList={menuList} />}
+      {/* {toggle && <MenuInput />}
+      {toggle || <ShowMenuList menuList={menuList} />} */}
     </div>
   );
 };

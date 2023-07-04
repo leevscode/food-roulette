@@ -9,25 +9,39 @@ const axiosInstance = axios.create({
   // },
 });
 
-const getMenus = async () => {
+const getMenus = async setFunc => {
   try {
     const res = await axiosInstance.get("/api/menu/2");
     const result = res.data;
+    setFunc(result);
     console.log(result);
   } catch (error) {
     console.error(error);
   }
 };
 
-const postMenus = async item => {
-  const headers = { "Content-Type": "multipart/form-data" };
+// const postMenus = async item => {
+//   const headers = { "Content-Type": "multipart/form-data" };
+//   try {
+//     const res = await axiosInstance.post("/api/menu/2", item, headers);
+//     const result = res.data;
+//     console.log(result);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// 데이터 보내기
+export const postMenus = async _data => {
+  console.log(_data);
+  const headers = { "Content-Type": "application/json" };
   try {
-    const res = await axiosInstance.post("/api/menu/2", item, headers);
-    const result = res.data;
-    console.log(result);
+    const res = await axios.post("/api/menu/2", _data, headers);
+    const data = res.data;
+    console.log(data);
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
-export { axiosInstance, getMenus, postMenus };
+export { axiosInstance, getMenus };
