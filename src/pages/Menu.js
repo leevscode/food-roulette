@@ -3,7 +3,6 @@ import Loading from "../components/Loading";
 import MenuInput from "../components/MenuInput";
 import ShowMenuList from "../components/ShowMenuList";
 import { getUserMenu, getCommonMenu } from "../api/fetch";
-import axios from "axios";
 import { Switch } from "antd";
 
 const Menu = () => {
@@ -30,9 +29,14 @@ const Menu = () => {
       <Switch onChange={handleToggle} />
       메뉴출력하기
       <hr />
-      {toggle ? <MenuInput /> : <ShowMenuList userMenuList={userMenuList} commonMenuList={commonMenuList} />}
-      {/* {toggle && <MenuInput />}
-      {toggle || <ShowMenuList menuList={menuList} />} */}
+      {toggle ? (
+        <MenuInput setUserMenuList={setUserMenuList} />
+      ) : (
+        <ShowMenuList
+          userMenuList={userMenuList}
+          commonMenuList={commonMenuList}
+        />
+      )}
     </div>
   );
 };

@@ -8,19 +8,16 @@ const ShowMenuList = ({ userMenuList, commonMenuList }) => {
 
   const handleMenuDelete = _id => {
     console.log("삭제버튼");
-    // axios
-    //   .delete(`http://192.168.0.144:5003/menu/1`)
-    //   .then(res => res.data)
-    //   .then(result => {
-    //     console.log(result);
-    //   })
-    //   .catch(err => console.log(err));
   };
 
   useEffect(() => {
     setUserMenu(userMenuList);
     setCommonMenu(commonMenuList);
   }, []);
+  // 메뉴아이템 입력 시 메뉴리스트 갱신
+  useEffect(() => {
+    setUserMenu(userMenuList);
+  }, [userMenuList]);
 
   return (
     <div>

@@ -1,10 +1,10 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { HashTag } from "../style/MenuCSS";
-import axios from "axios";
-import { axiosInstance, postMenus } from "../api/fetch";
+import { postMenus, getUserMenu } from "../api/fetch";
+import { postMenuItem } from "../api/fetch2";
 
-const MenuInput = () => {
+const MenuInput = ({ setUserMenuList }) => {
   const inputMenu = useRef(null);
   const inputTags = useRef(null);
   const testInput = useRef(null);
@@ -48,20 +48,16 @@ const MenuInput = () => {
       console.log("태그 저장 & 메뉴 저장");
       console.log("메뉴 = " + menuname);
       console.log(inputTagArr);
+      // axios POST
+      postMenuItem(menuname, inputTagArr);
+      // 칸 비우기
       setInputTagArr([]);
       inputMenu.current.value = null;
+      // 메뉴 불러오기
+      getUserMenu(setUserMenuList);
     } else {
       console.log("메뉴와 해시태그를 입력해주세요");
     }
-  };
-
-  /* */
-  const [test, setTest] = useState("");
-  const handlePostTest = async () => {
-    let userPost = testInput.current.value;
-    console.log(userPost);
-    setTest(userPost);
-    postMenus(userPost);
   };
 
   // JSX
@@ -97,10 +93,6 @@ const MenuInput = () => {
         <button style={{ border: "1px solid black" }} onClick={handleSaveMenu}>
           완료(db에 저장)
         </button>
-        <hr />
-        <p>axios post 테스트중</p>
-        <input type="text" ref={testInput} />
-        <button onClick={handlePostTest}>테스트</button>
       </div>
     </div>
   );
