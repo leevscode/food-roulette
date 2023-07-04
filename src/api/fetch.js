@@ -9,9 +9,20 @@ const axiosInstance = axios.create({
   // },
 });
 
-const getMenus = async setFunc => {
+export const getUserMenu = async setFunc => {
   try {
-    const res = await axiosInstance.get("/api/menu/2");
+    const res = await axiosInstance.get("/api/menu/2/user");
+    const result = res.data;
+    setFunc(result);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getCommonMenu = async setFunc => {
+  try {
+    const res = await axiosInstance.get("/api/menu/common");
     const result = res.data;
     setFunc(result);
     console.log(result);
@@ -44,4 +55,4 @@ export const postMenus = async _data => {
   }
 };
 
-export { axiosInstance, getMenus };
+export { axiosInstance };
