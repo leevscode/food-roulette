@@ -70,5 +70,5 @@ export const postMenus = async _data => {
   }
 };
 
-export { axiosInstance, getMenus, postMenus, getCalendar };
+export { axiosInstance, getCalendar };
 

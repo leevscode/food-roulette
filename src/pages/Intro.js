@@ -15,8 +15,14 @@ const Intro = () => {
   const [userName, setUserName] = useState("");
   const handleChange = e => setUserName(e.target.value);
   const handleClick = async () => {
+    if (userName === "") {
+      // 배열이 비어있을 경우 전송하지 않음
+      return;
+    }
+
     // 서버연동
     // 데이터 타입
+
     const headers = {
       "Content-Type": "application/json",
     };
@@ -42,17 +48,27 @@ const Intro = () => {
         <TextBox>
           <Logo></Logo>
           <p>당신은 누구십니까?</p>
-          <IntroForm >
+          <IntroForm>
             <IntroInput
               type="text"
-              placeholder="닉네임을 입력해주세요"
+              placeholder={userName === "" ? "닉네임을 입력해주세요" : ""}
+              value={userName}
               onChange={handleChange}
-            ></IntroInput>
+            />
             <br />
             <Link to="/main">
-              <IntroButton type="button" onClick={handleClick}>
-                딸깍
-              </IntroButton>
+              {userName === "" ? (
+                <IntroButton type="button" disabled>
+                  딸깍
+                </IntroButton>
+              ) : (
+                <IntroButton
+                  type="button"
+                  onClick={handleClick}
+                >
+                  딸깍
+                </IntroButton>
+              )}
             </Link>
           </IntroForm>
         </TextBox>
