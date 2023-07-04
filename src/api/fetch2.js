@@ -19,3 +19,14 @@ export const postMenuItem = async (menu, tags) => {
     console.log(error);
   }
 };
+
+export const deleteMenuItem = async _id => {
+  try {
+    await axios.delete(`/api/menu/2?iuserMenu=${_id}`);
+    // const res = await axios.delete(`/api/menu/2?iuserMenu=${_id}`);
+    // const result = res.data;
+    // console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};

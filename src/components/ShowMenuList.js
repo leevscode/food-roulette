@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
+import { deleteMenuItem } from "../api/fetch2";
 
 const ShowMenuList = ({ userMenuList, commonMenuList }) => {
   const [commonMenu, setCommonMenu] = useState([]);
@@ -8,6 +8,7 @@ const ShowMenuList = ({ userMenuList, commonMenuList }) => {
 
   const handleMenuDelete = _id => {
     console.log("삭제버튼");
+    deleteMenuItem(_id);
   };
 
   useEffect(() => {
@@ -75,9 +76,6 @@ const ShowMenuList = ({ userMenuList, commonMenuList }) => {
                   </span>
                 ))}
               </p>
-              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
-                메뉴삭제
-              </button>
               <hr />
             </div>
           ))}
