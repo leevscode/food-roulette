@@ -1,5 +1,15 @@
 import styled from "@emotion/styled";
 
+export const Dimmed = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  z-index: 99999;
+`;
+
 export const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
