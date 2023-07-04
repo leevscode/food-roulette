@@ -2,17 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
-const ShowMenuList = ({ menuList }) => {
-  const [showMenu, setShowMenu] = useState([
-    // { menu: "자장면", tag: ["마차이", "중식"] },
-    // { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
-    // { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
-    // { menu: "자장면", tag: ["마차이", "중식"] },
-    // { menu: "햄버거", tag: ["패스트푸드", "치킨버거", "가성비"] },
-    // { menu: "라멘", tag: ["일식", "유타로", "맛집"] },
-  ]);
+const ShowMenuList = ({ userMenuList, commonMenuList }) => {
+  const [commonMenu, setCommonMenu] = useState([]);
+  const [userMenu, setUserMenu] = useState([]);
 
-  const handleMenuDelete = (_id) => {
+  const handleMenuDelete = _id => {
     console.log("삭제버튼");
     // axios
     //   .delete(`http://192.168.0.144:5003/menu/1`)
@@ -24,7 +18,8 @@ const ShowMenuList = ({ menuList }) => {
   };
 
   useEffect(() => {
-    setShowMenu(menuList);
+    setUserMenu(userMenuList);
+    setCommonMenu(commonMenuList);
   }, []);
 
   return (
@@ -32,6 +27,7 @@ const ShowMenuList = ({ menuList }) => {
       <h2>메뉴리스트</h2>
       <div>
         <p>(db에서 불러온 메뉴리스트들)</p>
+        <p>유저가 입력한 메뉴</p>
         <div
           style={{
             border: "1px solid red",
@@ -41,19 +37,48 @@ const ShowMenuList = ({ menuList }) => {
             overflowY: "scroll",
           }}
         >
-          {showMenu.map((item, index) => (
-            <div key={index}>
+          {userMenu.map(item => (
+            <div key={item.iuserMenu}>
               <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
               <p>
                 태그들 :
-                {/* {item.tag.map((item, index) => (
-                  <span key={index}>
-                    <span>{` #${item}`}</span>
+                {item.tags.map(item => (
+                  <span key={item.itag}>
+                    <span>{` #${item.tag}`}</span>
                   </span>
-                ))} */}
-                #지금은 #없음
+                ))}
               </p>
-              <button onClick={() => handleMenuDelete(item.iusermenu)}>
+              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
+                메뉴삭제
+              </button>
+              <hr />
+            </div>
+          ))}
+        </div>
+        <br />
+
+        <p>공통메뉴-추천메뉴</p>
+        <div
+          style={{
+            border: "1px solid red",
+            padding: 8,
+            background: "pink",
+            maxHeight: 500,
+            overflowY: "scroll",
+          }}
+        >
+          {commonMenu.map(item => (
+            <div key={item.iuserMenu}>
+              <p style={{ fontSize: 32 }}>메뉴명 : {item.menu}</p>
+              <p>
+                태그들 :
+                {item.tags.map(item => (
+                  <span key={item.itag}>
+                    <span>{` #${item.tag}`}</span>
+                  </span>
+                ))}
+              </p>
+              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
                 메뉴삭제
               </button>
               <hr />

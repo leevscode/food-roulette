@@ -57,35 +57,11 @@ const MenuInput = () => {
 
   /* */
   const [test, setTest] = useState("");
-  const handleTest = async () => {
-    let aaa = testInput.current.value;
-    console.log(aaa);
-    setTest(aaa);
-    postMenus(test);
-    // const header = { "Content-Type": "application/json" };
-    // // post
-    // axios
-    //   .post("http://192.168.0.144:5003/api/menu/1", test)
-    //   .then(res => res.data)
-    //   .then(result => {
-    //     console.log(result);
-    //   })
-    //   .catch(err => console.log(err));
-
-    // await axiosInstance
-    //   .post("/api/menu/1", test)
-    //   .then(res => res.data)
-    //   .then(data => console.log(data))
-    //   .catch(error => console.error(error));
-
-    // try {
-    //   // const res = await axiosInstance.post("/api/menu/1", test);
-    //   // const data = res.data;
-    //   // console.log(data);
-    //   console.log("성공적");
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  const handlePostTest = async () => {
+    let userPost = testInput.current.value;
+    console.log(userPost);
+    setTest(userPost);
+    postMenus(userPost);
   };
 
   // JSX
@@ -124,7 +100,7 @@ const MenuInput = () => {
         <hr />
         <p>axios post 테스트중</p>
         <input type="text" ref={testInput} />
-        <button onClick={handleTest}>테스트</button>
+        <button onClick={handlePostTest}>테스트</button>
       </div>
     </div>
   );

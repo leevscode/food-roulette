@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
-import { RouletteBox } from "../style/MainCSS";
+import { Dimmed, RouletteBox } from "../style/MainCSS";
 import Modal from "antd/es/modal/Modal";
 import { useNavigate } from "react-router-dom";
 
@@ -54,6 +54,7 @@ const Roulette = ({ checkedList }) => {
   // JSX
   return (
     <>
+      {isSpinning ? <Dimmed /> : null}
       <RouletteBox>
         <Wheel
           mustStartSpinning={startSpin}

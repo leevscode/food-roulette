@@ -23,25 +23,52 @@ const getCalendar = async (_iuser, _month, _year) => {
   }
 };
 
-const getMenus = async () => {
+export const getUserMenu = async setFunc => {
   try {
-    const res = await axiosInstance.get("/api/menu/2");
+    const res = await axiosInstance.get("/api/menu/2/user");
     const result = res.data;
+    setFunc(result);
     console.log(result);
   } catch (error) {
     console.error(error);
   }
 };
 
-const postMenus = async item => {
-  const headers = { "Content-Type": "multipart/form-data" };
+export const getCommonMenu = async setFunc => {
   try {
-    const res = await axiosInstance.post("/api/menu/2", item, headers);
+    const res = await axiosInstance.get("/api/menu/common");
     const result = res.data;
+    setFunc(result);
     console.log(result);
   } catch (error) {
     console.error(error);
+  }
+};
+
+
+// const postMenus = async item => {
+//   const headers = { "Content-Type": "multipart/form-data" };
+//   try {
+//     const res = await axiosInstance.post("/api/menu/2", item, headers);
+//     const result = res.data;
+//     console.log(result);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// 데이터 보내기
+export const postMenus = async _data => {
+  console.log(_data);
+  const headers = { "Content-Type": "application/json" };
+  try {
+    const res = await axios.post("/api/menu/2", _data, headers);
+    const data = res.data;
+    console.log(data);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export { axiosInstance, getMenus, postMenus, getCalendar };
+

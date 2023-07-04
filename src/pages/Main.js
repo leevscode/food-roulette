@@ -40,7 +40,7 @@ const Main = () => {
   // 받아온 배열의 해시태그 배열만 따로 빼어냄
   const tagList = tempData.map(item => item.tags);
   // 인덱스를 담을 배열
-  const idxList = [];
+  let idxList = [];
 
   // user가 검색 - 1개 태그만 검색
   const [userInput, setUserInput] = useState("");
@@ -52,13 +52,25 @@ const Main = () => {
     setUserInput(e.target.value.toLowerCase());
   };
   const handleSearchTag = () => {
-    // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
-    tagList.forEach((items, idx) => {
-      let temp = items.filter(item => item.includes(userInput));
-      if (temp.length) {
-        idxList.push(idx);
-      }
+    // 받아온 키워드의 내용을 for 루틴을 중첩으로 돌려서 비교해서 찾아야 함.
+    idxList = [];
+    tagList.forEach((itemArr, index) => {
+      itemArr.forEach(item => {
+        // console.log(item);
+        if (item === userInput) {
+          idxList.push(index);
+          return;
+        }
+      });
     });
+    console.log(idxList);
+    // // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
+    // tagList.forEach((items, idx) => {
+    //   let temp = items.filter(item => item.includes(userInput));
+    //   if (temp.length) {
+    //     idxList.push(idx);
+    //   }
+    // });
     idxList.forEach(item => {
       results.push(tempData[item].menu);
     });
