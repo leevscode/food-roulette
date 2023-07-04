@@ -9,6 +9,20 @@ const axiosInstance = axios.create({
   // },
 });
 
+const getCalendar = async (_iuser, _month, _year) => {
+  try {
+    const res = await axios.get(
+      `/api/calendar/${_iuser}?year=${_year}&month=${_month}`,
+    );
+    const data = await res.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+};
+
 export const getUserMenu = async setFunc => {
   try {
     const res = await axiosInstance.get("/api/menu/2/user");
@@ -30,6 +44,7 @@ export const getCommonMenu = async setFunc => {
     console.error(error);
   }
 };
+
 
 // const postMenus = async item => {
 //   const headers = { "Content-Type": "multipart/form-data" };
@@ -55,4 +70,5 @@ export const postMenus = async _data => {
   }
 };
 
-export { axiosInstance };
+export { axiosInstance, getMenus, postMenus, getCalendar };
+

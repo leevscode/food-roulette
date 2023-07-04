@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   IntroBox,
@@ -12,20 +12,27 @@ import {
 import axios from "axios";
 
 const Intro = () => {
-  const handleButtonClick = async () => {
+  const [userName, setUserName] = useState("");
+  const handleChange = e => setUserName(e.target.value);
+  const handleClick = async () => {
+    // 서버연동
+    // 데이터 타입
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    // 데이터 형식
+    const userNameData = {
+      name: userName,
+    };
+    // try...catch
     try {
-      const response = await axios.get("");
-      console.log(response.data);
+      const res = await axios.post("/api", userNameData, { headers });
+      console.log(res);
+      const result = res.data;
+      console.log(result);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
-  };
-
-  const onSubmitForm = e => {
-    e.preventDefault();
-    // 서버연동 예정
-    
-    console.log(e.target);
   };
 
   return (
@@ -35,14 +42,15 @@ const Intro = () => {
         <TextBox>
           <Logo></Logo>
           <p>당신은 누구십니까?</p>
-          <IntroForm onSubmit={onSubmitForm}>
+          <IntroForm >
             <IntroInput
               type="text"
               placeholder="닉네임을 입력해주세요"
+              onChange={handleChange}
             ></IntroInput>
             <br />
             <Link to="/main">
-              <IntroButton type="button" onClick={handleButtonClick}>
+              <IntroButton type="button" onClick={handleClick}>
                 딸깍
               </IntroButton>
             </Link>

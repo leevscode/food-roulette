@@ -25,7 +25,7 @@ const Calculate = () => {
 
   useEffect(() => {
     const calculateProgress = () => {
-      const percent = (remainingBalance / totalBalance) * 100;
+      const percent = Math.floor((remainingBalance / totalBalance) * 100);
       setProgressPercent(percent);
     };
 
@@ -45,7 +45,7 @@ const Calculate = () => {
             </ProgressFill>
           </ProgressContainer>
         </Limit>
-        <br/>
+        <br />
         <ShowMonth />
       </>
     </CalculateBg>
