@@ -51,7 +51,7 @@ const Schedule = () => {
             onClickSetSchedule({});
           }}
         >
-          자료가 없습니다.
+          null
         </div>
       );
     }
