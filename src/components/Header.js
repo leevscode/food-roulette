@@ -13,7 +13,7 @@ const Header = () => {
               onClick={() => {
                 localStorage.setItem(
                   "user",
-                  JSON.stringify({ user_id: 0, user_name: '' }),
+                  JSON.stringify({ user_id: 0, user_name: "" }),
                 );
               }}
             >

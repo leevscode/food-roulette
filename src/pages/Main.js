@@ -4,23 +4,26 @@ import LimitSetting from "../components/LimitSetting";
 import Roulette from "../components/Roulette";
 import { MainContainer, RouletteArea } from "../style/MainCSS";
 import Loading from "../components/Loading";
-import { searchMenuItem } from "../api/fetch2";
+import { getMonthLimit, searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
 const Main = () => {
   console.log(JSON.parse(localStorage.getItem("user")));
   let user_id = JSON.parse(localStorage.getItem("user")).user_id;
   const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState(0);
   // 한도 설정 여부 확인
   const [isLimit, setIsLimit] = useState(false);
+  const [monthLimit, setMonthLimit] = useState(0);
   // db에서 한도 설정 값 받아와야 함
-  const limit = 10;
+  const limit = 0;
   // 로딩
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
       setUserName(JSON.parse(localStorage.getItem("user")).user_name);
+      setUserId(JSON.parse(localStorage.getItem("user")).user_id);
     }, 1800);
 
     if (limit > 0) {
@@ -28,8 +31,8 @@ const Main = () => {
     }
   }, []);
   useEffect(() => {
-    user_id = JSON.parse(localStorage.getItem("user")).user_id;
-  }, [user_id]);
+    getMonthLimit(userId, setMonthLimit);
+  }, [userId]);
 
   /* * * * * * * * * * * * */
   const tempData = [
@@ -72,14 +75,6 @@ const Main = () => {
         }
       });
     });
-    // console.log(idxList);
-    // // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
-    // tagList.forEach((items, idx) => {
-    //   let temp = items.filter(item => item.includes(userInput));
-    //   if (temp.length) {
-    //     idxList.push(idx);
-    //   }
-    // });
     idxList.forEach(item => {
       results.push(tempData[item].menu);
     });

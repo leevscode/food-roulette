@@ -44,7 +44,7 @@ const Roulette = ({ checkedList }) => {
     setIsModalOpen(false);
     console.log(spinResult);
     console.log(data[prizeNumber].option);
-    navigate("/calendar");
+    // navigate("/calendar");
   };
   const handleCancel = () => {
     setIsModalOpen(false);
