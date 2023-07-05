@@ -1,7 +1,5 @@
 import React from "react";
-
 import { Link, Outlet, NavLink } from "react-router-dom";
-
 
 const Header = () => {
   return (
@@ -9,7 +7,16 @@ const Header = () => {
       <header className="p-7 bg-gray-800">
         <div className="flex flex-wrap align-items-center justify-between">
           <div>
-            <Link to="/" className="text-white hover:text-indigo-600">
+            <Link
+              to="/"
+              className="text-white hover:text-indigo-600"
+              onClick={() => {
+                localStorage.setItem(
+                  "user",
+                  JSON.stringify({ user_id: 0, user_name: '' }),
+                );
+              }}
+            >
               로그아웃
             </Link>
           </div>

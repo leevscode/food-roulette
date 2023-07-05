@@ -30,6 +30,10 @@ const Intro = () => {
       console.log(res);
       const result = res.data;
       console.log(result);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ user_id: result.iuser, user_name: result.name }),
+      );
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +46,7 @@ const Intro = () => {
         <TextBox>
           <Logo></Logo>
           <p>당신은 누구십니까?</p>
-          <IntroForm >
+          <IntroForm>
             <IntroInput
               type="text"
               placeholder="닉네임을 입력해주세요"

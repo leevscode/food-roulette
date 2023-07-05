@@ -6,6 +6,7 @@ import { getUserMenu, getCommonMenu } from "../api/fetch";
 import { Switch } from "antd";
 
 const Menu = () => {
+  console.log(localStorage.getItem("user"));
   // 로딩 처리
   const [isLoading, setIsLoading] = useState(true);
   const [toggle, setToggle] = useState(true);

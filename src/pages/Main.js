@@ -8,6 +8,8 @@ import { searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
 const Main = () => {
+  console.log(localStorage.getItem("user"));
+  const [userName, setUserName] = useState("");
   // 한도 설정 여부 확인
   const [isLimit, setIsLimit] = useState(false);
   // db에서 한도 설정 값 받아와야 함
@@ -17,6 +19,7 @@ const Main = () => {
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
+      setUserName(JSON.parse(localStorage.getItem("user")).user_name);
     }, 1800);
 
     if (limit > 0) {
@@ -153,7 +156,7 @@ const Main = () => {
         <br />
         <div>
           <RouletteArea style={{ border: "1px solid red" }}>
-            <p>룰렛 영역 = 00 님의 룰렛</p>
+            <p>{userName || "user"} 님의 룰렛</p>
             <hr />
             <Roulette checkedList={checkedList} />
           </RouletteArea>
