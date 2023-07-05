@@ -18,7 +18,7 @@ const App = () => {
     { value: "7", label: "7월" },
   ];
 
-  const onMonthChange = (value) => {
+  const onMonthChange = value => {
     setSelectedOption(value);
   };
 
@@ -46,7 +46,7 @@ const App = () => {
             onChange={onMonthChange}
             allowClear
           >
-            {options.map((option) => (
+            {options.map(option => (
               <Option key={option.value} value={option.value}>
                 {option.label}
               </Option>
@@ -63,7 +63,9 @@ const App = () => {
         }}
       >
         {selectedOption && `${selectedOption}월`}
-        {selectedOption && <CalculateChart month={selectedOption} />}
+        {selectedOption && (
+          <CalculateChart user={1} month={selectedOption} year={2023} />
+        )}
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ const Schedule = () => {
   const getCalendarLoad = async () => {
     try {
       const data = await getCalendar(1, 6, 23);
+      console.log(data);
       setScheduleData(data);
     } catch (err) {
       console.log(err);
@@ -33,14 +34,21 @@ const Schedule = () => {
       return (
         <div
           className="schedule-box"
-          style={{ backgroundColor: "#7FFFD4" }}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+            paddingTop: 75,
+            textAlign: "center",
+          }}
           onClick={e => {
             e.stopPropagation();
             onClickSetSchedule(result);
           }}
         >
-          <div className="empty-space" />
-          <div>{result.total}</div>
+          <div style={{ width: "100%" }}>{result.total}</div>
         </div>
       );
     } else {
@@ -48,10 +56,28 @@ const Schedule = () => {
         <div
           onClick={e => {
             e.stopPropagation();
-            onClickSetSchedule({});
+            onClickSetSchedule({
+              ipayment: 0,
+              paymentAt: day,
+              total: 0,
+              cmt: 0,
+            });
           }}
         >
-          null
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: "100%",
+              height: "100%",
+              paddingTop: 75,
+              textAlign: "center",
+              fontSize: 14,
+            }}
+          >
+            자료없음
+          </div>
         </div>
       );
     }

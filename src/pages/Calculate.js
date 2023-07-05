@@ -9,6 +9,7 @@ import {
   CalculateBg,
 } from "../style/CalculateCSS";
 import ShowMonth from "../components/ShowMonth";
+import { getCalculate } from "../api/fetch3";
 
 // useState 훅을 사용하여 remainingBalance 상태를 관리하고,
 // 초기값으로 500000을 설정.
@@ -19,18 +20,36 @@ import ShowMonth from "../components/ShowMonth";
 // 이를 통해 진행 상태의 백분율이 적절하게 업데이트되도록 한다
 // 추가 코드 진행 완료함.
 const Calculate = () => {
-  const [remainingBalance, setRemainingBalance] = useState(400000);
-  const totalBalance = 500000;
+  const [monthData, setMonthData] = useState({});
+  const getCalculateData = async () => {
+    const data = await getCalculate(setMonthData);
+    calculateProgress(data);
+  };
+  useEffect(() => {
+    getCalculateData();
+  }, []);
+
+  const calculateProgress = _data => {
+    console.log(_data);
+    const 잔액 = _data.management.monthLimit - _data.management.expense;
+    const percent = Math.floor((잔액 / _data.management.monthLimit) * 100);
+    setProgressPercent(percent);
+    setMonthData(_data);
+  };
+
+  const [totalBalance, setTotalBalance] = useState(0);
+  const [remainingBalance, setRemainingBalance] = useState(0);
   const [progressPercent, setProgressPercent] = useState(0);
 
-  useEffect(() => {
-    const calculateProgress = () => {
-      const percent = Math.floor((remainingBalance / totalBalance) * 100);
-      setProgressPercent(percent);
-    };
-
-    calculateProgress();
-  }, [remainingBalance, totalBalance]);
+  // useEffect(() => {
+  //   setTotalBalance(monthData.management?.expense || 0);
+  //   console.log(monthData.management?.expense);
+  //   const calculateProgress = () => {
+  //     const percent = Math.floor((remainingBalance / totalBalance) * 100);
+  //     setProgressPercent(percent);
+  //   };
+  //   calculateProgress();
+  // }, [remainingBalance, totalBalance]);
 
   return (
     <CalculateBg>
@@ -39,8 +58,8 @@ const Calculate = () => {
         <Limit>
           <h1>이달의 한도</h1>
           <ProgressContainer>
-            <ProgressFill style={{ width: `${progressPercent}%` }}>
-              <ProgressText>{`${progressPercent}%`}</ProgressText>
+            <ProgressFill style={{ width: `100%` }}>
+              <ProgressText>{progressPercent && progressPercent}%</ProgressText>
               <ProgressFillInner></ProgressFillInner>
             </ProgressFill>
           </ProgressContainer>
