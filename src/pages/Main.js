@@ -8,7 +8,8 @@ import { searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
 const Main = () => {
-  console.log(localStorage.getItem("user"));
+  console.log(JSON.parse(localStorage.getItem("user")));
+  let user_id = JSON.parse(localStorage.getItem("user")).user_id;
   const [userName, setUserName] = useState("");
   // 한도 설정 여부 확인
   const [isLimit, setIsLimit] = useState(false);
@@ -26,6 +27,9 @@ const Main = () => {
       setIsLimit(true);
     }
   }, []);
+  useEffect(() => {
+    user_id = JSON.parse(localStorage.getItem("user")).user_id;
+  }, [user_id]);
 
   /* * * * * * * * * * * * */
   const tempData = [
@@ -86,7 +90,7 @@ const Main = () => {
   const inputTags = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
   const handleSearchTagBE = () => {
-    searchMenuItem(inputTagArr, setSearchedResult);
+    searchMenuItem(inputTagArr, setSearchedResult, user_id);
     setInputTagArr([]);
   };
   const handleAddTagEnter = e => {
