@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { HashTag } from "../style/MenuCSS";
-import { postMenus, getUserMenu } from "../api/fetch";
-import { postMenuItem } from "../api/fetch2";
+import { postMenuItem, getUserMenu } from "../api/fetch2";
 
-const MenuInput = ({ setUserMenuList }) => {
+const MenuInput = ({ setUserMenuList, userId }) => {
   const inputMenu = useRef(null);
   const inputTags = useRef(null);
   const testInput = useRef(null);
@@ -48,13 +47,14 @@ const MenuInput = ({ setUserMenuList }) => {
       console.log("태그 저장 & 메뉴 저장");
       console.log("메뉴 = " + menuname);
       console.log(inputTagArr);
+      console.log(userId);
       // axios POST
-      postMenuItem(menuname, inputTagArr);
+      postMenuItem(userId, menuname, inputTagArr);
       // 칸 비우기
       setInputTagArr([]);
       inputMenu.current.value = null;
       // 메뉴 불러오기
-      getUserMenu(setUserMenuList);
+      getUserMenu(setUserMenuList, userId);
     } else {
       console.log("메뉴와 해시태그를 입력해주세요");
     }

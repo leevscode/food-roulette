@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import MenuInput from "../components/MenuInput";
 import ShowMenuList from "../components/ShowMenuList";
-import { getUserMenu, getCommonMenu } from "../api/fetch";
+import { getUserMenu, getCommonMenu } from "../api/fetch2";
 import { Switch } from "antd";
 
 const Menu = () => {
-  console.log(localStorage.getItem("user"));
+  const userId = JSON.parse(localStorage.getItem("user")).user_id
   // 로딩 처리
   const [isLoading, setIsLoading] = useState(true);
   const [toggle, setToggle] = useState(true);
@@ -16,7 +16,7 @@ const Menu = () => {
     setToggle(!toggle);
   };
   useEffect(() => {
-    getUserMenu(setUserMenuList);
+    getUserMenu(setUserMenuList, userId);
     getCommonMenu(setCommonMenuList);
     setIsLoading(false);
   }, []);
@@ -31,11 +31,12 @@ const Menu = () => {
       메뉴출력하기
       <hr />
       {toggle ? (
-        <MenuInput setUserMenuList={setUserMenuList} />
+        <MenuInput setUserMenuList={setUserMenuList} userId={userId} />
       ) : (
         <ShowMenuList
           userMenuList={userMenuList}
           commonMenuList={commonMenuList}
+          userId={userId}
         />
       )}
     </div>

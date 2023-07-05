@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { deleteMenuItem } from "../api/fetch2";
 
-const ShowMenuList = ({ userMenuList, commonMenuList }) => {
+const ShowMenuList = ({ userMenuList, commonMenuList, userId }) => {
   const [commonMenu, setCommonMenu] = useState([]);
   const [userMenu, setUserMenu] = useState([]);
 
-  const handleMenuDelete = _id => {
+  const handleMenuDelete = (_userId, _menuId ) => {
     console.log("삭제버튼");
-    deleteMenuItem(_id);
+    deleteMenuItem(_userId, _menuId);
   };
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const ShowMenuList = ({ userMenuList, commonMenuList }) => {
                   </span>
                 ))}
               </p>
-              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
+              <button onClick={() => handleMenuDelete(userId, item.iuserMenu)}>
                 메뉴삭제
               </button>
               <hr />
