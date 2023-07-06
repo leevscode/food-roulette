@@ -3,8 +3,9 @@ import { Wheel } from "react-custom-roulette";
 import { Dimmed, RouletteBox } from "../style/MainCSS";
 import Modal from "antd/es/modal/Modal";
 import { useNavigate } from "react-router-dom";
+import { postWinningMenu } from "../api/fetch2";
 
-const Roulette = ({ checkedList, searchedResult }) => {
+const Roulette = ({ checkedList, searchedResult, monthLimitId }) => {
   console.log(checkedList);
   console.log(searchedResult);
   let winningMenu;
@@ -49,9 +50,15 @@ const Roulette = ({ checkedList, searchedResult }) => {
     console.log(data[prizeNumber].option);
     winningMenu = data[prizeNumber].option;
     console.log("당첨메뉴 = ", winningMenu);
-    
-    let aaa = searchedResult.filter(value => value.menu === winningMenu);
-    console.log("filter result", aaa);
+
+    let winningMenuData = searchedResult.filter(
+      value => value.menu === winningMenu,
+    );
+    let winningMenuId = winningMenuData[0].imenu;
+    console.log("filter result", winningMenuData);
+    console.log("winning menu id = imenu", winningMenuId);
+
+    postWinningMenu(winningMenuId, monthLimitId);
   };
   const handleCancel = () => {
     setIsModalOpen(false);

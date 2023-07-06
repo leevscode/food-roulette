@@ -46,6 +46,9 @@ const Main = ({ userName, userId }) => {
     // };
   }, []);
 
+  // 당첨메뉴 전송 - 유저의 이달의 한도
+  // let monthLimitId;
+  const [monthLimitId, setMonthLimitId] = useState();
   const getMonthLimitData = async () => {
     const localData = await JSON.parse(localStorage.getItem("user"));
     const result = await getMonthLimit(localData.user_id, setMonthLimit);
@@ -56,6 +59,8 @@ const Main = ({ userName, userId }) => {
       setMonthLimit(0);
     } else {
       setShowLimitSetting(true);
+      console.log("imanagement = ", result.imanagement);
+      setMonthLimitId(result.imanagement);
     }
   };
 
@@ -192,6 +197,7 @@ const Main = ({ userName, userId }) => {
             <Roulette
               checkedList={checkedList}
               searchedResult={searchedResult}
+              monthLimitId={monthLimitId}
             />
           </RouletteArea>
         </div>
