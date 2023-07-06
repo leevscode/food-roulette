@@ -140,14 +140,39 @@ export const getUnReviewList = async (_userId, setFunc, year, month) => {
     console.log(error);
   }
 };
-export const patchUnReviewMenu = async _userId => {
+export const patchUnReviewMenu = async (
+  _userId,
+  reviewData,
+  restaurant,
+  currentMenuPrice,
+  reviewGrade,
+  selectedDate,
+  ipayment,
+) => {
+  console.log(reviewData, restaurant, currentMenuPrice, reviewGrade);
+
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth() + 1;
+
+  const headers = { "Content-Type": "application/json" };
   const patchData = {
-    ipayment: 0,
-    month: 0,
-    year: "string",
+    ipayment: ipayment,
+    month: month,
+    year: year + "",
     currentMenuPrice: 0,
-    reviewGrade: 0,
-    restaurant: "string",
+    reviewGrade: 3,
+    restaurant: restaurant + "",
   };
-  console.log(_userId);
+
+  console.log("patch 명령", _userId, patchData);
+  try {
+    const res = await axios.patch(`api/review/${_userId}`, patchData, {
+      headers,
+    });
+    const result = res.data;
+    console.log(res);
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
 };

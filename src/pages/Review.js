@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getUnReviewList, patchUnReviewMenu } from "../api/fetch2";
 import DatePicker from "react-datepicker";
 import "../style/datepicker.css";
+import Modal from "antd/es/modal/Modal";
+import { Button, Checkbox, Form, Input, Radio } from "antd";
 
 const Review = ({ reviewList }) => {
   const [unReview, setUnReveiw] = useState([]);
@@ -17,10 +19,12 @@ const Review = ({ reviewList }) => {
     display: "flex",
     justifyContent: "space-between",
   };
+  const [reviewMenuInfo, setReviewMenuInfo] = useState({});
+  // patch 연결!!
   const handleEnterReview = _item => {
-    // patch 연결!!
-    patchUnReviewMenu(userId);
+    showModal();
     console.log(_item);
+    setReviewMenuInfo(_item);
     /*
     ipayment : 105
     menu: "솥솥"
@@ -29,6 +33,7 @@ const Review = ({ reviewList }) => {
   };
   // datepicker - 미등록 리스트 불러오기
   const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(new Date());
   const handleSendDate = () => {
     console.log("state 변수", selectedDate);
     if (!selectedDate) {
@@ -41,6 +46,52 @@ const Review = ({ reviewList }) => {
       getUnReviewList(userId, setUnReveiw, year, month);
     }
   };
+
+  // 모달 관련 state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+    handleClearInput();
+    console.log("전송");
+
+    patchUnReviewMenu(
+      userId,
+      reviewMenuInfo,
+      inputRestaurant,
+      inputPrice,
+      inputPoint,
+      selectedDate,
+      reviewMenuInfo.ipayment
+    );
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    handleClearInput();
+    console.log("다시선택");
+  };
+  // 메뉴 후기 남기기
+  const [inputRestaurant, setInputRestaurant] = useState("");
+  const [inputPrice, setInputPrice] = useState(null);
+  const [inputPoint, setInputPoint] = useState();
+  const handleClearInput = () => {
+    setInputRestaurant("");
+    setInputPrice(null);
+    setInputPoint();
+  };
+  const handleValueChange = e => {
+    setInputRestaurant(e.target.value);
+  };
+  const handlePriceChange = e => {
+    setInputPrice(e.target.value);
+  };
+  const handlePointChange = e => {
+    setInputPoint(e.target.value);
+    console.log(e.target.value);
+  };
+
   // JSX
   return (
     <div>
@@ -75,6 +126,8 @@ const Review = ({ reviewList }) => {
             {unReview.map((item, index) => (
               <div style={tempStyle} key={index}>
                 <span>{item.menu}</span>
+                <span> {/* */} </span>
+                <span>{item.paymentAt}</span>
                 <button
                   onClick={() => handleEnterReview(item)}
                   style={{ border: "1px solid black" }}
@@ -86,6 +139,88 @@ const Review = ({ reviewList }) => {
           </div>
         </div>
       )}
+      <Modal
+        title="리뷰를 등록해 보아요"
+        open={isModalOpen}
+        onOk={handleOk}
+        okText="등록할래요"
+        onCancel={handleCancel}
+        cancelText="다시 생각해볼래요"
+        centered
+        closable={false}
+        maskClosable={false}
+      >
+        <Input
+          placeholder="식당"
+          value={inputRestaurant}
+          onChange={handleValueChange}
+        />
+        <Input
+          type="number"
+          placeholder="가격"
+          value={inputPrice}
+          onChange={handlePriceChange}
+        />
+        <Radio.Group name="reviewpoint">
+          <Radio value={1} onClick={handlePointChange}>
+            1점
+          </Radio>
+          <Radio value={2} onClick={handlePointChange}>
+            2점
+          </Radio>
+          <Radio value={3} onClick={handlePointChange}>
+            3점
+          </Radio>
+        </Radio.Group>
+        {/* <Form
+          name="basic"
+          onFinish={onFinish}
+          // onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="금액"
+            name="amount"
+            rules={[
+              {
+                required: true,
+                message: "금액을 입력해주세요.",
+              },
+              {
+                validator: validateAmount,
+              },
+            ]}
+          >
+            <Input placeholder="금액" />
+          </Form.Item>
+
+          <Form.Item
+            label="restaurant"
+            name="restaurant"
+            rules={[
+              {
+                required: true,
+                message: "입력해주세요!",
+              },
+            ]}
+          >
+            <Input placeholder="식당" />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              // onClick={() => setIsModalOpen(false)}
+            >
+              Submit
+            </Button>
+          </Form.Item>
+          <Button type="primary" onClick={() => setIsModalOpen(false)}>
+            다시 생각해볼래요
+          </Button>
+        </Form> */}
+      </Modal>
     </div>
   );
 };
