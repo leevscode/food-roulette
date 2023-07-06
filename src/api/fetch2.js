@@ -95,3 +95,20 @@ export const getMonthLimit = async (_userId, setFunc) => {
     console.log(error);
   }
 };
+// 룰렛 당첨 메뉴 등록
+export const postWinningMenu = async () => {
+  const headers = { "Content-Type": "application/json" };
+  const data = {
+    imenu: 0,
+    imanagement: 0,
+  };
+  try {
+    const res = await axios.post(`/api/main`, data, {
+      headers,
+    });
+    const result = res.data;
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};

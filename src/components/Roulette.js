@@ -4,7 +4,10 @@ import { Dimmed, RouletteBox } from "../style/MainCSS";
 import Modal from "antd/es/modal/Modal";
 import { useNavigate } from "react-router-dom";
 
-const Roulette = ({ checkedList }) => {
+const Roulette = ({ checkedList, searchedResult }) => {
+  console.log(checkedList);
+  console.log(searchedResult);
+  let winningMenu;
   const navigate = useNavigate();
   // 룰렛데이터
   const [startSpin, setStartSpin] = useState(false);
@@ -44,7 +47,11 @@ const Roulette = ({ checkedList }) => {
     setIsModalOpen(false);
     console.log(spinResult);
     console.log(data[prizeNumber].option);
-    // navigate("/calendar");
+    winningMenu = data[prizeNumber].option;
+    console.log("당첨메뉴 = ", winningMenu);
+    
+    let aaa = searchedResult.filter(value => value.menu === winningMenu);
+    console.log("filter result", aaa);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
