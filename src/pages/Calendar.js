@@ -11,7 +11,7 @@ const Schedule = () => {
 
   const getCalendarLoad = async () => {
     try {
-      const data = await getCalendar(1, 6, 23);
+      const data = await getCalendar(3, 6, 23);
       console.log(data);
       setScheduleData(data);
     } catch (err) {
@@ -153,59 +153,43 @@ const Schedule = () => {
 
           {selectedSchedule && (
             <div className="selected-schedule">
-              <div>
                 <p>{selectedSchedule.paymentAt}</p>
                 <br />
-              </div>
               <div>
-                <form onSubmit={onSubmitForm}>
-                  <div className="calendar-scroll">
-                    {[...Array(1)].map((_, index) => (
-                      <div className="calendar-info" key={index}>
-                        <h2>{selectedSchedule.title}</h2>
-                        <p className="food-name">{selectedSchedule.price}</p>
-                        <div className="calendar-input">
-                          <input
-                            type="text"
-                            placeholder="가격을 입력해주세요"
-                            name="price"
-                            onChange={onChangePrice}
-                          ></input>
-                        </div>
-                        <div className="calendar-input">
-                          <input
-                            type="text"
-                            placeholder="장소를 입력해주세요"
-                            name="place"
-                            onChange={onChangePlace}
-                          ></input>
-                        </div>
-                        <br />
-                        <h2>페페 스코어</h2>
-                        {/* <img src={selectedSchedule.imgPath} alt="테스트" /> */}
-                        <div className="pepe-score">
-                          <img src="/images/1점.png" alt="울음" />
-                          <img src="/images/2점.png" alt="무난" />
-                          <img src="/images/3점.png" alt="행복" />
-                        </div>
-                        <Radio.Group
-                          className="pepe-score-raido"
-                          name="point"
-                          onChange={onChangePoint}
-                        >
-                          <Radio value={1}>1점</Radio>
-                          <Radio value={2}>2점</Radio>
-                          <Radio value={3}>3점</Radio>
-                        </Radio.Group>
+                <div className="calendar-scroll">
+                  {[...Array(1)].map((_, index) => (
+                    <div className="calendar-info" key={index}>
+                      <h2>{selectedSchedule.title}</h2>
+                      <p className="food-name">{selectedSchedule.price}</p>
+                      <p>메뉴 자리</p>
+                      <br />
+                      <p>가격 자리</p>
+                      <br/>
+                      <p>장소 자리</p>
+                      <br/>
+                      <h2>페페 스코어</h2>
+                      {/* 스코어 점수를 라디오 박스를 통해 DB연동 */}
+                      <div className="pepe-score">
+                        <img src="/images/1점.png" alt="울음" />
+                        <img src="/images/2점.png" alt="무난" />
+                        <img src="/images/3점.png" alt="행복" />
                       </div>
-                    ))}
-                  </div>
-                  <div className="calendar-bt">
-                    <button className="calendar-button" onClick={onCalc}>
-                      입력
-                    </button>
-                  </div>
-                </form>
+                      <Radio.Group
+                        className="pepe-score-raido"
+                        name="point"
+                        onChange={onChangePoint}
+                      >
+                        <Radio value={1}>1점</Radio>
+                        <Radio value={2}>2점</Radio>
+                        <Radio value={3}>3점</Radio>
+                      </Radio.Group>
+                      <p></p>
+                    </div>
+                  ))}
+                </div>
+                <div className="calendar-total">
+                  <p> 오늘 먹은 총액 :{selectedSchedule.total}</p>
+                </div>
               </div>
             </div>
           )}

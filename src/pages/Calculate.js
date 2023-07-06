@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Backgroundimg,
+  // Backgroundimg,
   Limit,
   ProgressContainer,
   ProgressFill,
@@ -54,7 +54,7 @@ const Calculate = () => {
   return (
     <CalculateBg>
       <>
-        <Backgroundimg />
+        {/* <Backgroundimg /> */}
         <Limit>
           <h1>이달의 한도</h1>
           <ProgressContainer>
