@@ -8,6 +8,26 @@ import { getMonthLimit, searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
 const Main = ({ userName, userId }) => {
+  /* * * 새로고침 버튼 막기 * * */
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (
+        (event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82)) ||
+        event.keyCode === 116
+      ) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.returnValue = false;
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  /* * * * * * * * * * */
   // 한도 설정 여부 확인 - false이면 한도설정창을 보여줘야 함
   const [showLimitSetting, setShowLimitSetting] = useState(false);
   const [monthLimit, setMonthLimit] = useState(0);
