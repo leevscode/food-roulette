@@ -11,7 +11,7 @@ const Header = () => {
               to="/"
               className="text-white hover:text-indigo-600"
               onClick={() => {
-                localStorage.removeItem(
+                localStorage.setItem(
                   "user",
                   JSON.stringify({ user_id: 0, user_name: "" }),
                 );
