@@ -30,16 +30,17 @@ export const TextBox = styled.div`
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  background: #bffff3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
-  width: 550px;
-  height: 435px;
+  width: 560px;
+  height: 550px;
   z-index: 999;
-  border-radius: 30px;
+  background: url("/images/introbg.jpg") no-repeat center center;
+  background-position: center -245px;
+  border-radius: 50px;
 `;
 
 export const Logo = styled.div`
@@ -56,7 +57,7 @@ export const IntroInput = styled.input`
   background-color: #f2f2f2;
   text-align: center;
   color: #333333;
-  padding: 10px;
+
   margin-top: 20px;
   border: 1px solid #333333;
   & :hover {

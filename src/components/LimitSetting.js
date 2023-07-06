@@ -8,7 +8,9 @@ const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "pink",
+    backgroundImage: "url('/images/limit.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center -800px",
     zIndex: 99999,
   };
   const inputContainer = {
@@ -38,7 +40,7 @@ const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
     padding: "8px 80px",
   };
 
-  const pad = {
+  const phone = {
     background: "url('/images/limit.png')",
     backgroundSize: "cover",
     padding: "70px",
@@ -61,7 +63,7 @@ const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
   return (
     <div style={bgStyle}>
       <div style={inputContainer}>
-        <div style={pad}>
+        <div style={phone}>
           <div style={inputBox}>
             <img
               src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1586271105/noticon/eyjidxvaivj5xh1vitnn.gif"

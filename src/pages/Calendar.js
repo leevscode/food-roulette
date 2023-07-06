@@ -170,7 +170,7 @@ const Schedule = () => {
                       <br />
                       <h2 className="calendar-info-box">페페 스코어</h2>
                       <div className="pepe-score">
-                        <img src="/images/1점.png" alt="울음" />
+                        <img src="/images/1점.jpg" alt="울음" />
                         <img src="/images/2점.png" alt="무난" />
                         <img src="/images/3점.png" alt="행복" />
                       </div>
