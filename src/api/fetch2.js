@@ -1,9 +1,9 @@
 import axios from "axios";
 // 오늘 날짜 불러오기
-const date = new Date();
-const year = date.getFullYear();
-const month = String(date.getMonth() + 1).padStart(2, "0");
-const day = String(date.getDate()).padStart(2, "0");
+// const date = new Date();
+// const year = date.getFullYear();
+// const month = String(date.getMonth() + 1).padStart(2, "0");
+// const day = String(date.getDate()).padStart(2, "0");
 
 // 전체 메뉴 불러오기
 export const getAllMenu = async (setFunc, _id) => {
@@ -125,7 +125,8 @@ export const postWinningMenu = async (
   }
 };
 // 해당 달의 리뷰 미등록 리스트 출력 - 임시로 해당 달만 보여줌
-export const getUnReviewList = async (_userId, setFunc) => {
+export const getUnReviewList = async (_userId, setFunc, year, month) => {
+  console.log(year, month);
   try {
     //http://192.168.0.144:5003/api/review/1?year=2023&month=07
     const res = await axios.get(

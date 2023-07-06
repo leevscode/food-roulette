@@ -7,9 +7,9 @@ const Review = ({ reviewList }) => {
   const [unReview, setUnReveiw] = useState([]);
   // console.log(reviewList);
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
-  useEffect(() => {
-    getUnReviewList(userId, setUnReveiw);
-  }, []);
+  // useEffect(() => {
+  //   getUnReviewList(userId, setUnReveiw);
+  // }, []);
   const tempStyle = {
     margin: 4,
     padding: "8px 16px",
@@ -27,13 +27,18 @@ const Review = ({ reviewList }) => {
     paymentAt : "2023-07-06" 
     */
   };
-  // datepicker
+  // datepicker - 미등록 리스트 불러오기
   const [selectedDate, setSelectedDate] = useState(null);
   const handleSendDate = () => {
     console.log("state 변수", selectedDate);
     if (!selectedDate) {
       alert("날짜를 입력해");
       return;
+    } else {
+      const year = selectedDate.getFullYear();
+      // const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+      const month = selectedDate.getMonth() + 1;
+      getUnReviewList(userId, setUnReveiw, year, month);
     }
   };
   // JSX
@@ -52,13 +57,13 @@ const Review = ({ reviewList }) => {
         isClearable
         placeholderText="날짜를 선택해주세요"
       />
+      <br />
       <button onClick={handleSendDate}>날짜전달</button>
       <hr />
       {unReview.length === 0 ? (
-        "리스트가 없어요"
+        <p>리스트가 없어요</p>
       ) : (
         <div>
-          <p>리스트가 있어요</p>
           <div
             style={{
               border: "1px solid coral",
