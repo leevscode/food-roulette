@@ -1,26 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Banner from "../components/Banner";
 import LimitSetting from "../components/LimitSetting";
 import Roulette from "../components/Roulette";
 import { MainContainer, RouletteArea } from "../style/MainCSS";
 import Loading from "../components/Loading";
+import { getMonthLimit, searchMenuItem } from "../api/fetch2";
+import { HashTag } from "../style/MenuCSS";
 
-const Main = () => {
-  // 한도 설정 여부 확인
-  const [isLimit, setIsLimit] = useState(false);
+const Main = ({ userName, userId }) => {
+  // 한도 설정 여부 확인 - false이면 한도설정창을 보여줘야 함
+  const [showLimitSetting, setShowLimitSetting] = useState(false);
+  const [monthLimit, setMonthLimit] = useState(0);
   // db에서 한도 설정 값 받아와야 함
-  const limit = 10;
+  const limit = 0;
   // 로딩
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
     }, 1800);
+    getMonthLimitData();
 
-    if (limit > 0) {
-      setIsLimit(true);
-    }
+    // return () => {
+    //   clearInterval(loading);
+    // };
   }, []);
+
+  const getMonthLimitData = async () => {
+    const localData = await JSON.parse(localStorage.getItem("user"));
+    const result = await getMonthLimit(localData.user_id, setMonthLimit);
+    console.log("result.monthLimit ", result.monthLimit);
+    setIsLoading(false);
+    if (!result) {
+      console.log("이달의 한도 값 설정 창으로");
+      setMonthLimit(0);
+    } else {
+      setShowLimitSetting(true);
+    }
+  };
 
   /* * * * * * * * * * * * */
   const tempData = [
@@ -63,19 +80,30 @@ const Main = () => {
         }
       });
     });
-    console.log(idxList);
-    // // 받아온 배열의 해시태그 배열에서 includes 하고 있는 값의 인덱스만 배열에 받아옴
-    // tagList.forEach((items, idx) => {
-    //   let temp = items.filter(item => item.includes(userInput));
-    //   if (temp.length) {
-    //     idxList.push(idx);
-    //   }
-    // });
     idxList.forEach(item => {
       results.push(tempData[item].menu);
     });
     setSearchedResult(results);
     handleClearAllChecks();
+  };
+  //
+  const inputTags = useRef(null);
+  const [inputTagArr, setInputTagArr] = useState([]);
+  const handleSearchTagBE = () => {
+    searchMenuItem(inputTagArr, setSearchedResult, userId);
+    setInputTagArr([]);
+    handleClearAllChecks();
+  };
+  const handleAddTagEnter = e => {
+    if (e.key === "Enter") {
+      let copyItem = e.target.value;
+      setInputTagArr([...inputTagArr, copyItem]);
+      e.target.value = null;
+    }
+  };
+  const handleRemoveTag = _idx => {
+    inputTagArr.splice(_idx, 1);
+    setInputTagArr(inputTagArr.filter(item => item._idx !== _idx));
   };
 
   // 체크박스 state 변수
@@ -126,14 +154,20 @@ const Main = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        isLimit || <LimitSetting setIsLimit={setIsLimit} />
+        showLimitSetting || (
+          <LimitSetting
+            setShowLimitSetting={setShowLimitSetting}
+            setMonthLimit={setMonthLimit}
+          />
+        )
       )}
       <MainContainer>
         <Banner />
+        {monthLimit}
         <br />
         <div>
           <RouletteArea style={{ border: "1px solid red" }}>
-            <p>룰렛 영역 = 00 님의 룰렛</p>
+            <p>{userName || "user"} 님의 룰렛</p>
             <hr />
             <Roulette checkedList={checkedList} />
           </RouletteArea>
@@ -152,7 +186,6 @@ const Main = () => {
               />
               <button onClick={handleSearchTag}>검색</button>
             </div>
-
             <div style={{ border: "1px solid green" }}>
               <p>검색결과 출력 영역</p>
               <div>
@@ -164,10 +197,10 @@ const Main = () => {
                         type="checkbox"
                         name="roulette"
                         id={index}
-                        value={item}
+                        value={item.menu}
                         onChange={handleCheckEvent}
                       />
-                      <label htmlFor={index}>{item}</label>
+                      <label htmlFor={index}>{item.menu}</label>
                     </p>
                   ))}
                 </div>
@@ -180,6 +213,29 @@ const Main = () => {
                 체크전체해제
               </button>
               <span> {countCheck} / 8 </span>
+            </div>
+
+            <div style={{ border: "1px solid red" }}>
+              <p>해시태그 검색 - BE</p>
+              <input
+                style={{ border: "1px solid black", marginBottom: 20 }}
+                type="text"
+                ref={inputTags}
+                onKeyPress={handleAddTagEnter}
+                placeholder="태그검색"
+              />
+              {inputTagArr.map((item, idx) => (
+                <HashTag key={idx}>
+                  <span>{item}</span>
+                  <button
+                    onClick={() => {
+                      handleRemoveTag(idx);
+                    }}
+                  ></button>
+                </HashTag>
+              ))}
+              <br />
+              <button onClick={handleSearchTagBE}>검색</button>
             </div>
           </div>
         </div>

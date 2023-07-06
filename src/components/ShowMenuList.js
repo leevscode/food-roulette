@@ -1,26 +1,24 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
+import { deleteMenuItem } from "../api/fetch2";
 
-const ShowMenuList = ({ userMenuList, commonMenuList }) => {
+const ShowMenuList = ({ userMenuList, commonMenuList, userId }) => {
   const [commonMenu, setCommonMenu] = useState([]);
   const [userMenu, setUserMenu] = useState([]);
 
-  const handleMenuDelete = _id => {
+  const handleMenuDelete = (_userId, _menuId ) => {
     console.log("삭제버튼");
-    // axios
-    //   .delete(`http://192.168.0.144:5003/menu/1`)
-    //   .then(res => res.data)
-    //   .then(result => {
-    //     console.log(result);
-    //   })
-    //   .catch(err => console.log(err));
+    deleteMenuItem(_userId, _menuId);
   };
 
   useEffect(() => {
     setUserMenu(userMenuList);
     setCommonMenu(commonMenuList);
   }, []);
+  // 메뉴아이템 입력 시 메뉴리스트 갱신
+  useEffect(() => {
+    setUserMenu(userMenuList);
+  }, [userMenuList]);
 
   return (
     <div>
@@ -48,7 +46,7 @@ const ShowMenuList = ({ userMenuList, commonMenuList }) => {
                   </span>
                 ))}
               </p>
-              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
+              <button onClick={() => handleMenuDelete(userId, item.iuserMenu)}>
                 메뉴삭제
               </button>
               <hr />
@@ -78,9 +76,6 @@ const ShowMenuList = ({ userMenuList, commonMenuList }) => {
                   </span>
                 ))}
               </p>
-              <button onClick={() => handleMenuDelete(item.iuserMenu)}>
-                메뉴삭제
-              </button>
               <hr />
             </div>
           ))}

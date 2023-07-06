@@ -45,7 +45,6 @@ export const getCommonMenu = async setFunc => {
   }
 };
 
-
 // const postMenus = async item => {
 //   const headers = { "Content-Type": "multipart/form-data" };
 //   try {
@@ -71,4 +70,3 @@ export const postMenus = async _data => {
 };
 
 export { axiosInstance, getCalendar };
-
