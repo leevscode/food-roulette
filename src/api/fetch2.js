@@ -1,4 +1,9 @@
 import axios from "axios";
+// 오늘 날짜 불러오기
+const date = new Date();
+const year = date.getFullYear();
+const month = String(date.getMonth() + 1).padStart(2, "0");
+const day = String(date.getDate()).padStart(2, "0");
 
 // 전체 메뉴 불러오기
 export const getAllMenu = async (setFunc, _id) => {
@@ -96,7 +101,11 @@ export const getMonthLimit = async (_userId, setFunc) => {
   }
 };
 // 룰렛 당첨 메뉴 등록
-export const postWinningMenu = async (winningMenuId, monthLimitId) => {
+export const postWinningMenu = async (
+  winningMenuId,
+  monthLimitId,
+  setReviewList,
+) => {
   console.log("imenu = ", winningMenuId);
   console.log("imanagement", monthLimitId);
   const headers = { "Content-Type": "application/json" };
@@ -110,7 +119,34 @@ export const postWinningMenu = async (winningMenuId, monthLimitId) => {
     });
     const result = res.data;
     console.log(result);
+    setReviewList(result);
   } catch (error) {
     console.log(error);
   }
+};
+// 해당 달의 리뷰 미등록 리스트 출력 - 임시로 해당 달만 보여줌
+export const getUnReviewList = async (_userId, setFunc) => {
+  try {
+    //http://192.168.0.144:5003/api/review/1?year=2023&month=07
+    const res = await axios.get(
+      `api/review/${_userId}?year=${year}&month=${month}`,
+    );
+    const result = res.data;
+    console.log(res);
+    console.log(result);
+    setFunc(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const patchUnReviewMenu = async _userId => {
+  const patchData = {
+    ipayment: 0,
+    month: 0,
+    year: "string",
+    currentMenuPrice: 0,
+    reviewGrade: 0,
+    restaurant: "string",
+  };
+  console.log(_userId);
 };

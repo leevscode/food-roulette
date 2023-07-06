@@ -5,7 +5,7 @@ import Modal from "antd/es/modal/Modal";
 import { useNavigate } from "react-router-dom";
 import { postWinningMenu } from "../api/fetch2";
 
-const Roulette = ({ checkedList, searchedResult, monthLimitId }) => {
+const Roulette = ({ checkedList, searchedResult, monthLimitId, setReviewList }) => {
   console.log(checkedList);
   console.log(searchedResult);
   let winningMenu;
@@ -58,7 +58,7 @@ const Roulette = ({ checkedList, searchedResult, monthLimitId }) => {
     console.log("filter result", winningMenuData);
     console.log("winning menu id = imenu", winningMenuId);
 
-    postWinningMenu(winningMenuId, monthLimitId);
+    postWinningMenu(winningMenuId, monthLimitId, setReviewList);
   };
   const handleCancel = () => {
     setIsModalOpen(false);

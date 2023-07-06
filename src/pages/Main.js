@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 import { getMonthLimit, searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
-const Main = ({ userName, userId }) => {
+const Main = ({ userName, userId, setReviewList }) => {
   /* * * 새로고침 버튼 막기 * * */
   useEffect(() => {
     const handleKeyDown = event => {
@@ -198,6 +198,7 @@ const Main = ({ userName, userId }) => {
               checkedList={checkedList}
               searchedResult={searchedResult}
               monthLimitId={monthLimitId}
+              setReviewList={setReviewList}
             />
           </RouletteArea>
         </div>
