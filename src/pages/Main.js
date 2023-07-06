@@ -7,13 +7,9 @@ import Loading from "../components/Loading";
 import { getMonthLimit, searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
-const Main = () => {
-  console.log(JSON.parse(localStorage.getItem("user")));
-  let user_id = JSON.parse(localStorage.getItem("user")).user_id;
-  const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState(0);
-  // 한도 설정 여부 확인
-  const [isLimit, setIsLimit] = useState(false);
+const Main = ({ userName, userId }) => {
+  // 한도 설정 여부 확인 - false이면 한도설정창을 보여줘야 함
+  const [showLimitSetting, setShowLimitSetting] = useState(false);
   const [monthLimit, setMonthLimit] = useState(0);
   // db에서 한도 설정 값 받아와야 함
   const limit = 0;
@@ -22,17 +18,26 @@ const Main = () => {
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
-      setUserName(JSON.parse(localStorage.getItem("user")).user_name);
-      setUserId(JSON.parse(localStorage.getItem("user")).user_id);
     }, 1800);
+    getMonthLimitData();
 
-    if (limit > 0) {
-      setIsLimit(true);
-    }
+    // return () => {
+    //   clearInterval(loading);
+    // };
   }, []);
-  useEffect(() => {
-    getMonthLimit(userId, setMonthLimit);
-  }, [userId]);
+
+  const getMonthLimitData = async () => {
+    const localData = await JSON.parse(localStorage.getItem("user"));
+    const result = await getMonthLimit(localData.user_id, setMonthLimit);
+    console.log("result.monthLimit ", result.monthLimit);
+    setIsLoading(false);
+    if (!result) {
+      console.log("이달의 한도 값 설정 창으로");
+      setMonthLimit(0);
+    } else {
+      setShowLimitSetting(true);
+    }
+  };
 
   /* * * * * * * * * * * * */
   const tempData = [
@@ -85,8 +90,9 @@ const Main = () => {
   const inputTags = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
   const handleSearchTagBE = () => {
-    searchMenuItem(inputTagArr, setSearchedResult, user_id);
+    searchMenuItem(inputTagArr, setSearchedResult, userId);
     setInputTagArr([]);
+    handleClearAllChecks();
   };
   const handleAddTagEnter = e => {
     if (e.key === "Enter") {
@@ -148,10 +154,16 @@ const Main = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        isLimit || <LimitSetting setIsLimit={setIsLimit} />
+        showLimitSetting || (
+          <LimitSetting
+            setShowLimitSetting={setShowLimitSetting}
+            setMonthLimit={setMonthLimit}
+          />
+        )
       )}
       <MainContainer>
         <Banner />
+        {monthLimit}
         <br />
         <div>
           <RouletteArea style={{ border: "1px solid red" }}>

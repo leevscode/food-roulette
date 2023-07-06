@@ -11,10 +11,11 @@ const Header = () => {
               to="/"
               className="text-white hover:text-indigo-600"
               onClick={() => {
-                localStorage.setItem(
+                localStorage.removeItem(
                   "user",
                   JSON.stringify({ user_id: 0, user_name: "" }),
                 );
+                // localStorage.removeItem("user");
               }}
             >
               로그아웃

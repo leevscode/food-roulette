@@ -81,13 +81,16 @@ export const deleteMenuItem = async (_userId, _menuId) => {
   }
 };
 // 이달의 금액 한도 불러오기
-export const getMonthLimit = async _userId => {
+export const getMonthLimit = async (_userId, setFunc) => {
   try {
+    console.log("넘겨진 ID 값은 ? ", _userId);
     const res = await axios.get(`/api/main/${_userId}`);
     const result = await res.data;
     console.log(res);
-    console.log(result);
+    console.log("result", result);
     console.log(result.monthLimit);
+    setFunc(result.monthLimit);
+    return result;
   } catch (error) {
     console.log(error);
   }

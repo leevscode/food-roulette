@@ -1,6 +1,6 @@
 import React from "react";
 
-const LimitSetting = ({ setIsLimit }) => {
+const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
   const bgStyle = {
     position: "fixed",
     top: 0,
@@ -26,7 +26,8 @@ const LimitSetting = ({ setIsLimit }) => {
 
   const handleInputLimit = () => {
     // db에 한도 설정 값 저장해야 함
-    setIsLimit(10000);
+    setMonthLimit(10000);
+    setShowLimitSetting(true);
   };
 
   return (

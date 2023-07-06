@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   IntroBox,
   IntroBg,
@@ -11,29 +11,43 @@ import {
 } from "../style/IntroCSS";
 import axios from "axios";
 
-const Intro = () => {
-  const [userName, setUserName] = useState("");
-  const handleChange = e => setUserName(e.target.value);
-  const handleClick = async () => {
-    // 서버연동
+const Intro = ({ setUserName, setUserId }) => {
+  const navigate = useNavigate();
+  const [userInputName, setUserInputName] = useState("");
+  const handleChange = e => setUserInputName(e.target.value);
+  // 서버연동
+  const handleLoginClick = async () => {
     // 데이터 타입
     const headers = {
       "Content-Type": "application/json",
     };
     // 데이터 형식
     const userNameData = {
-      name: userName,
+      name: userInputName,
     };
     // try...catch
     try {
       const res = await axios.post("/api", userNameData, { headers });
-      console.log(res);
       const result = res.data;
       console.log(result);
+      console.log("인트로 Result : ", result);
+
+      const localStorageData = JSON.parse(localStorage.getItem("user"));
+      if (!localStorageData) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ user_id: 0, user_name: "" }),
+        );
+      }
       localStorage.setItem(
         "user",
         JSON.stringify({ user_id: result.iuser, user_name: result.name }),
       );
+
+      setUserId(result.iuser);
+      setUserName(result.name);
+
+      navigate("/main");
     } catch (error) {
       console.log(error);
     }
@@ -53,11 +67,9 @@ const Intro = () => {
               onChange={handleChange}
             ></IntroInput>
             <br />
-            <Link to="/main">
-              <IntroButton type="button" onClick={handleClick}>
-                딸깍
-              </IntroButton>
-            </Link>
+            <IntroButton type="button" onClick={handleLoginClick}>
+              딸깍
+            </IntroButton>
           </IntroForm>
         </TextBox>
       </IntroBox>
