@@ -1,5 +1,19 @@
 import axios from "axios";
 
+// 진행 막힌 부분
+const getCalendarDetail = async setCalendarDetail => {
+  try {
+    const res = await axios.get(`/api/calendar/3/detail?paymentAt=23-06-26'`);
+    const data = await res.data;
+    console.log(data);
+    setCalendarDetail(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
+};
+
 const getCalculate = async setFunc => {
   try {
     const res = await axios.get("api/calculate/1?month=06&year=2023");
@@ -28,4 +42,4 @@ const getCalculateUser = async (_user, _month, _year) => {
   }
 };
 
-export { getCalculate, getCalculateUser };
+export { getCalculate, getCalculateUser, getCalendarDetail };

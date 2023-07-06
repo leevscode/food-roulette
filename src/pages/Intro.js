@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   IntroBox,
   IntroBg,
@@ -11,31 +11,43 @@ import {
 } from "../style/IntroCSS";
 import axios from "axios";
 
-const Intro = () => {
-  const [userName, setUserName] = useState("");
-  const handleChange = e => setUserName(e.target.value);
-  const handleClick = async () => {
-    if (userName === "") {
-      // 배열이 비어있을 경우 전송하지 않음
-      return;
-    }
-
-    // 서버연동
+const Intro = ({ setUserName, setUserId }) => {
+  const navigate = useNavigate();
+  const [userInputName, setUserInputName] = useState("");
+  const handleChange = e => setUserInputName(e.target.value);
+  // 서버연동
+  const handleLoginClick = async () => {
     // 데이터 타입
-
     const headers = {
       "Content-Type": "application/json",
     };
     // 데이터 형식
     const userNameData = {
-      name: userName,
+      name: userInputName,
     };
     // try...catch
     try {
       const res = await axios.post("/api", userNameData, { headers });
-      console.log(res);
       const result = res.data;
       console.log(result);
+      console.log("인트로 Result : ", result);
+
+      const localStorageData = JSON.parse(localStorage.getItem("user"));
+      if (!localStorageData) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ user_id: 0, user_name: "" }),
+        );
+      }
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ user_id: result.iuser, user_name: result.name }),
+      );
+
+      setUserId(result.iuser);
+      setUserName(result.name);
+
+      navigate("/main");
     } catch (error) {
       console.log(error);
     }
@@ -51,25 +63,13 @@ const Intro = () => {
           <IntroForm>
             <IntroInput
               type="text"
-              placeholder={userName === "" ? "닉네임을 입력해주세요" : ""}
-              value={userName}
+              placeholder="닉네임을 입력해주세요"
               onChange={handleChange}
-            />
+            ></IntroInput>
             <br />
-            <Link to="/main">
-              {userName === "" ? (
-                <IntroButton type="button" disabled>
-                  딸깍
-                </IntroButton>
-              ) : (
-                <IntroButton
-                  type="button"
-                  onClick={handleClick}
-                >
-                  딸깍
-                </IntroButton>
-              )}
-            </Link>
+            <IntroButton type="button" onClick={handleLoginClick}>
+              딸깍
+            </IntroButton>
           </IntroForm>
         </TextBox>
       </IntroBox>

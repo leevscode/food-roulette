@@ -171,6 +171,15 @@
   margin-right: 15px;
 }
 
+.calendar-info-box {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+width: 100%;
+  border-radius: 8px;
+  background-color: #bffff3;
+  color: #333333;
+  border: 1px solid #333333;
+}
+
 .calendar-button {
   display: flex;
   height: 100%;
@@ -188,7 +197,7 @@
   width: 340px;
   height: 726px;
   background: #dffff9;
-  margin-top: 70px;
+  margin-top: 33px;
   border-radius: 20px;
 }
 
@@ -220,7 +229,7 @@
 }
 
 .calendar-scroll {
- margin-left: 45px;
+  margin-left: 45px;
   width: 100%;
   height: 500px;
   overflow: auto;
@@ -237,10 +246,6 @@
 .calendar-scroll::-webkit-scrollbar-thumb {
   background-color: #7fffd4;
   border-radius: 20px;
-}
-
-.empty-space {
-  margin-top: 10px;
 }
 
 .calendar-info {
