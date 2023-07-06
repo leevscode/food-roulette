@@ -75,6 +75,13 @@
   font-size: 1em;
 }
 
+/* 년 넘어가는거 방지 */
+.react-calendar__navigation .react-calendar__navigation__label {
+  pointer-events: none;
+  opacity: 1;
+
+}
+
 .react-calendar__month-view__weekdays__weekday {
   padding: 0.5em;
 }
@@ -220,7 +227,7 @@ width: 100%;
   border: 1px solid #333333;
   margin-right: 15px;
   position: absolute;
-  bottom: 30px;
+  bottom: 40px;
 }
 
 .react-calendar__navigation__next2-button,

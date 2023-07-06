@@ -184,6 +184,7 @@ const Schedule = () => {
                         <Radio value={3}>3점</Radio>
                       </Radio.Group>
                         {/* DB연동 막힌곳 */}
+                        {/* 라디오 버튼은 DB에서 보내주는 reviewGrade. 따라 동작하게 설정 */}
                     </div>
                   ))}
                 </div>
