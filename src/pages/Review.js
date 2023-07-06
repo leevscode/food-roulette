@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUnReviewList, patchUnReviewMenu } from "../api/fetch2";
+import DatePicker from "react-datepicker";
+import "../style/datepicker.css";
 
 const Review = ({ reviewList }) => {
   const [unReview, setUnReveiw] = useState([]);
@@ -25,10 +27,33 @@ const Review = ({ reviewList }) => {
     paymentAt : "2023-07-06" 
     */
   };
+  // datepicker
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleSendDate = () => {
+    console.log("state 변수", selectedDate);
+    if (!selectedDate) {
+      alert("날짜를 입력해");
+      return;
+    }
+  };
   // JSX
   return (
     <div>
       <p>Review 미등록 리스트</p>
+      <hr />
+      <DatePicker
+        todayButton="이번달로"
+        selected={selectedDate}
+        minDate={new Date("2000-01-01")} // minDate 이전 날짜 선택 불가
+        maxDate={new Date()} // maxDate 이후 날짜 선택 불가
+        onChange={date => setSelectedDate(date)}
+        dateFormat="yyyy-MM" // 월 선택 모드로 설정
+        showMonthYearPicker // 월 선택 모드를 활성화
+        isClearable
+        placeholderText="날짜를 선택해주세요"
+      />
+      <button onClick={handleSendDate}>날짜전달</button>
+      <hr />
       {unReview.length === 0 ? (
         "리스트가 없어요"
       ) : (
