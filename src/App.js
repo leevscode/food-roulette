@@ -8,6 +8,7 @@ import Calendar from "./pages/Calendar";
 import Menu from "./pages/Menu";
 import Calculate from "./pages/Calculate";
 import NotFound from "./pages/NotFound";
+import Review from "./pages/Review";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -27,6 +28,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/calculate" element={<Calculate />} />
+          <Route path="/review" element={<Review />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

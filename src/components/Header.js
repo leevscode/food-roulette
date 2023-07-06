@@ -62,6 +62,16 @@ const Header = () => {
                 소비 실적
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/review"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-cyan-400" : "text-white")
+                }
+              >
+                리뷰 등록
+              </NavLink>
+            </li>
           </ul>
           <div>
             <Link to="/" className="text-white hover:text-rose-500">
