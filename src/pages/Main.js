@@ -30,8 +30,6 @@ const Main = ({ userName, userId, setReviewList }) => {
   // 한도 설정 여부 확인 - false이면 한도설정창을 보여줘야 함
   const [showLimitSetting, setShowLimitSetting] = useState(false);
   const [monthLimit, setMonthLimit] = useState(0);
-  // db에서 한도 설정 값 받아와야 함
-  const limit = 0;
   // 로딩
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -46,7 +44,6 @@ const Main = ({ userName, userId, setReviewList }) => {
   }, []);
 
   // 당첨메뉴 전송 - 유저의 이달의 한도
-  // let monthLimitId;
   const [monthLimitId, setMonthLimitId] = useState();
   const getMonthLimitData = async () => {
     const localData = await JSON.parse(localStorage.getItem("user"));
@@ -64,53 +61,8 @@ const Main = ({ userName, userId, setReviewList }) => {
   };
 
   /* * * * * * * * * * * * */
-  // const tempData = [
-  //   { id: 1, menu: "사과", tags: ["테스트", "빨강", "좋다"] },
-  //   { id: 2, menu: "딸기", tags: ["테스트", "빨강", "좋다"] },
-  //   { id: 3, menu: "오렌지", tags: ["테스트", "주황", "시트러스"] },
-  //   { id: 4, menu: "망고", tags: ["테스트", "노랑", "좋다"] },
-  //   { id: 5, menu: "레몬", tags: ["테스트", "노랑", "시트러스"] },
-  //   { id: 6, menu: "바나나", tags: ["테스트", "노랑", "신선함"] },
-  //   { id: 7, menu: "자몽", tags: ["테스트", "주황", "시트러스"] },
-  //   { id: 8, menu: "메론", tags: ["테스트", "초록", "신선함"] },
-  //   { id: 9, menu: "키위", tags: ["테스트", "초록", "맛있다"] },
-  //   { id: 10, menu: "복숭아", tags: ["테스트", "분홍", "여름"] },
-  //   { id: 11, menu: "포도", tags: ["테스트", "보라", "신선함"] },
-  //   { id: 12, menu: "참외", tags: ["테스트", "노랑", "맛있다"] },
-  // ];
-  // 받아온 배열의 해시태그 배열만 따로 빼어냄
-  // const tagList = tempData.map(item => item.tags);
-  // 인덱스를 담을 배열
-  // let idxList = [];
-
-  // user가 검색 - 1개 태그만 검색
-  // const [userInput, setUserInput] = useState("");
-  // 검색결과
   const [searchedResult, setSearchedResult] = useState([]);
-  // const results = [];
 
-  // const handleGetValue = e => {
-  //   setUserInput(e.target.value.toLowerCase());
-  // };
-  // const handleSearchTag = () => {
-  //   // 받아온 키워드의 내용을 for 루틴을 중첩으로 돌려서 비교해서 찾아야 함.
-  //   idxList = [];
-  //   tagList.forEach((itemArr, index) => {
-  //     itemArr.forEach(item => {
-  //       // console.log(item);
-  //       if (item === userInput) {
-  //         idxList.push(index);
-  //         return;
-  //       }
-  //     });
-  //   });
-  //   idxList.forEach(item => {
-  //     results.push(tempData[item].menu);
-  //   });
-  //   setSearchedResult(results);
-  //   handleClearAllChecks();
-  // };
-  //
   const inputTags = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
   const handleSearchTagBE = () => {
@@ -205,16 +157,6 @@ const Main = ({ userName, userId, setReviewList }) => {
         <div style={{ border: "1px solid aqua" }}>
           <p>해시태그 검색영역</p>
           <div>
-            {/* <div style={{ border: "1px solid green" }}>
-              <p>해시태그 검색</p>
-              <input
-                style={{ border: "1px solid black", marginBottom: 20 }}
-                type="text"
-                placeholder="키워드 검색"
-                onChange={handleGetValue}
-              />
-              <button onClick={handleSearchTag}>검색</button>
-            </div> */}
             <div style={{ border: "1px solid green" }}>
               <p>검색결과 출력 영역</p>
               <div>
