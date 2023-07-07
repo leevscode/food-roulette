@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Banner from "../components/Banner";
 import LimitSetting from "../components/LimitSetting";
 import Roulette from "../components/Roulette";
 import { MainContainer, RouletteArea } from "../style/MainCSS";
@@ -7,12 +6,27 @@ import Loading from "../components/Loading";
 import { getMonthLimit, searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
 
-const Main = ({ userName, userId }) => {
-  // 한도 설정 여부 확인 - false이면 한도설정창을 보여줘야 함
-  const [showLimitSetting, setShowLimitSetting] = useState(false);
-  const [monthLimit, setMonthLimit] = useState(0);
-  // db에서 한도 설정 값 받아와야 함
-  const limit = 0;
+const Main = ({ userName, setUserName, userId, setReviewList }) => {
+  /* * * 새로고침 버튼 막기 * * */
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (
+        (event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82)) ||
+        event.keyCode === 116
+      ) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.returnValue = false;
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  /* * * * * * * * * * */
   // 로딩
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -20,15 +34,25 @@ const Main = ({ userName, userId }) => {
       setIsLoading(false);
     }, 1800);
     getMonthLimitData();
-
+    setUserName(JSON.parse(localStorage.getItem("user")).user_name);
     // return () => {
     //   clearInterval(loading);
     // };
   }, []);
 
+  // 한도 설정 여부 확인 - false이면 한도설정창을 보여줘야 함
+  const [showLimitSetting, setShowLimitSetting] = useState(false);
+  const [monthLimit, setMonthLimit] = useState(0);
+  // 당첨메뉴 전송 - 유저의 이달의 한도
+  const [monthLimitId, setMonthLimitId] = useState();
+  const [consumeData, setConsumeData] = useState({});
   const getMonthLimitData = async () => {
     const localData = await JSON.parse(localStorage.getItem("user"));
-    const result = await getMonthLimit(localData.user_id, setMonthLimit);
+    const result = await getMonthLimit(
+      localData.user_id,
+      setMonthLimit,
+      setConsumeData,
+    );
     console.log("result.monthLimit ", result.monthLimit);
     setIsLoading(false);
     if (!result) {
@@ -36,61 +60,26 @@ const Main = ({ userName, userId }) => {
       setMonthLimit(0);
     } else {
       setShowLimitSetting(true);
+      console.log(result);
+      console.log("imanagement = ", result.imanagement);
+      setMonthLimitId(result.imanagement);
     }
   };
-
+  useEffect(() => {
+    // setMonthLimitId(result.imanagement);
+  }, [consumeData]);
   /* * * * * * * * * * * * */
-  const tempData = [
-    { id: 1, menu: "사과", tags: ["테스트", "빨강", "좋다"] },
-    { id: 2, menu: "딸기", tags: ["테스트", "빨강", "좋다"] },
-    { id: 3, menu: "오렌지", tags: ["테스트", "주황", "시트러스"] },
-    { id: 4, menu: "망고", tags: ["테스트", "노랑", "좋다"] },
-    { id: 5, menu: "레몬", tags: ["테스트", "노랑", "시트러스"] },
-    { id: 6, menu: "바나나", tags: ["테스트", "노랑", "신선함"] },
-    { id: 7, menu: "자몽", tags: ["테스트", "주황", "시트러스"] },
-    { id: 8, menu: "메론", tags: ["테스트", "초록", "신선함"] },
-    { id: 9, menu: "키위", tags: ["테스트", "초록", "맛있다"] },
-    { id: 10, menu: "복숭아", tags: ["테스트", "분홍", "여름"] },
-    { id: 11, menu: "포도", tags: ["테스트", "보라", "신선함"] },
-    { id: 12, menu: "참외", tags: ["테스트", "노랑", "맛있다"] },
-  ];
-  // 받아온 배열의 해시태그 배열만 따로 빼어냄
-  const tagList = tempData.map(item => item.tags);
-  // 인덱스를 담을 배열
-  let idxList = [];
-
-  // user가 검색 - 1개 태그만 검색
-  const [userInput, setUserInput] = useState("");
-  // 검색결과
   const [searchedResult, setSearchedResult] = useState([]);
-  const results = [];
 
-  const handleGetValue = e => {
-    setUserInput(e.target.value.toLowerCase());
-  };
-  const handleSearchTag = () => {
-    // 받아온 키워드의 내용을 for 루틴을 중첩으로 돌려서 비교해서 찾아야 함.
-    idxList = [];
-    tagList.forEach((itemArr, index) => {
-      itemArr.forEach(item => {
-        // console.log(item);
-        if (item === userInput) {
-          idxList.push(index);
-          return;
-        }
-      });
-    });
-    idxList.forEach(item => {
-      results.push(tempData[item].menu);
-    });
-    setSearchedResult(results);
-    handleClearAllChecks();
-  };
-  //
   const inputTags = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
-  const handleSearchTagBE = () => {
-    searchMenuItem(inputTagArr, setSearchedResult, userId);
+
+  const handleSearchTagBEWait = async () => {
+    const localId = await JSON.parse(localStorage.getItem("user")).user_id;
+    handleSearchTagBE(localId);
+  };
+  const handleSearchTagBE = _userId => {
+    searchMenuItem(inputTagArr, setSearchedResult, _userId);
     setInputTagArr([]);
     handleClearAllChecks();
   };
@@ -147,7 +136,6 @@ const Main = ({ userName, userId }) => {
   const handleClearAllChecks = () => {
     checkboxes.forEach(item => (item.checked = false));
   };
-
   /* * * * * * * * * * * * */
   return (
     <>
@@ -156,36 +144,41 @@ const Main = ({ userName, userId }) => {
       ) : (
         showLimitSetting || (
           <LimitSetting
+            userId={userId}
             setShowLimitSetting={setShowLimitSetting}
             setMonthLimit={setMonthLimit}
+            setConsumeData={setConsumeData}
+            setMonthLimitId={setMonthLimitId}
           />
         )
       )}
       <MainContainer>
-        <Banner />
-        {monthLimit}
+        <div>
+          <p>
+            {consumeData.year}년 {consumeData.month}월 입니다
+          </p>
+          <hr />
+          <p>이번 달 한도는 {monthLimit} 원으로 설정하셨습니다</p>
+          <p>이달의 지출은 {consumeData.expense}원 이군요</p>
+          <p>사용할 수 있는 금액은 {consumeData.balance}원 입니다</p>
+        </div>
         <br />
         <div>
           <RouletteArea style={{ border: "1px solid red" }}>
             <p>{userName || "user"} 님의 룰렛</p>
             <hr />
-            <Roulette checkedList={checkedList} />
+            <Roulette
+              checkedList={checkedList}
+              searchedResult={searchedResult}
+              monthLimitId={monthLimitId}
+              setReviewList={setReviewList}
+            />
           </RouletteArea>
         </div>
         <br />
         <div style={{ border: "1px solid aqua" }}>
           <p>해시태그 검색영역</p>
           <div>
-            <div style={{ border: "1px solid green" }}>
-              <p>해시태그 검색</p>
-              <input
-                style={{ border: "1px solid black", marginBottom: 20 }}
-                type="text"
-                placeholder="키워드 검색"
-                onChange={handleGetValue}
-              />
-              <button onClick={handleSearchTag}>검색</button>
-            </div>
             <div style={{ border: "1px solid green" }}>
               <p>검색결과 출력 영역</p>
               <div>
@@ -235,7 +228,7 @@ const Main = ({ userName, userId }) => {
                 </HashTag>
               ))}
               <br />
-              <button onClick={handleSearchTagBE}>검색</button>
+              <button onClick={handleSearchTagBEWait}>검색</button>
             </div>
           </div>
         </div>

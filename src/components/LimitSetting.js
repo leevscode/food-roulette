@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { postMonthLimit } from "../api/fetch2";
 
-const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
-  const [inputValue, setInputValue] = useState("");
+const LimitSetting = ({
+  userId,
+  setMonthLimit,
+  setShowLimitSetting,
+  setConsumeData,
+  setMonthLimitId,
+}) => {
   const bgStyle = {
     position: "fixed",
     top: 0,
@@ -47,11 +53,38 @@ const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
     height: "800px",
     backgroundPosition: "center bottom",
   };
+  const inputtext = {
+    borderRadius: 10,
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#f2f2f2",
+    textAlign: "center",
+  };
+  const btstyle = {
+    background: "aqua",
+    borderRadius: 10,
+    padding: "8px 80px",
+  };
+  const phone = {
+    background: "url('/images/limit.png')",
+    backgroundSize: "cover",
+    padding: "70px",
+    height: "800px",
+    backgroundPosition: "center bottom",
+  };
 
+  const limitPrice = useRef(null);
   const handleInputLimit = () => {
-    // db에 한도 설정 값 저장해야 함
-    setMonthLimit(10000);
-    setShowLimitSetting(true);
+    let price = limitPrice.current.value;
+    const regex = /^\d+$/; // 숫자만 허용하는 정규표현식
+    if (!regex.test(price)) {
+      alert("유효한 금액을 입력해주세요");
+      limitPrice.current.value = null;
+      return false;
+    } else {
+      postMonthLimit(userId, price, setMonthLimit, setConsumeData, setMonthLimitId);
+      setShowLimitSetting(true);
+    }
+    console.log(price);
   };
 
   const handleInputChange = e => {
@@ -73,10 +106,9 @@ const LimitSetting = ({ setMonthLimit, setShowLimitSetting }) => {
             <br />
             <p>한도를 입력해주세요</p>
             <input
+              ref={limitPrice}
               style={inputtext}
               type="text"
-              value={inputValue}
-              onChange={handleInputChange}
               placeholder="ex) 500000"
             />
             <br />

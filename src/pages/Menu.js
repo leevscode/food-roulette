@@ -6,7 +6,10 @@ import { getUserMenu, getCommonMenu } from "../api/fetch2";
 import { Switch } from "antd";
 
 const Menu = () => {
-  const userId = JSON.parse(localStorage.getItem("user")).user_id
+  const userId = JSON.parse(localStorage.getItem("user")).user_id;
+  const [userName] = useState(
+    JSON.parse(localStorage.getItem("user")).user_name,
+  );
   // 로딩 처리
   const [isLoading, setIsLoading] = useState(true);
   const [toggle, setToggle] = useState(true);
@@ -24,7 +27,7 @@ const Menu = () => {
   return (
     <div>
       {isLoading && <Loading />}
-      <div>Menu</div>
+      <div>{userName} 님의 Menu</div>
       <hr />
       메뉴입력하기
       <Switch onChange={handleToggle} />
