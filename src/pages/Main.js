@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Banner from "../components/Banner";
 import LimitSetting from "../components/LimitSetting";
 import Roulette from "../components/Roulette";
 import { MainContainer, RouletteArea } from "../style/MainCSS";
@@ -181,13 +180,13 @@ const Main = ({ userName, userId, setReviewList }) => {
       ) : (
         showLimitSetting || (
           <LimitSetting
+            userId={userId}
             setShowLimitSetting={setShowLimitSetting}
             setMonthLimit={setMonthLimit}
           />
         )
       )}
       <MainContainer>
-        <Banner />
         {monthLimit}
         <br />
         <div>

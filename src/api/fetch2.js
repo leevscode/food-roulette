@@ -68,7 +68,6 @@ export const postMenuItem = async (user_id, menu, tags) => {
     const res = await axios.post("/api/menu", data, { headers });
     const result = res.data;
     console.log(result);
-    // 배열의 길이가 출력됨(BE)
     return result;
   } catch (error) {
     console.log(error);
@@ -124,7 +123,7 @@ export const postWinningMenu = async (
     console.log(error);
   }
 };
-// 해당 달의 리뷰 미등록 리스트 출력 - 임시로 해당 달만 보여줌
+// 해당 달의 리뷰 미등록 리스트 출력
 export const getUnReviewList = async (_userId, setFunc, year, month) => {
   console.log(year, month);
   try {
@@ -140,6 +139,7 @@ export const getUnReviewList = async (_userId, setFunc, year, month) => {
     console.log(error);
   }
 };
+// 해당 달의 리뷰 미등록한 메뉴 리뷰 등록
 export const patchUnReviewMenu = async (
   _userId,
   reviewData,
@@ -172,6 +172,25 @@ export const patchUnReviewMenu = async (
     const result = res.data;
     console.log(res);
     console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+// 이달의 한도 금액 설정하기
+export const postMonthLimit = async (_userId, _price, setFunc) => {
+  const limitPrice = parseInt(_price);
+  const headers = { "Content-Type": "application/json" };
+  const postData = {
+    monthLimit: limitPrice,
+  };
+  try {
+    const res = await axios.post(`/api/main/${_userId}/plan`, postData, {
+      headers,
+    });
+    const result = res.data;
+    console.log(res);
+    console.log(result);
+    setFunc(result.monthLimit)
   } catch (error) {
     console.log(error);
   }
