@@ -1,13 +1,17 @@
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { Radio } from "antd";
 import "../style/Calendar.css";
 import { getCalendar } from "../api/fetch";
 import { getCalendarDetail } from "../api/fetch3";
 import CalendarDetailList from "../components/CalendarDetailList";
 
 const Schedule = () => {
+  const userId = JSON.parse(localStorage.getItem("user")).user_id;
+  // 오늘 날짜 불러오기
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   // 날짜
   const [selectedSchedulePayment, setSelectedSchedulePayment] = useState("");
@@ -18,32 +22,37 @@ const Schedule = () => {
 
   const getCalendarLoad = async () => {
     try {
-      const data = await getCalendar(3, 6, 23);
-      console.log(data);
-      setScheduleData(data);
+      const data01 = await getCalendar(userId, year, month);
+      const data02 = await getCalendar(userId, year, month - 1);
+      const data03 = await getCalendar(userId, year, month - 2);
+      console.log(data01);
+      console.log(data02);
+      console.log(data03);
+      let copy = [...data01, ...data02, data03];
+      setScheduleData(copy);
     } catch (err) {
       console.log(err);
     }
   };
+
   const getCalendarDetailLoad = async (_day, _iuser) => {
     try {
       const data = await getCalendarDetail(_day, _iuser);
       console.log("받은 자료 ", data);
-      setCalendarDetail(data);
+      let filterData = data.filter(value => value.reviewGrade);
+      console.log("리뷰를 등록하지 않은 데이터 filter함");
+      setCalendarDetail(filterData);
     } catch (err) {
       console.log(err);
     }
   };
 
   const onClickSetSchedule = _result => {
-    // console.log("날짜를 클릭", _result);
+    console.log("날짜를 클릭", _result);
     setSelectedSchedulePayment(_result.paymentAt);
     setSelectedScheduleTotal(_result.total);
     setSelectedSchedule(_result);
-
-    // iuser 적용해야 합니다.
-    getCalendarDetailLoad(_result.paymentAt, 3);
-    // setCalendarDetail(_result);
+    getCalendarDetailLoad(_result.paymentAt, userId);
   };
 
   useEffect(() => {
@@ -106,45 +115,6 @@ const Schedule = () => {
     }
   };
 
-  // react-calendar 에 있는 거 (사용할 필요없는 듯)
-  const handleClickDay = value => {
-    // console.log("또 날짜 클릭");
-    // const day = moment(value).format("YYYY-MM-DD");
-    // const result = scheduleData.find(item => item.day === day);
-    // setSelectedSchedule(result);
-  };
-
-  // const onSubmitForm = e => {
-  //   e.preventDefault();
-  //   // 서버연동 예정
-  //   console.log(e.target);
-  // };
-  // const [price, setPrice] = useState(0);
-  // const [place, setPlace] = useState("");
-  // const [point, setPoint] = useState(0);
-  // const onChangePrice = e => {
-  //   // console.log(e.target.value);
-  //   setPrice(e.target.value);
-  // };
-  // const onChangePlace = e => {
-  //   // console.log(e.target.value);
-  //   setPlace(e.target.value);
-  // };
-  // const onChangePoint = e => {
-  //   // console.log(e.target.value);
-  //   setPoint(e.target.value);
-  // };
-  // const onCalc = () => {
-  //   const totalPrice = selectedSchedule.total + parseInt(price);
-  //   const newArr = scheduleData.map(item => {
-  //     if (item.paymentAt === selectedSchedule.paymentAt) {
-  //       item.total = totalPrice;
-  //     }
-  //     return item;
-  //   });
-  //   setScheduleData(newArr);
-  // };
-
   return (
     <>
       <div className="p-6 mt-5 bg-white flex justify-center gap-7">
@@ -152,7 +122,6 @@ const Schedule = () => {
           <h1>Calendar</h1>
           <div style={{ border: "1px solid" }}>
             <Calendar
-              // onClickDay={handleClickDay}
               calendarType="US"
               formatDay={(locale, date) => moment(date).format("D")}
               tileContent={titleContentShow}
@@ -179,7 +148,15 @@ const Schedule = () => {
                 <div className="calendar-scroll">
                   {/* DB를 이용한 목록 출력 */}
                   {CalendarDetail.length === 0 ? (
-                    <div>돈을 절약 하셨군요</div>
+                    <div className="calendar-nopay">
+                      돈을 절약 하셨군요 <br />
+                      축하드립니다
+                      <img
+                        className="pepe-happy"
+                        src="/images/happy.png"
+                        alt=""
+                      />
+                    </div>
                   ) : (
                     <div>
                       {CalendarDetail.map((item, index) => (
