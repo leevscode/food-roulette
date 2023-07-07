@@ -32,8 +32,8 @@ const Review = ({ reviewList }) => {
     */
   };
   // datepicker - 미등록 리스트 불러오기
-  const [selectedDate, setSelectedDate] = useState(null);
-  // const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const handleSendDate = () => {
     console.log("state 변수", selectedDate);
     if (!selectedDate) {
@@ -64,7 +64,7 @@ const Review = ({ reviewList }) => {
       inputPrice,
       inputPoint,
       selectedDate,
-      reviewMenuInfo.ipayment
+      reviewMenuInfo.ipayment,
     );
   };
   const handleCancel = () => {
