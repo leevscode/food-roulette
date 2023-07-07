@@ -40,18 +40,18 @@ const LimitSetting = ({
     textAlign: "center",
   };
 
-  const btstyle = {
-    background: "aqua",
-    borderRadius: 10,
-    padding: "8px 80px",
-  };
-
   const phone = {
     background: "url('/images/limit.png')",
     backgroundSize: "cover",
     padding: "70px",
     height: "800px",
     backgroundPosition: "center bottom",
+  };
+
+  const btstyle = {
+    background: "aqua",
+    borderRadius: 10,
+    padding: "8px 80px",
   };
 
   const limitPrice = useRef(null);

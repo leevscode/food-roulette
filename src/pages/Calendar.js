@@ -1,7 +1,6 @@
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { Radio } from "antd";
 import "../style/Calendar.css";
 import { getCalendar } from "../api/fetch";
 import { getCalendarDetail } from "../api/fetch3";
@@ -146,7 +145,15 @@ const Schedule = () => {
                 <div className="calendar-scroll">
                   {/* DB를 이용한 목록 출력 */}
                   {CalendarDetail.length === 0 ? (
-                    <div>돈을 절약 하셨군요</div>
+                    <div className="calendar-nopay">
+                      돈을 절약 하셨군요 <br />
+                      축하드립니다
+                      <img
+                        className="pepe-happy"
+                        src="/images/happy.png"
+                        alt=""
+                      />
+                    </div>
                   ) : (
                     <div>
                       {CalendarDetail.map((item, index) => (

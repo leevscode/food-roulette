@@ -64,7 +64,6 @@ export const ProgressText = styled.p`
   display: flex;
   justify-content: center;
   margin-top: 5px;
-  margin-left: 22px;
   font-size: 16px;
   color: black;
   text-align: center;
