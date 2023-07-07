@@ -15,7 +15,7 @@ const getCalendar = async (_iuser, _month, _year) => {
       `/api/calendar/${_iuser}?year=${_year}&month=${_month}`,
     );
     const data = await res.data;
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.log(error);

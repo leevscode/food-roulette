@@ -5,9 +5,14 @@ import { Radio } from "antd";
 import "../style/Calendar.css";
 import { getCalendar } from "../api/fetch";
 import { getCalendarDetail } from "../api/fetch3";
+import CalendarDetailList from "../components/CalendarDetailList";
 
 const Schedule = () => {
   const [selectedSchedule, setSelectedSchedule] = useState(null);
+  // 날짜
+  const [selectedSchedulePayment, setSelectedSchedulePayment] = useState("");
+  // 총액
+  const [selectedScheduleTotal, setSelectedScheduleTotal] = useState(0);
   const [scheduleData, setScheduleData] = useState([]);
   const [CalendarDetail, setCalendarDetail] = useState([]);
 
@@ -20,15 +25,29 @@ const Schedule = () => {
       console.log(err);
     }
   };
+  const getCalendarDetailLoad = async (_day, _iuser) => {
+    try {
+      const data = await getCalendarDetail(_day, _iuser);
+      console.log("받은 자료 ", data);
+      setCalendarDetail(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onClickSetSchedule = _result => {
+    // console.log("날짜를 클릭", _result);
+    setSelectedSchedulePayment(_result.paymentAt);
+    setSelectedScheduleTotal(_result.total);
     setSelectedSchedule(_result);
+
+    // iuser 적용해야 합니다.
+    getCalendarDetailLoad(_result.paymentAt, 3);
     // setCalendarDetail(_result);
   };
 
   useEffect(() => {
     getCalendarLoad();
-    getCalendarDetail(setCalendarDetail);
   }, []);
 
   const titleContentShow = ({ date }) => {
@@ -87,10 +106,12 @@ const Schedule = () => {
     }
   };
 
+  // react-calendar 에 있는 거 (사용할 필요없는 듯)
   const handleClickDay = value => {
-    const day = moment(value).format("YYYY-MM-DD");
-    const result = scheduleData.find(item => item.day === day);
-    setSelectedSchedule(result);
+    // console.log("또 날짜 클릭");
+    // const day = moment(value).format("YYYY-MM-DD");
+    // const result = scheduleData.find(item => item.day === day);
+    // setSelectedSchedule(result);
   };
 
   // const onSubmitForm = e => {
@@ -136,7 +157,7 @@ const Schedule = () => {
           <h1>Calendar</h1>
           <div style={{ border: "1px solid" }}>
             <Calendar
-              onClickDay={handleClickDay}
+              // onClickDay={handleClickDay}
               calendarType="US"
               formatDay={(locale, date) => moment(date).format("D")}
               tileContent={titleContentShow}
@@ -145,55 +166,45 @@ const Schedule = () => {
         </div>
 
         <div className="calendar-menubox">
-          <p className="calendar-menutext">
-            날짜를 <br /> 선택해주세요!
-          </p>
+          {/* 날짜 및 안내 문구 출력 영역 */}
+          <div>
+            {selectedSchedule ? (
+              <p>{selectedSchedulePayment}</p>
+            ) : (
+              <p className="calendar-menutext">
+                날짜를 <br /> 선택해주세요!
+              </p>
+            )}
+          </div>
 
-          {selectedSchedule && (
-            <div className="selected-schedule">
-              <p>{selectedSchedule.paymentAt}</p>
-              <br />
-              <div>
+          {/* 목록 출력하기 */}
+          {selectedSchedule ? (
+            <div>
+              {CalendarDetail ? (
                 <div className="calendar-scroll">
-                  {[...Array(1)].map((_, index) => (
-                    <div className="calendar-info" key={index}>
-                      <h2>{selectedSchedule.title}</h2>
-                      <p className="food-name">{selectedSchedule.price}</p>
-                      <p className="calendar-info-box">
-                        {/* DB연동 막힌곳 */}
-                        메뉴 : {CalendarDetail.menu}{" "}
-                      </p>
-                      <br />
-                      <p className="calendar-info-box">가격 : {} </p>
-                      <br />
-                      <p className="calendar-info-box">장소 : {} </p>
-                      <br />
-                      <h2 className="calendar-info-box">페페 스코어</h2>
-                      <div className="pepe-score">
-                        <img src="/images/1점.jpg" alt="울음" />
-                        <img src="/images/2점.png" alt="무난" />
-                        <img src="/images/3점.png" alt="행복" />
-                      </div>
-                      <Radio.Group
-                        className="pepe-score-raido"
-                        name="point"
-                        // onChange={onChangePoint}
-                        >
-                        <Radio value={1}>1점</Radio>
-                        <Radio value={2}>2점</Radio>
-                        <Radio value={3}>3점</Radio>
-                      </Radio.Group>
-                        {/* DB연동 막힌곳 */}
-                        {/* 라디오 버튼은 DB에서 보내주는 reviewGrade. 따라 동작하게 설정 */}
+                  {/* DB를 이용한 목록 출력 */}
+                  {CalendarDetail.length === 0 ? (
+                    <div>자료가 없습니다.</div>
+                  ) : (
+                    <div>
+                      {CalendarDetail.map((item, index) => (
+                        <CalendarDetailList key={index} item={item} />
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
-                <div className="calendar-total">
-                  <p> 오늘 먹은 총액 : {selectedSchedule.total}</p>
-                </div>
-              </div>
+              ) : null}
             </div>
-          )}
+          ) : null}
+
+          {/* 총액 출력 영역 */}
+          <div>
+            {selectedSchedule ? (
+              <div className="calendar-total">
+                <p>오늘 먹은 총액 : {selectedScheduleTotal}</p>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </>

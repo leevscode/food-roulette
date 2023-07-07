@@ -1,12 +1,13 @@
 import axios from "axios";
 
 // 진행 막힌 부분
-const getCalendarDetail = async setCalendarDetail => {
+const getCalendarDetail = async (_day, _iuser) => {
   try {
-    const res = await axios.get(`/api/calendar/3/detail?paymentAt=23-06-26'`);
+    const res = await axios.get(
+      `/api/calendar/${_iuser}/detail?paymentAt=${_day}`,
+    );
     const data = await res.data;
     console.log(data);
-    setCalendarDetail(data);
     return data;
   } catch (error) {
     console.log(error);
