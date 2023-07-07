@@ -75,8 +75,13 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
   const [inputTagArr, setInputTagArr] = useState([]);
 
   const handleSearchTagBEWait = async () => {
-    const localId = await JSON.parse(localStorage.getItem("user")).user_id;
-    handleSearchTagBE(localId);
+    if (inputTagArr.length === 0) {
+      alert("검색어를 입력해주세요");
+      return;
+    } else {
+      const localId = await JSON.parse(localStorage.getItem("user")).user_id;
+      handleSearchTagBE(localId);
+    }
   };
   const handleSearchTagBE = _userId => {
     searchMenuItem(inputTagArr, setSearchedResult, _userId);
