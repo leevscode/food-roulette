@@ -2,13 +2,19 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { deleteMenuItem } from "../api/fetch2";
 
-const ShowMenuList = ({ userMenuList, commonMenuList, userId }) => {
+const ShowMenuList = ({
+  userMenuList,
+  getUserMenuData,
+  commonMenuList,
+  userId,
+}) => {
   const [commonMenu, setCommonMenu] = useState([]);
   const [userMenu, setUserMenu] = useState([]);
 
-  const handleMenuDelete = (_userId, _menuId ) => {
+  const handleMenuDelete = async (_userId, _menuId) => {
     console.log("삭제버튼");
-    deleteMenuItem(_userId, _menuId);
+    const deleteAxios = await deleteMenuItem(_userId, _menuId);
+    getUserMenuData();
   };
 
   useEffect(() => {

@@ -75,8 +75,13 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
   const [inputTagArr, setInputTagArr] = useState([]);
 
   const handleSearchTagBEWait = async () => {
-    const localId = await JSON.parse(localStorage.getItem("user")).user_id;
-    handleSearchTagBE(localId);
+    if (inputTagArr.length === 0) {
+      alert("검색어를 입력해주세요");
+      return;
+    } else {
+      const localId = await JSON.parse(localStorage.getItem("user")).user_id;
+      handleSearchTagBE(localId);
+    }
   };
   const handleSearchTagBE = _userId => {
     searchMenuItem(inputTagArr, setSearchedResult, _userId);
@@ -153,14 +158,22 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
         )
       )}
       <MainContainer>
-        <div>
-          <p>
-            {consumeData.year}년 {consumeData.month}월 입니다
-          </p>
-          <hr />
-          <p>이번 달 한도는 {monthLimit} 원으로 설정하셨습니다</p>
-          <p>이달의 지출은 {consumeData.expense}원 이군요</p>
-          <p>사용할 수 있는 금액은 {consumeData.balance}원 입니다</p>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div>
+            <p>
+              {consumeData.year}년 {consumeData.month}월 입니다
+            </p>
+            <hr />
+            <p>이번 달 한도는 {monthLimit} 원으로 설정하셨습니다</p>
+            <p>이달의 지출은 {consumeData.expense}원 이군요</p>
+            <p>사용할 수 있는 금액은 {consumeData.balance}원 입니다</p>
+          </div>
+          <div>
+            <img
+              src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1651566999/noticon/xgnjqiiapirbz9ixdiol.gif"
+              alt=""
+            />
+          </div>
         </div>
         <br />
         <div>

@@ -18,8 +18,11 @@ const Menu = () => {
   const handleToggle = () => {
     setToggle(!toggle);
   };
+  const getUserMenuData = async () => {
+    await getUserMenu(setUserMenuList, userId);
+  };
   useEffect(() => {
-    getUserMenu(setUserMenuList, userId);
+    getUserMenuData();
     getCommonMenu(setCommonMenuList);
     setIsLoading(false);
   }, []);
@@ -37,9 +40,10 @@ const Menu = () => {
         <MenuInput setUserMenuList={setUserMenuList} userId={userId} />
       ) : (
         <ShowMenuList
-          userMenuList={userMenuList}
-          commonMenuList={commonMenuList}
-          userId={userId}
+        userMenuList={userMenuList}
+        getUserMenuData={getUserMenuData}
+        commonMenuList={commonMenuList}
+        userId={userId}
         />
       )}
     </div>

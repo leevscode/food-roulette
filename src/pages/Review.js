@@ -12,9 +12,6 @@ const Review = ({ reviewList }) => {
   const [userName] = useState(
     JSON.parse(localStorage.getItem("user")).user_name,
   );
-  // useEffect(() => {
-  //   getUnReviewList(userId, setUnReveiw);
-  // }, []);
   const tempStyle = {
     margin: 4,
     padding: "8px 16px",
@@ -28,16 +25,11 @@ const Review = ({ reviewList }) => {
     showModal();
     console.log(_item);
     setReviewMenuInfo(_item);
-    /*
-    ipayment : 105
-    menu: "솥솥"
-    paymentAt : "2023-07-06" 
-    */
   };
   // datepicker - 미등록 리스트 불러오기
   // const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const handleSendDate = () => {
+  const handleSendDate = async () => {
     console.log("state 변수", selectedDate);
     if (!selectedDate) {
       alert("날짜를 입력해");
@@ -46,7 +38,7 @@ const Review = ({ reviewList }) => {
       const year = selectedDate.getFullYear();
       // const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
       const month = selectedDate.getMonth() + 1;
-      getUnReviewList(userId, setUnReveiw, year, month);
+      await getUnReviewList(userId, setUnReveiw, year, month);
     }
   };
 
@@ -55,20 +47,31 @@ const Review = ({ reviewList }) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-    handleClearInput();
-    console.log("전송");
+  const handleOk = async () => {
+    const regex = /^[1-9]\d*$/; // 숫자만 허용하는 정규표현식
+    if (!inputPoint || !inputPrice || !inputRestaurant) {
+      alert("값을 입력하세요");
+      return;
+    } else if (!regex.test(inputPrice)) {
+      alert("정확한 금액을 입력하세요");
+    } else {
+      setIsModalOpen(false);
+      handleClearInput();
+      console.log("전송");
 
-    patchUnReviewMenu(
-      userId,
-      reviewMenuInfo,
-      inputRestaurant,
-      inputPrice,
-      inputPoint,
-      selectedDate,
-      reviewMenuInfo.ipayment,
-    );
+      const res = await patchUnReviewMenu(
+        userId,
+        reviewMenuInfo,
+        inputRestaurant,
+        inputPrice,
+        inputPoint,
+        selectedDate,
+        reviewMenuInfo.ipayment,
+      );
+      const year = selectedDate.getFullYear();
+      const month = selectedDate.getMonth() + 1;
+      const loadList = await getUnReviewList(userId, setUnReveiw, year, month);
+    }
   };
   const handleCancel = () => {
     // 입력했던 내용들 전체 삭제

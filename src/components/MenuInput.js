@@ -2,11 +2,11 @@ import React from "react";
 import { useState, useRef } from "react";
 import { HashTag } from "../style/MenuCSS";
 import { postMenuItem, getUserMenu } from "../api/fetch2";
+import { async } from "q";
 
 const MenuInput = ({ setUserMenuList, userId }) => {
   const inputMenu = useRef(null);
-  const inputTags = useRef(null);
-  const testInput = useRef(null);
+  const inputTags = useRef(null); 
   const [inputTagArr, setInputTagArr] = useState([]);
 
   // 정규표현식 = 스페이스바, 특수문자, 빈 값 금지
@@ -14,7 +14,7 @@ const MenuInput = ({ setUserMenuList, userId }) => {
   // 글자 사이에 공백 허용할지는 고민
   // const regex = /^[a-zA-Z가-힣ㄱ-ㅎ0-9\s]+$/;
 
-  const handleAddTag = e => {
+  const handleAddTag = () => {
     const tag = inputTags.current.value;
     if (regex.test(tag)) {
       setInputTagArr([...inputTagArr, tag]);
@@ -41,7 +41,7 @@ const MenuInput = ({ setUserMenuList, userId }) => {
     let copy = inputTagArr.filter(item => item !== selectedItem);
     setInputTagArr(copy);
   };
-  const handleSaveMenu = () => {
+  const handleSaveMenu = async () => {
     let menuname = inputMenu.current.value.trim();
     if (regex.test(menuname)) {
       console.log("태그 저장 & 메뉴 저장");
@@ -49,12 +49,12 @@ const MenuInput = ({ setUserMenuList, userId }) => {
       console.log(inputTagArr);
       console.log(userId);
       // axios POST
-      postMenuItem(userId, menuname, inputTagArr);
+      const postMenuRes = await postMenuItem(userId, menuname, inputTagArr);
       // 칸 비우기
       setInputTagArr([]);
       inputMenu.current.value = null;
       // 메뉴 불러오기
-      getUserMenu(setUserMenuList, userId);
+      const getMenuRes = await getUserMenu(setUserMenuList, userId);
     } else {
       console.log("메뉴와 해시태그를 입력해주세요");
     }

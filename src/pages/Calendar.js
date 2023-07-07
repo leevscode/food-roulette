@@ -25,9 +25,6 @@ const Schedule = () => {
       const data01 = await getCalendar(userId, year, month);
       const data02 = await getCalendar(userId, year, month - 1);
       const data03 = await getCalendar(userId, year, month - 2);
-      console.log(data01);
-      console.log(data02);
-      console.log(data03);
       let copy = [...data01, ...data02, data03];
       setScheduleData(copy);
     } catch (err) {

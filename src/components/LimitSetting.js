@@ -69,7 +69,6 @@ const LimitSetting = ({
     console.log(price);
   };
 
-
   return (
     <div style={bgStyle}>
       <div style={inputContainer}>
