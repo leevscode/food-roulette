@@ -178,7 +178,13 @@ export const patchUnReviewMenu = async (
   }
 };
 // 이달의 한도 금액 설정하기
-export const postMonthLimit = async (_userId, _price, setFunc, setData) => {
+export const postMonthLimit = async (
+  _userId,
+  _price,
+  setFunc,
+  setData,
+  setMonthLimitId,
+) => {
   const limitPrice = parseInt(_price);
   const headers = { "Content-Type": "application/json" };
   const postData = {
@@ -193,6 +199,7 @@ export const postMonthLimit = async (_userId, _price, setFunc, setData) => {
     console.log(result);
     setData(result);
     setFunc(result.monthLimit);
+    setMonthLimitId(result.imanagement);
   } catch (error) {
     console.log(error);
   }

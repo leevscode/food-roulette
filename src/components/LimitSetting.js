@@ -6,8 +6,8 @@ const LimitSetting = ({
   setMonthLimit,
   setShowLimitSetting,
   setConsumeData,
+  setMonthLimitId,
 }) => {
-  console.log(userId);
   const bgStyle = {
     position: "fixed",
     top: 0,
@@ -30,9 +30,26 @@ const LimitSetting = ({
     justifyContent: "center",
     alignItems: "center",
   };
+  const inputtext = {
+    borderRadius: 10,
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#f2f2f2",
+    textAlign: "center",
+  };
+  const btstyle = {
+    background: "aqua",
+    borderRadius: 10,
+    padding: "8px 80px",
+  };
+  const phone = {
+    background: "url('/images/limit.png')",
+    backgroundSize: "cover",
+    padding: "70px",
+    height: "800px",
+    backgroundPosition: "center bottom",
+  };
 
   const limitPrice = useRef(null);
-
   const handleInputLimit = () => {
     let price = limitPrice.current.value;
     const regex = /^\d+$/; // 숫자만 허용하는 정규표현식
@@ -41,7 +58,7 @@ const LimitSetting = ({
       limitPrice.current.value = null;
       return false;
     } else {
-      postMonthLimit(userId, price, setMonthLimit, setConsumeData);
+      postMonthLimit(userId, price, setMonthLimit, setConsumeData, setMonthLimitId);
       setShowLimitSetting(true);
     }
     console.log(price);
@@ -50,10 +67,26 @@ const LimitSetting = ({
   return (
     <div style={bgStyle}>
       <div style={inputContainer}>
-        <div style={inputBox}>
-          <p>한도를 입력해주세요</p>
-          <input type="text" ref={limitPrice} />
-          <button onClick={handleInputLimit}>입력</button>
+        <div style={phone}>
+          <div style={inputBox}>
+            <img
+              src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1586271105/noticon/eyjidxvaivj5xh1vitnn.gif"
+              alt="커비"
+              style={{ width: "100%", height: "100%" }}
+            />
+            <br />
+            <p>한도를 입력해주세요</p>
+            <input
+              ref={limitPrice}
+              style={inputtext}
+              type="text"
+              placeholder="ex) 500000"
+            />
+            <br />
+            <button style={btstyle} onClick={handleInputLimit}>
+              입력
+            </button>
+          </div>
         </div>
       </div>
     </div>

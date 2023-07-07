@@ -60,11 +60,14 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
       setMonthLimit(0);
     } else {
       setShowLimitSetting(true);
+      console.log(result);
       console.log("imanagement = ", result.imanagement);
       setMonthLimitId(result.imanagement);
     }
   };
-
+  useEffect(() => {
+    // setMonthLimitId(result.imanagement);
+  }, [consumeData]);
   /* * * * * * * * * * * * */
   const [searchedResult, setSearchedResult] = useState([]);
 
@@ -145,6 +148,7 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
             setShowLimitSetting={setShowLimitSetting}
             setMonthLimit={setMonthLimit}
             setConsumeData={setConsumeData}
+            setMonthLimitId={setMonthLimitId}
           />
         )
       )}
