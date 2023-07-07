@@ -23,6 +23,7 @@ export const getUserMenu = async (setFunc, _id) => {
     const result = res.data;
     setFunc(result);
     console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -76,10 +77,10 @@ export const postMenuItem = async (user_id, menu, tags) => {
 // 메뉴 아이템 삭제
 export const deleteMenuItem = async (_userId, _menuId) => {
   try {
-    await axios.delete(`/api/menu/${_userId}?iuserMenu=${_menuId}`);
-    // const res = await axios.delete(`/api/menu/2?iuserMenu=${_id}`);
-    // const result = res.data;
-    // console.log(result);
+    const res = await axios.delete(`/api/menu/${_userId}?iuserMenu=${_menuId}`); 
+    const result = res.data;
+    console.log(result);
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -173,6 +174,7 @@ export const patchUnReviewMenu = async (
     const result = res.data;
     console.log(res);
     console.log(result);
+    return result;
   } catch (error) {
     console.log(error);
   }
