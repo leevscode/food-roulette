@@ -160,8 +160,8 @@ export const patchUnReviewMenu = async (
     ipayment: ipayment,
     month: month,
     year: year + "",
-    currentMenuPrice: 0,
-    reviewGrade: 3,
+    currentMenuPrice: currentMenuPrice,
+    reviewGrade: reviewGrade,
     restaurant: restaurant + "",
   };
 

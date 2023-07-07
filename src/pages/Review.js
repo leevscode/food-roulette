@@ -9,6 +9,9 @@ const Review = ({ reviewList }) => {
   const [unReview, setUnReveiw] = useState([]);
   // console.log(reviewList);
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
+  const [userName] = useState(
+    JSON.parse(localStorage.getItem("user")).user_name,
+  );
   // useEffect(() => {
   //   getUnReviewList(userId, setUnReveiw);
   // }, []);
@@ -68,6 +71,7 @@ const Review = ({ reviewList }) => {
     );
   };
   const handleCancel = () => {
+    // 입력했던 내용들 전체 삭제
     setIsModalOpen(false);
     handleClearInput();
     console.log("다시선택");
@@ -75,11 +79,11 @@ const Review = ({ reviewList }) => {
   // 메뉴 후기 남기기
   const [inputRestaurant, setInputRestaurant] = useState("");
   const [inputPrice, setInputPrice] = useState(null);
-  const [inputPoint, setInputPoint] = useState();
+  const [inputPoint, setInputPoint] = useState(null);
   const handleClearInput = () => {
     setInputRestaurant("");
     setInputPrice(null);
-    setInputPoint();
+    setInputPoint(null);
   };
   const handleValueChange = e => {
     setInputRestaurant(e.target.value);
@@ -95,7 +99,7 @@ const Review = ({ reviewList }) => {
   // JSX
   return (
     <div>
-      <p>Review 미등록 리스트</p>
+      <p>{userName} 님의 Review 미등록 리스트</p>
       <hr />
       <DatePicker
         todayButton="이번달로"
@@ -161,65 +165,15 @@ const Review = ({ reviewList }) => {
           value={inputPrice}
           onChange={handlePriceChange}
         />
-        <Radio.Group name="reviewpoint">
-          <Radio value={1} onClick={handlePointChange}>
-            1점
-          </Radio>
-          <Radio value={2} onClick={handlePointChange}>
-            2점
-          </Radio>
-          <Radio value={3} onClick={handlePointChange}>
-            3점
-          </Radio>
-        </Radio.Group>
-        {/* <Form
-          name="basic"
-          onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
-          autoComplete="off"
+        <Radio.Group
+          name="reviewpoint"
+          value={inputPoint}
+          onChange={handlePointChange}
         >
-          <Form.Item
-            label="금액"
-            name="amount"
-            rules={[
-              {
-                required: true,
-                message: "금액을 입력해주세요.",
-              },
-              {
-                validator: validateAmount,
-              },
-            ]}
-          >
-            <Input placeholder="금액" />
-          </Form.Item>
-
-          <Form.Item
-            label="restaurant"
-            name="restaurant"
-            rules={[
-              {
-                required: true,
-                message: "입력해주세요!",
-              },
-            ]}
-          >
-            <Input placeholder="식당" />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              // onClick={() => setIsModalOpen(false)}
-            >
-              Submit
-            </Button>
-          </Form.Item>
-          <Button type="primary" onClick={() => setIsModalOpen(false)}>
-            다시 생각해볼래요
-          </Button>
-        </Form> */}
+          <Radio value={1}>1점</Radio>
+          <Radio value={2}>2점</Radio>
+          <Radio value={3}>3점</Radio>
+        </Radio.Group> 
       </Modal>
     </div>
   );
