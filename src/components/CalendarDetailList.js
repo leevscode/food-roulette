@@ -3,8 +3,8 @@ import React from "react";
 
 const CalendarDetailList = ({ item }) => {
   return (
-    <div>
-      <p className="calendar-info-box">{item.menu}</p>
+    <div className="detail-box">
+      <p className="calendar-info-box">메뉴 : {item.menu}</p>
       <p className="calendar-info-box">가격 : {item.currentMenuPrice}</p>
       <p className="calendar-info-box">장소 : {item.restaurant}</p>
       <h2 className="calendar-info-box">페페 스코어</h2>

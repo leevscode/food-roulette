@@ -145,13 +145,8 @@ const Schedule = () => {
   //   setScheduleData(newArr);
   // };
 
-  const detailClick = () => {
-    console.log(CalendarDetail);
-    console.log(scheduleData);
-  };
   return (
     <>
-      <button onClick={detailClick}>테스트 클릭</button>
       <div className="p-6 mt-5 bg-white flex justify-center gap-7">
         <div>
           <h1>Calendar</h1>
@@ -184,7 +179,7 @@ const Schedule = () => {
                 <div className="calendar-scroll">
                   {/* DB를 이용한 목록 출력 */}
                   {CalendarDetail.length === 0 ? (
-                    <div>자료가 없습니다.</div>
+                    <div>돈을 절약 하셨군요</div>
                   ) : (
                     <div>
                       {CalendarDetail.map((item, index) => (
