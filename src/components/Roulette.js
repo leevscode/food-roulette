@@ -87,7 +87,7 @@ const Roulette = ({
           radiusLineColor={["transparent"]}
           radiusLineWidth={[2]}
           textColors={["#ffffff"]}
-          fontSize={[30]}
+          fontSize={[21]}
           perpendicularText={[true]}
           backgroundColors={[
             "rgb(246,110,100)",
