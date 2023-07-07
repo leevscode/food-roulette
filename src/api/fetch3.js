@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// 진행 막힌 부분
 const getCalendarDetail = async (_day, _iuser) => {
   try {
     const res = await axios.get(
@@ -14,7 +13,6 @@ const getCalendarDetail = async (_day, _iuser) => {
     return {};
   }
 };
-// 진행 막힌 부분
 
 const getCalculate = async setFunc => {
   try {

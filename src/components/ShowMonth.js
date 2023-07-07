@@ -5,6 +5,7 @@ import CalculateChart from "./CalculateChart";
 const { Option } = Select;
 
 const App = () => {
+  const userId = JSON.parse(localStorage.getItem("user")).user_id;
   const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -64,7 +65,7 @@ const App = () => {
       >
         {selectedOption && `${selectedOption}월`}
         {selectedOption && (
-          <CalculateChart user={1} month={selectedOption} year={2023} />
+          <CalculateChart user={userId} month={selectedOption} year={2023} />
         )}
       </div>
     </div>
