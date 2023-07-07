@@ -85,13 +85,14 @@ export const deleteMenuItem = async (_userId, _menuId) => {
   }
 };
 // 이달의 금액 한도 불러오기
-export const getMonthLimit = async (_userId, setFunc) => {
+export const getMonthLimit = async (_userId, setFunc, setData) => {
   try {
     console.log("넘겨진 ID 값은 ? ", _userId);
     const res = await axios.get(`/api/main/${_userId}`);
     const result = await res.data;
     console.log(res);
     console.log("result", result);
+    setData(result);
     console.log(result.monthLimit);
     setFunc(result.monthLimit);
     return result;
@@ -177,7 +178,7 @@ export const patchUnReviewMenu = async (
   }
 };
 // 이달의 한도 금액 설정하기
-export const postMonthLimit = async (_userId, _price, setFunc) => {
+export const postMonthLimit = async (_userId, _price, setFunc, setData) => {
   const limitPrice = parseInt(_price);
   const headers = { "Content-Type": "application/json" };
   const postData = {
@@ -190,7 +191,8 @@ export const postMonthLimit = async (_userId, _price, setFunc) => {
     const result = res.data;
     console.log(res);
     console.log(result);
-    setFunc(result.monthLimit)
+    setData(result);
+    setFunc(result.monthLimit);
   } catch (error) {
     console.log(error);
   }

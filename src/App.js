@@ -27,6 +27,7 @@ function App() {
             element={
               <Main
                 userName={userName}
+                setUserName={setUserName}
                 userId={userId}
                 setReviewList={setReviewList}
               />

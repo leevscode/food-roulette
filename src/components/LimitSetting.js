@@ -1,7 +1,12 @@
 import React, { useRef } from "react";
 import { postMonthLimit } from "../api/fetch2";
 
-const LimitSetting = ({ userId, setMonthLimit, setShowLimitSetting }) => {
+const LimitSetting = ({
+  userId,
+  setMonthLimit,
+  setShowLimitSetting,
+  setConsumeData,
+}) => {
   console.log(userId);
   const bgStyle = {
     position: "fixed",
@@ -36,7 +41,7 @@ const LimitSetting = ({ userId, setMonthLimit, setShowLimitSetting }) => {
       limitPrice.current.value = null;
       return false;
     } else {
-      postMonthLimit(userId, price, setMonthLimit);
+      postMonthLimit(userId, price, setMonthLimit, setConsumeData);
       setShowLimitSetting(true);
     }
     console.log(price);
