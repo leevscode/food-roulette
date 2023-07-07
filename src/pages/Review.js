@@ -3,7 +3,7 @@ import { getUnReviewList, patchUnReviewMenu } from "../api/fetch2";
 import DatePicker from "react-datepicker";
 import "../style/datepicker.css";
 import Modal from "antd/es/modal/Modal";
-import { Button, Checkbox, Form, Input, Radio } from "antd";
+import { Input, Radio } from "antd";
 
 const Review = ({ reviewList }) => {
   const [unReview, setUnReveiw] = useState([]);
@@ -173,7 +173,7 @@ const Review = ({ reviewList }) => {
           <Radio value={1}>1점</Radio>
           <Radio value={2}>2점</Radio>
           <Radio value={3}>3점</Radio>
-        </Radio.Group> 
+        </Radio.Group>
       </Modal>
     </div>
   );

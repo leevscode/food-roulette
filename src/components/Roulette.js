@@ -5,7 +5,12 @@ import Modal from "antd/es/modal/Modal";
 import { useNavigate } from "react-router-dom";
 import { postWinningMenu } from "../api/fetch2";
 
-const Roulette = ({ checkedList, searchedResult, monthLimitId, setReviewList }) => {
+const Roulette = ({
+  checkedList,
+  searchedResult,
+  monthLimitId,
+  setReviewList,
+}) => {
   console.log(checkedList);
   console.log(searchedResult);
   let winningMenu;
@@ -59,6 +64,7 @@ const Roulette = ({ checkedList, searchedResult, monthLimitId, setReviewList }) 
     console.log("winning menu id = imenu", winningMenuId);
 
     postWinningMenu(winningMenuId, monthLimitId, setReviewList);
+    navigate("/review");
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -109,7 +115,20 @@ const Roulette = ({ checkedList, searchedResult, monthLimitId, setReviewList }) 
           SPIN
         </button>
         <br />
-        {!startSpin ? `오늘의 결과는?` : "룰렛이 돌아가고 있습니다..."}
+        {!startSpin ? (
+          `오늘의 결과는?`
+        ) : (
+          <>
+            <span>룰렛이 돌아가고 있습니다... </span>
+            <img
+              src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1586271210/noticon/sageach1qrmmyfufwli1.gif"
+              alt="돌아가고 있어요"
+              width={30}
+              height={30}
+              style={{ display: "inline" }}
+            />
+          </>
+        )}
       </RouletteBox>
       {!startSpin ? (
         <Modal
