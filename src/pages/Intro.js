@@ -53,6 +53,13 @@ const Intro = ({ setUserName, setUserId }) => {
     }
   };
 
+  const isInputEmpty = userInputName.trim() === "";
+  const handleKeyPress = e => {
+    if (e.key === "Enter") {
+      handleLoginClick();
+    }
+  };
+
   return (
     <>
       <IntroBox>
@@ -67,8 +74,14 @@ const Intro = ({ setUserName, setUserId }) => {
               onChange={handleChange}
             ></IntroInput>
             <br />
-            <IntroButton type="button" onClick={handleLoginClick}>
+            <IntroButton
+              type="button"
+              onClick={handleLoginClick}
+              disabled={isInputEmpty}
+              onKeyPress={handleKeyPress}
+              >
               딸깍
+           
             </IntroButton>
           </IntroForm>
         </TextBox>
