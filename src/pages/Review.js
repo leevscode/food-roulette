@@ -48,24 +48,30 @@ const Review = ({ reviewList }) => {
     setIsModalOpen(true);
   };
   const handleOk = async () => {
-    setIsModalOpen(false);
-    handleClearInput();
-    console.log("전송");
+    const regex = /^[1-9]\d*$/; // 숫자만 허용하는 정규표현식
+    if (!inputPoint || !inputPrice || !inputRestaurant) {
+      alert("값을 입력하세요");
+      return;
+    } else if (!regex.test(inputPrice)) {
+      alert("정확한 금액을 입력하세요");
+    } else {
+      setIsModalOpen(false);
+      handleClearInput();
+      console.log("전송");
 
-    const res = await patchUnReviewMenu(
-      userId,
-      reviewMenuInfo,
-      inputRestaurant,
-      inputPrice,
-      inputPoint,
-      selectedDate,
-      reviewMenuInfo.ipayment,
-    );
-    const year = selectedDate.getFullYear();
-    // const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
-    const month = selectedDate.getMonth() + 1;
-    const loadList = await getUnReviewList(userId, setUnReveiw, year, month);
-    // setUnReveiw([]);
+      const res = await patchUnReviewMenu(
+        userId,
+        reviewMenuInfo,
+        inputRestaurant,
+        inputPrice,
+        inputPoint,
+        selectedDate,
+        reviewMenuInfo.ipayment,
+      );
+      const year = selectedDate.getFullYear();
+      const month = selectedDate.getMonth() + 1;
+      const loadList = await getUnReviewList(userId, setUnReveiw, year, month);
+    }
   };
   const handleCancel = () => {
     // 입력했던 내용들 전체 삭제
