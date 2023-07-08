@@ -4,7 +4,27 @@ import { getCalculate, getCalculateUser } from "../api/fetch3";
 import ChartProgressBar from "./ChartProgressBar";
 const CalculateChart = ({ user, month, year }) => {
   const [data, setData] = useState([]);
-  const colors = ["#DFFFF9", "#7FFFD4", "#59B2A2", "#FF6CC4", "red", "yellow"];
+  const colors = [
+    "#DFFFF9",
+    "#7FFFD4",
+    "#59B2A2",
+    "#FF6CC4",
+    "red",
+    "yellow",
+    "blue",
+    "#8D8D8D",
+    "brown",
+    "gold",
+    "silver",
+    "cyan",
+    "magenta",
+    "coral",
+    "maroon",
+    "violet",
+    "salmon",
+    "olive",
+
+  ];
   const limit = 500000;
 
   const getCalculateUserData = async () => {
@@ -12,7 +32,7 @@ const CalculateChart = ({ user, month, year }) => {
     const data = await getCalculateUser(user, month, year);
     const dataArr = data.paymentVoList.map((item, index) => {
       let obj = {
-        id: index,
+        id: item.menu,
         label: item.menu,
         value: item.sum,
       };
@@ -56,7 +76,7 @@ const CalculateChart = ({ user, month, year }) => {
             arcLinkLabelsTextColor="#fffff"
             arcLinkLabelsThickness={2}
             arcLinkLabelsColor={{ from: "color" }}
-            arcLabel="id"
+            arcLabel=""
             arcLinkLabel="label"
             arcLabelsSkipAngle={10}
             arcLabelsTextColor={{

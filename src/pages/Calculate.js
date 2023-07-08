@@ -20,9 +20,10 @@ import { getCalculate } from "../api/fetch3";
 // 이를 통해 진행 상태의 백분율이 적절하게 업데이트되도록 한다
 // 추가 코드 진행 완료함.
 const Calculate = () => {
+  const userId = JSON.parse(localStorage.getItem("user")).user_id;
   const [monthData, setMonthData] = useState({});
   const getCalculateData = async () => {
-    const data = await getCalculate(setMonthData);
+    const data = await getCalculate(userId, 7, setMonthData);
     calculateProgress(data);
   };
   useEffect(() => {
@@ -31,10 +32,11 @@ const Calculate = () => {
 
   const calculateProgress = _data => {
     console.log(_data);
-    const 잔액 = _data.management.monthLimit - _data.management.expense;
-    const percent = Math.floor((잔액 / _data.management.monthLimit) * 100);
+    const percent = Math.floor(
+      (_data.management.balance / _data.management.monthLimit) * 100,
+    );
     setProgressPercent(percent);
-    setMonthData(_data);
+   // setMonthData(_data);
   };
 
   const [totalBalance, setTotalBalance] = useState(0);

@@ -72,16 +72,15 @@ const Intro = ({ setUserName, setUserId }) => {
               type="text"
               placeholder="닉네임을 입력해주세요"
               onChange={handleChange}
+              onKeyPress={handleKeyPress}
             ></IntroInput>
             <br />
             <IntroButton
               type="button"
               onClick={handleLoginClick}
               disabled={isInputEmpty}
-              onKeyPress={handleKeyPress}
-              >
+            >
               딸깍
-           
             </IntroButton>
           </IntroForm>
         </TextBox>

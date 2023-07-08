@@ -14,9 +14,9 @@ const getCalendarDetail = async (_day, _iuser) => {
   }
 };
 
-const getCalculate = async setFunc => {
+const getCalculate = async (userId, month, setFunc) => {
   try {
-    const res = await axios.get("api/calculate/1?month=06&year=2023");
+    const res = await axios.get(`api/calculate/${userId}?month=${month}&year=2023`);
     const result = await res.data;
     // console.log(result);
     setFunc(result);
@@ -41,5 +41,18 @@ const getCalculateUser = async (_user, _month, _year) => {
     return {};
   }
 };
+
+export const deleteCalendar = async () => {
+  try {
+    const res = await axios.delete("");
+    const data = res.data;
+    return data; // 삭제 결과 반환
+  } catch (err) {
+    console.log(err);
+    return {}; // 오류 발생 시 빈 객체 반환
+  }
+};
+
+
 
 export { getCalculate, getCalculateUser, getCalendarDetail };
