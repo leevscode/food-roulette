@@ -72,7 +72,7 @@ const CalculateChart = ({ user, month, year }) => {
               modifiers: [["darker", 0.2]],
             }}
             colors={colors}
-            arcLinkLabelsSkipAngle={10}
+            arcLinkLabelsSkipAngle={1}
             arcLinkLabelsTextColor="#fffff"
             arcLinkLabelsThickness={2}
             arcLinkLabelsColor={{ from: "color" }}
