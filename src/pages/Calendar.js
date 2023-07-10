@@ -77,7 +77,9 @@ const Schedule = () => {
             onClickSetSchedule(result);
           }}
         >
-          <div style={{ width: "100%" }}>{result.total}</div>
+          <div style={{ width: "100%", color: "#59B2A2", fontweight: "bold" }}>
+            {result.total}
+          </div>
         </div>
       );
     } else {
@@ -117,7 +119,12 @@ const Schedule = () => {
       <div className="p-6 mt-5 bg-white flex justify-center gap-7">
         <div>
           <h1>Calendar</h1>
-          <div style={{ border: "1px solid" }}>
+          <div
+            style={{
+              border: "1px solid",
+              boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+            }}
+          >
             <Calendar
               calendarType="US"
               formatDay={(locale, date) => moment(date).format("D")}
@@ -130,7 +137,7 @@ const Schedule = () => {
           {/* 날짜 및 안내 문구 출력 영역 */}
           <div>
             {selectedSchedule ? (
-              <p>{selectedSchedulePayment}</p>
+              <p className="calendar-day">{selectedSchedulePayment}</p>
             ) : (
               <p className="calendar-menutext">
                 날짜를 <br /> 선택해주세요!
@@ -151,7 +158,7 @@ const Schedule = () => {
                       <img
                         className="pepe-happy"
                         src="/images/happy.png"
-                        alt=""
+                        alt="절약"
                       />
                     </div>
                   ) : (

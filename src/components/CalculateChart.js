@@ -2,9 +2,37 @@ import React, { useState, useEffect } from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { getCalculate, getCalculateUser } from "../api/fetch3";
 import ChartProgressBar from "./ChartProgressBar";
+
 const CalculateChart = ({ user, month, year }) => {
   const [data, setData] = useState([]);
-  const colors = ["#DFFFF9", "#7FFFD4", "#59B2A2", "#FF6CC4", "red", "yellow"];
+  const [hasData, setHasData] = useState(true); // 상태 변수 위치 수정
+
+  const colors = [
+    "#DFFFF9",
+    "#7FFFD4",
+    "#59B2A2",
+    "#FF6CC4",
+    "red",
+    "yellow",
+    "blue",
+    "#8D8D8D",
+    "brown",
+    "gold",
+    "silver",
+    "cyan",
+    "magenta",
+    "coral",
+    "maroon",
+    "violet",
+    "salmon",
+    "olive",
+    "green", 
+    "purple", 
+    "teal",  
+    "pink",  
+    "orange", 
+  ];
+  
   const limit = 500000;
 
   const getCalculateUserData = async () => {
@@ -12,7 +40,7 @@ const CalculateChart = ({ user, month, year }) => {
     const data = await getCalculateUser(user, month, year);
     const dataArr = data.paymentVoList.map((item, index) => {
       let obj = {
-        id: index,
+        id: item.menu,
         label: item.menu,
         value: item.sum,
       };
@@ -20,6 +48,11 @@ const CalculateChart = ({ user, month, year }) => {
     });
     console.log(dataArr);
     setData(dataArr);
+    if (dataArr.length === 0) {
+      setHasData(false);
+    } else {
+      setHasData(true);
+    }
   };
 
   useEffect(() => {
@@ -28,65 +61,71 @@ const CalculateChart = ({ user, month, year }) => {
 
   return (
     <>
-      <div className="p-6 mt-5 shadow rounded bg-white">
-        <div
-          style={{
-            height: "400px",
-            width: "500px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <ResponsivePie
-            data={data}
-            margin={{ top: 0, right: 80, bottom: 0, left: 80 }}
-            startAngle={360}
-            endAngle={-360}
-            innerRadius={0}
-            padAngle={0.7}
-            cornerRadius={3}
-            activeOuterRadiusOffset={8}
-            borderWidth={1}
-            borderColor={{
-              from: "color",
-              modifiers: [["darker", 0.2]],
+      <div className="mt-5">
+        {hasData ? (
+          <div
+            style={{
+              height: "540px",
+              width: "540px",
             }}
-            colors={colors}
-            arcLinkLabelsSkipAngle={10}
-            arcLinkLabelsTextColor="#fffff"
-            arcLinkLabelsThickness={2}
-            arcLinkLabelsColor={{ from: "color" }}
-            arcLabel="id"
-            arcLinkLabel="label"
-            arcLabelsSkipAngle={10}
-            arcLabelsTextColor={{
-              from: "color",
-              modifiers: [["darker", 2]],
-              fontSize: "40px",
-            }}
-            defs={[
-              {
-                id: "dots",
-                type: "patternDots",
-                background: "inherit",
-                color: "rgba(255, 255, 255, 0.3)",
-                size: 4,
-                padding: 1,
-                stagger: true,
-              },
-              {
-                id: "lines",
-                type: "patternLines",
-                background: "inherit",
-                color: "rgba(255, 255, 255, 0.3)",
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10,
-              },
-            ]}
-          />
-          <ChartProgressBar value={data.length} limit={limit} />
-        </div>
+          >
+            {/* 차트 컴포넌트 */}
+            {data.length > 0 && (
+              <ResponsivePie
+                data={data}
+                margin={{ top: 0, right: 80, bottom: 0, left: 80 }}
+                startAngle={360}
+                endAngle={-360}
+                innerRadius={0}
+                padAngle={0.7}
+                cornerRadius={3}
+                activeOuterRadiusOffset={8}
+                borderWidth={1}
+                borderColor={{
+                  from: "color",
+                  modifiers: [["darker", 0.2]],
+                }}
+                colors={colors}
+                arcLinkLabelsSkipAngle={1}
+                arcLinkLabelsTextColor="#fffff"
+                arcLinkLabelsThickness={2}
+                arcLinkLabelsColor={{ from: "color" }}
+                arcLabel=""
+                arcLinkLabel="label"
+                arcLabelsSkipAngle={10}
+                arcLinkLabelsDiagonalLength={5}
+                arcLabelsTextColor={{
+                  from: "color",
+                  modifiers: [["darker", 2]],
+                  fontSize: "40px",
+                }}
+                defs={[
+                  {
+                    id: "dots",
+                    type: "patternDots",
+                    background: "inherit",
+                    color: "rgba(255, 255, 255, 0.3)",
+                    size: 4,
+                    padding: 1,
+                    stagger: true,
+                  },
+                  {
+                    id: "lines",
+                    type: "patternLines",
+                    background: "inherit",
+                    color: "rgba(255, 255, 255, 0.3)",
+                    rotation: -45,
+                    lineWidth: 6,
+                    spacing: 10,
+                  },
+                ]}
+              />
+            )}
+            <ChartProgressBar value={data.length} limit={limit} />
+          </div>
+        ) : (
+          <p>데이터가 없습니다.</p>
+        )}
       </div>
     </>
   );

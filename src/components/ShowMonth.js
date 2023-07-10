@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import { Form, Select } from "antd";
 import CalculateChart from "./CalculateChart";
 
@@ -6,17 +6,16 @@ const { Option } = Select;
 
 const App = () => {
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
-  const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState("");
 
   const options = [
-    { value: "1", label: "1월" },
-    { value: "2", label: "2월" },
-    { value: "3", label: "3월" },
-    { value: "4", label: "4월" },
-    { value: "5", label: "5월" },
-    { value: "6", label: "6월" },
-    { value: "7", label: "7월" },
+    { value: "1", label: "1월 소비내역" },
+    { value: "2", label: "2월 소비내역" },
+    { value: "3", label: "3월 소비내역" },
+    { value: "4", label: "4월 소비내역" },
+    { value: "5", label: "5월 소비내역" },
+    { value: "6", label: "6월 소비내역" },
+    { value: "7", label: "7월 소비내역" },
   ];
 
   const onMonthChange = value => {
@@ -32,7 +31,7 @@ const App = () => {
         alignItems: "center",
       }}
     >
-      <Form form={form} name="control-hooks" style={{ width: "500px" }}>
+      <Form name="control-hooks" style={{ width: "500px" }}>
         <Form.Item
           style={{
             display: "flex",
@@ -63,9 +62,13 @@ const App = () => {
           alignItems: "center",
         }}
       >
-        {selectedOption && `${selectedOption}월`}
-        {selectedOption && (
-          <CalculateChart user={userId} month={selectedOption} year={2023} />
+        {selectedOption ? (
+          <>
+            <div>{`${selectedOption}월`}</div>
+            <CalculateChart user={userId} month={selectedOption} year={2023} />
+          </>
+        ) : (
+          <p>차트를 선택해주세요</p>
         )}
       </div>
     </div>

@@ -1,13 +1,19 @@
 import styled from "@emotion/styled";
 
+export const CalculateChartText = styled.p`
+  z-index: 999;
+`;
+
 export const CalculateBg = styled.div`
   position: relative;
   margin: 0 auto;
   border-radius: 30px;
   width: 40%;
   height: auto;
-  min-height: 755px;
+  min-height: 790px;
+  max-height: 790px;
   padding-bottom: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
   z-index: 5;
 `;
 
@@ -41,7 +47,7 @@ export const Limit = styled.div`
 export const ProgressContainer = styled.div`
   width: 230px; /* 막대기의 길이 */
   height: 30px;
-  background-color: #7FFFD4;
+  background-color: #7fffd4;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -50,7 +56,7 @@ export const ProgressContainer = styled.div`
 
 export const ProgressFill = styled.div`
   height: 100%;
-  background-color: #59B2A2;
+  background-color: #59b2a2;
   border-radius: 5px;
 `;
 
