@@ -19,7 +19,21 @@ export const ReveiwContainer = styled.div`
   .unreview-list {
     width: 75%;
     margin: 16px auto;
-    padding: 8px;
+    padding: 16px;
     border: 1px solid coral;
+    border-radius: 16px;
+    .unreview-item {
+      margin-top: 16px;
+      padding: 8px 16px;
+      border: 1px solid red;
+      display: flex;
+      justify-content: space-between;
+      &:first-of-type {
+        margin-top: 0;
+      }
+      & > span:first-of-type {
+        width: 50%;
+      }
+    }
   }
 `;

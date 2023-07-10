@@ -14,11 +14,11 @@ const Review = ({ reviewList }) => {
     JSON.parse(localStorage.getItem("user")).user_name,
   );
   const tempStyle = {
-    margin: 4,
-    padding: "8px 16px",
-    border: "1px dotted red",
-    display: "flex",
-    justifyContent: "space-between",
+    // margin: 4,
+    // padding: "8px 16px",
+    // border: "1px dotted red",
+    // display: "flex",
+    // justifyContent: "space-between",
   };
   const [reviewMenuInfo, setReviewMenuInfo] = useState({});
   // patch 연결!!
@@ -116,16 +116,17 @@ const Review = ({ reviewList }) => {
         isClearable
         placeholderText="날짜를 선택해주세요"
       />
-      <button className="search-btn" onClick={handleSendDate}>검색</button>
+      <button className="search-btn" onClick={handleSendDate}>
+        검색
+      </button>
       <div className="unreview-list">
         {unReview.length === 0 ? (
           <p>리스트가 없어요</p>
         ) : (
           <>
             {unReview.map((item, index) => (
-              <div style={tempStyle} key={index}>
+              <div className="unreview-item" style={tempStyle} key={index}>
                 <span>{item.menu}</span>
-                <span> {/* */} </span>
                 <span>{item.paymentAt}</span>
                 <button
                   onClick={() => handleEnterReview(item)}
