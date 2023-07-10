@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import { Form, Select } from "antd";
 import CalculateChart from "./CalculateChart";
 
@@ -6,7 +6,6 @@ const { Option } = Select;
 
 const App = () => {
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
-  const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState("");
 
   const options = [
@@ -32,7 +31,7 @@ const App = () => {
         alignItems: "center",
       }}
     >
-      <Form form={form} name="control-hooks" style={{ width: "500px" }}>
+      <Form name="control-hooks" style={{ width: "500px" }}>
         <Form.Item
           style={{
             display: "flex",
@@ -63,9 +62,13 @@ const App = () => {
           alignItems: "center",
         }}
       >
-        {selectedOption && `${selectedOption}월`}
-        {selectedOption && (
-          <CalculateChart user={userId} month={selectedOption} year={2023} />
+        {selectedOption ? (
+          <>
+            <div>{`${selectedOption}월`}</div>
+            <CalculateChart user={userId} month={selectedOption} year={2023} />
+          </>
+        ) : (
+          <p>차트를 선택해주세요</p>
         )}
       </div>
     </div>
