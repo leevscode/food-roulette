@@ -883,3 +883,7 @@
   height: 1em;
   vertical-align: -0.125em;
 }
+
+.react-datepicker__tab-loop {
+  display: inline-block;
+}

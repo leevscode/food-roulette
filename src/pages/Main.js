@@ -200,13 +200,8 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
         <SearchTagArea>
           <p>해시태그 검색영역</p>
           <div className="search-tag">
-            <p>해시태그 검색 - BE</p>
+            <p>해시태그 검색</p>
             <input
-              style={{
-                display: "block",
-                border: "1px solid black",
-                marginBottom: 20,
-              }}
               type="text"
               ref={inputTags}
               onKeyPress={handleAddTagEnter}
@@ -214,7 +209,7 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
             />
             {inputTagArr.length === 0 ? (
               <span className="how-search">
-                키워드를 입력하고 엔터키를 쳐보세요
+                * 키워드를 입력하고 엔터키를 쳐보세요
               </span>
             ) : (
               inputTagArr.map((item, idx) => (
@@ -236,18 +231,24 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
             <p>검색결과 출력 영역</p>
             {/* 일치하는 태그를 가지는 메뉴를 출력 */}
             <div className="check-area">
-              {searchedResult.map((item, index) => (
-                <p key={index}>
-                  <input
-                    type="checkbox"
-                    name="roulette"
-                    id={index}
-                    value={item.menu}
-                    onChange={handleCheckEvent}
-                  />
-                  <label htmlFor={index}>{item.menu}</label>
-                </p>
-              ))}
+              {searchedResult.length === 0 ? (
+                <span className="how-search">* 키워드를 검색해보세요</span>
+              ) : (
+                <div className="check-list">
+                  {searchedResult.map((item, index) => (
+                    <p key={index}>
+                      <input
+                        type="checkbox"
+                        name="roulette"
+                        id={index}
+                        value={item.menu}
+                        onChange={handleCheckEvent}
+                      />
+                      <label htmlFor={index}>{item.menu}</label>
+                    </p>
+                  ))}
+                </div>
+              )}
             </div>
             <button onClick={handleMakeRoulette} disabled={!canCheck}>
               룰렛생성

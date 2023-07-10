@@ -59,18 +59,30 @@ export const SearchTagArea = styled.div`
     border-radius: 24px;
     padding: 16px;
   }
+  .how-search {
+    color: red;
+    font-size: 16px;
+  }
   .search-tag {
     border: 1px solid green;
     text-align: center;
     input {
       width: 100%;
+      padding: 4px 8px;
+      border: 1px solid black;
+      border-radius: 4px;
     }
   }
   .search-result {
+    margin-top: 24px;
     border: 1px solid red;
     .check-area {
       p label {
         margin-left: 4px;
+        cursor: pointer;
+      }
+      .check-list {
+        /* overflow-y: scroll; */
       }
     }
   }

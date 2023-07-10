@@ -1,12 +1,12 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { HashTag } from "../style/MenuCSS";
+import { HashTag, MenuInputContainer } from "../style/MenuCSS";
 import { postMenuItem, getUserMenu } from "../api/fetch2";
-import { async } from "q";
+import { Input } from "antd";
 
 const MenuInput = ({ setUserMenuList, userId }) => {
   const inputMenu = useRef(null);
-  const inputTags = useRef(null); 
+  const inputTags = useRef(null);
   const [inputTagArr, setInputTagArr] = useState([]);
 
   // 정규표현식 = 스페이스바, 특수문자, 빈 값 금지
@@ -15,6 +15,9 @@ const MenuInput = ({ setUserMenuList, userId }) => {
   // const regex = /^[a-zA-Z가-힣ㄱ-ㅎ0-9\s]+$/;
 
   const handleAddTag = () => {
+    console.log(inputTags);
+    console.log(inputTags.current);
+    console.log(inputTags.current.value);
     const tag = inputTags.current.value;
     if (regex.test(tag)) {
       setInputTagArr([...inputTagArr, tag]);
@@ -31,7 +34,7 @@ const MenuInput = ({ setUserMenuList, userId }) => {
         setInputTagArr([...inputTagArr, copyItem]);
         console.log("올바른 값");
       } else {
-        console.log("잘못된 값");
+        alert("잘못된 값입니다");
       }
       e.target.value = null;
     }
@@ -56,45 +59,46 @@ const MenuInput = ({ setUserMenuList, userId }) => {
       // 메뉴 불러오기
       const getMenuRes = await getUserMenu(setUserMenuList, userId);
     } else {
-      console.log("메뉴와 해시태그를 입력해주세요");
+      alert("메뉴와 해시태그를 입력해주세요");
     }
   };
 
   // JSX
   return (
-    <div>
-      <h2>메뉴등록</h2>
-      <div>
-        <input
-          style={{ border: "1px solid black" }}
-          type="text"
-          ref={inputMenu}
-          placeholder="메뉴입력"
-        />
-        <br />
-        <input
-          style={{ border: "1px solid black" }}
-          type="text"
-          ref={inputTags}
-          onKeyPress={handleAddTagEnter}
-          placeholder="해시태그입력"
-        />
-        <button onClick={handleAddTag}>클릭</button>
-        <br />
-        {inputTagArr.map((item, index) => {
-          return (
-            <HashTag key={index}>
-              <span>{item}</span>
-              <button onClick={handleRemoveTag}></button>
-            </HashTag>
-          );
-        })}
-        <br />
-        <button style={{ border: "1px solid black" }} onClick={handleSaveMenu}>
-          완료(db에 저장)
-        </button>
-      </div>
-    </div>
+    <MenuInputContainer>
+      <p>메뉴 등록</p>
+      <input type="text" ref={inputMenu} placeholder="메뉴입력" />
+      <br />
+      <p># 태그</p>
+      <input
+        type="text"
+        ref={inputTags}
+        onKeyPress={handleAddTagEnter}
+        placeholder="해시태그입력"
+      />
+      <button onClick={handleAddTag}>추가</button>
+      <br />
+      {inputTagArr.length === 0 ? (
+        <span className="how-input">
+          * 추가할 키워드를 입력하고 엔터키나 추가버튼을 눌러주세요
+        </span>
+      ) : (
+        inputTagArr.map((item, index) => (
+          <HashTag key={index}>
+            <span>{item}</span>
+            <button onClick={handleRemoveTag}></button>
+          </HashTag>
+        ))
+      )}
+      <br />
+      <button
+        className="save"
+        style={{ border: "1px solid black" }}
+        onClick={handleSaveMenu}
+      >
+        완료(db에 저장)
+      </button>
+    </MenuInputContainer>
   );
 };
 
