@@ -3,9 +3,10 @@ import styled from "@emotion/styled";
 export const HashTag = styled.div`
   display: inline-block;
   margin: 4px;
-  padding: 3px 12px;
-  border: 1px dotted red;
-  border-radius: 20px;
+  padding: 2px 12px;
+  border: 1px solid #e7e5e4;
+  border-radius: 32px;
+  background: white;
   &::before {
     content: "#";
     margin-right: 4px;
@@ -24,14 +25,28 @@ export const MenuContainer = styled.div`
     font-size: 42px;
     text-align: center;
     margin-bottom: 24px;
+    mark {
+      background: linear-gradient(180deg, white 60%, gold 40%);
+    }
   }
+  button {
+    padding: 2px 8px;
+    border-radius: 32px;
+    background-color: #776d61;
+    color: white;
+    font-size: 20px;
+  }
+  /* button:hover {
+    box-shadow: 2px 2px 4px 0px rgb(177 172 172 / 50%);
+  } */
   .menu-area {
     display: flex;
     justify-content: space-between;
     padding: 0 48px;
     .menu {
-      width: 75%;
+      width: 80%;
       .menu-switch {
+        padding-right: 8px;
         text-align: right;
       }
       hr {
@@ -46,8 +61,18 @@ export const MenuInputContainer = styled.div`
   height: 600px;
   margin: 16px;
   padding: 32px 64px;
-  border: 1px solid red;
+  border: 1px solid transparent;
   border-radius: 16px;
+  background-color: rgba(127, 255, 212, 0.4);
+  box-shadow: 2px 2px 4px 0px rgb(177 172 172 / 50%);
+  .add-btn {
+    margin-left: 8px;
+    padding: 4px 12px;
+    font-size: 20px;
+    &:hover {
+      box-shadow: 2px 2px 4px 0px rgb(177 172 172 / 50%);
+    }
+  }
   .how-input {
     font-size: 20px;
     color: red;
@@ -59,11 +84,12 @@ export const MenuInputContainer = styled.div`
     font-size: 32px;
   }
   input {
-    width: 600px;
+    width: 86%;
     margin-bottom: 20px;
     padding: 4px 8px;
-    border: 1px solid black;
+    border: 1px solid transparent;
     border-radius: 12px;
+    box-shadow: 1px 1px 4px 0px rgb(177 172 172 / 50%);
     font-family: "omyu_pretty", "sans-serif";
     font-size: 24px;
   }
@@ -71,9 +97,22 @@ export const MenuInputContainer = styled.div`
     position: absolute;
     right: 72px;
     bottom: 72px;
+    padding: 4px 12px;
+    font-size: 24px;
+    &:hover {
+      box-shadow: 2px 2px 4px 0px rgb(177 172 172 / 50%);
+    }
   }
 `;
 export const MenuShowContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 30px;
+  & > div {
+    width: 50%;
+  }
+  .user-menu button {
+    background-color: #776d61;
+    color: white;
+  }
 `;

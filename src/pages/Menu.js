@@ -30,7 +30,10 @@ const Menu = () => {
 
   return (
     <MenuContainer>
-      <h1>{userName} 님의 Menu</h1>
+      <h1>
+        <mark>{userName}</mark>
+        님의 Menu
+      </h1>
       <div className="menu-area">
         <Banner />
         <div className="menu">

@@ -53,6 +53,7 @@ const MenuInput = ({ setUserMenuList, userId }) => {
       console.log(userId);
       // axios POST
       const postMenuRes = await postMenuItem(userId, menuname, inputTagArr);
+      alert("메뉴 등록이 완료되었습니다!");
       // 칸 비우기
       setInputTagArr([]);
       inputMenu.current.value = null;
@@ -66,7 +67,7 @@ const MenuInput = ({ setUserMenuList, userId }) => {
   // JSX
   return (
     <MenuInputContainer>
-      <p>메뉴 등록</p>
+      <p>메뉴</p>
       <input type="text" ref={inputMenu} placeholder="메뉴입력" />
       <br />
       <p># 태그</p>
@@ -76,7 +77,9 @@ const MenuInput = ({ setUserMenuList, userId }) => {
         onKeyPress={handleAddTagEnter}
         placeholder="해시태그입력"
       />
-      <button onClick={handleAddTag}>추가</button>
+      <button className="add-btn" onClick={handleAddTag}>
+        추가
+      </button>
       <br />
       {inputTagArr.length === 0 ? (
         <span className="how-input">
@@ -91,12 +94,8 @@ const MenuInput = ({ setUserMenuList, userId }) => {
         ))
       )}
       <br />
-      <button
-        className="save"
-        style={{ border: "1px solid black" }}
-        onClick={handleSaveMenu}
-      >
-        완료(db에 저장)
+      <button className="save" onClick={handleSaveMenu}>
+        메뉴 등록
       </button>
     </MenuInputContainer>
   );
