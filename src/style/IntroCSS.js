@@ -65,7 +65,7 @@ export const IntroInput = styled.input`
   }
 `;
 
-export const IntroForm = styled.form`
+export const IntroForm = styled.div`
   display: contents;
 `;
 
