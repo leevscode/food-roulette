@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import LimitSetting from "../components/LimitSetting";
 import Roulette from "../components/Roulette";
-import { MainContainer, RouletteArea } from "../style/MainCSS";
+import {
+  MainContainer,
+  RouletteArea,
+  SearchTagArea,
+  UserAmountArea,
+} from "../style/MainCSS";
 import Loading from "../components/Loading";
 import { getMonthLimit, searchMenuItem } from "../api/fetch2";
 import { HashTag } from "../style/MenuCSS";
@@ -158,7 +163,7 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
         )
       )}
       <MainContainer>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <UserAmountArea>
           <div>
             <p>
               {consumeData.year}년 {consumeData.month}월 입니다
@@ -166,71 +171,53 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
             <hr />
             <p>이번 달 한도는 {monthLimit} 원으로 설정하셨습니다</p>
             <p>이달의 지출은 {consumeData.expense}원 이군요</p>
-            <p>사용할 수 있는 금액은 {consumeData.balance}원 입니다</p>
-          </div>
-          <div>
+            <p>
+              사용할 수 있는 금액은? <br /> {consumeData.balance}원 입니다
+            </p>
             <img
-              src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1651566999/noticon/xgnjqiiapirbz9ixdiol.gif"
+              style={{ transform: "scaleX(-1) rotate(60deg)" }}
+              src="/images/thinkbubble.png"
               alt=""
             />
           </div>
-        </div>
-        <br />
-        <div>
-          <RouletteArea style={{ border: "1px solid red" }}>
-            <p>{userName || "user"} 님의 룰렛</p>
-            <hr />
-            <Roulette
-              checkedList={checkedList}
-              searchedResult={searchedResult}
-              monthLimitId={monthLimitId}
-              setReviewList={setReviewList}
-            />
-          </RouletteArea>
-        </div>
-        <br />
-        <div style={{ border: "1px solid aqua" }}>
-          <p>해시태그 검색영역</p>
-          <div>
-            <div style={{ border: "1px solid green" }}>
-              <p>검색결과 출력 영역</p>
-              <div>
-                {/* 일치하는 태그를 가지는 메뉴를 출력 */}
-                <div className="check-area">
-                  {searchedResult.map((item, index) => (
-                    <p key={index}>
-                      <input
-                        type="checkbox"
-                        name="roulette"
-                        id={index}
-                        value={item.menu}
-                        onChange={handleCheckEvent}
-                      />
-                      <label htmlFor={index}>{item.menu}</label>
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <button onClick={handleMakeRoulette} disabled={!canCheck}>
-                룰렛생성
-              </button>
-              <br />
-              <button onClick={handleClearAllChecks} disabled={!canCheck}>
-                체크전체해제
-              </button>
-              <span> {countCheck} / 8 </span>
-            </div>
+          <img
+            style={{ transform: "scaleX(-1)" }}
+            src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1651566999/noticon/xgnjqiiapirbz9ixdiol.gif"
+            alt=""
+          />
+        </UserAmountArea>
+        <RouletteArea style={{ border: "1px solid red" }}>
+          <p>{userName || "user"} 님의 룰렛</p>
+          <hr />
+          <Roulette
+            checkedList={checkedList}
+            searchedResult={searchedResult}
+            monthLimitId={monthLimitId}
+            setReviewList={setReviewList}
+          />
+        </RouletteArea>
 
-            <div style={{ border: "1px solid red" }}>
-              <p>해시태그 검색 - BE</p>
-              <input
-                style={{ border: "1px solid black", marginBottom: 20 }}
-                type="text"
-                ref={inputTags}
-                onKeyPress={handleAddTagEnter}
-                placeholder="태그검색"
-              />
-              {inputTagArr.map((item, idx) => (
+        <SearchTagArea>
+          <p>해시태그 검색영역</p>
+          <div className="search-tag">
+            <p>해시태그 검색 - BE</p>
+            <input
+              style={{
+                display: "block",
+                border: "1px solid black",
+                marginBottom: 20,
+              }}
+              type="text"
+              ref={inputTags}
+              onKeyPress={handleAddTagEnter}
+              placeholder="태그검색"
+            />
+            {inputTagArr.length === 0 ? (
+              <span className="how-search">
+                키워드를 입력하고 엔터키를 쳐보세요
+              </span>
+            ) : (
+              inputTagArr.map((item, idx) => (
                 <HashTag key={idx}>
                   <span>{item}</span>
                   <button
@@ -239,12 +226,39 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
                     }}
                   ></button>
                 </HashTag>
-              ))}
-              <br />
-              <button onClick={handleSearchTagBEWait}>검색</button>
-            </div>
+              ))
+            )}
+            <br />
+            <button onClick={handleSearchTagBEWait}>검색</button>
           </div>
-        </div>
+
+          <div className="search-result">
+            <p>검색결과 출력 영역</p>
+            {/* 일치하는 태그를 가지는 메뉴를 출력 */}
+            <div className="check-area">
+              {searchedResult.map((item, index) => (
+                <p key={index}>
+                  <input
+                    type="checkbox"
+                    name="roulette"
+                    id={index}
+                    value={item.menu}
+                    onChange={handleCheckEvent}
+                  />
+                  <label htmlFor={index}>{item.menu}</label>
+                </p>
+              ))}
+            </div>
+            <button onClick={handleMakeRoulette} disabled={!canCheck}>
+              룰렛생성
+            </button>
+            <br />
+            <button onClick={handleClearAllChecks} disabled={!canCheck}>
+              체크전체해제
+            </button>
+            <span> {countCheck} / 8 </span>
+          </div>
+        </SearchTagArea>
       </MainContainer>
     </>
   );
