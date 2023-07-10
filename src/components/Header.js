@@ -4,7 +4,7 @@ import { Link, Outlet, NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <header className="p-7 bg-gray-800">
+      <header className="p-7 bg-stone-600">
         <div className="flex flex-wrap align-items-center justify-between">
           <div>
             <Link

@@ -48,5 +48,6 @@ button {
 }
 
 .ant-switch.css-dev-only-do-not-override-12upa3x {
-  background-color: coral !important;
+  background-color: #7fffd4 !important;
+  margin: 0 6px;
 }

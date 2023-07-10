@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Loading from "../components/Loading";
+import { MenuContainer } from "../style/MenuCSS";
+import Banner from "../components/Banner";
 import MenuInput from "../components/MenuInput";
 import ShowMenuList from "../components/ShowMenuList";
 import { getUserMenu, getCommonMenu } from "../api/fetch2";
@@ -28,25 +29,33 @@ const Menu = () => {
   }, []);
 
   return (
-    <div>
-      {isLoading && <Loading />}
-      <div>{userName} 님의 Menu</div>
-      <hr />
-      메뉴입력하기
-      <Switch onChange={handleToggle} />
-      메뉴출력하기
-      <hr />
-      {toggle ? (
-        <MenuInput setUserMenuList={setUserMenuList} userId={userId} />
-      ) : (
-        <ShowMenuList
-        userMenuList={userMenuList}
-        getUserMenuData={getUserMenuData}
-        commonMenuList={commonMenuList}
-        userId={userId}
-        />
-      )}
-    </div>
+    <MenuContainer>
+      <h1>
+        <mark>{userName}</mark>
+        님의 Menu
+      </h1>
+      <div className="menu-area">
+        <Banner />
+        <div className="menu">
+          <p className="menu-switch">
+            메뉴추가
+            <Switch onChange={handleToggle} />
+            메뉴리스트
+          </p>
+          <hr />
+          {toggle ? (
+            <MenuInput setUserMenuList={setUserMenuList} userId={userId} />
+          ) : (
+            <ShowMenuList
+              userMenuList={userMenuList}
+              getUserMenuData={getUserMenuData}
+              commonMenuList={commonMenuList}
+              userId={userId}
+            />
+          )}
+        </div>
+      </div>
+    </MenuContainer>
   );
 };
 

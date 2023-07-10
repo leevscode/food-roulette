@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "../style/datepicker.css";
 import Modal from "antd/es/modal/Modal";
 import { Input, Radio } from "antd";
+import { ReveiwContainer } from "../style/ReviewCSS";
 
 const Review = ({ reviewList }) => {
   const [unReview, setUnReveiw] = useState([]);
@@ -13,11 +14,11 @@ const Review = ({ reviewList }) => {
     JSON.parse(localStorage.getItem("user")).user_name,
   );
   const tempStyle = {
-    margin: 4,
-    padding: "8px 16px",
-    border: "1px dotted red",
-    display: "flex",
-    justifyContent: "space-between",
+    // margin: 4,
+    // padding: "8px 16px",
+    // border: "1px dotted red",
+    // display: "flex",
+    // justifyContent: "space-between",
   };
   const [reviewMenuInfo, setReviewMenuInfo] = useState({});
   // patch 연결!!
@@ -28,7 +29,7 @@ const Review = ({ reviewList }) => {
   };
   // datepicker - 미등록 리스트 불러오기
   // const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState();
   const handleSendDate = async () => {
     console.log("state 변수", selectedDate);
     if (!selectedDate) {
@@ -101,8 +102,8 @@ const Review = ({ reviewList }) => {
 
   // JSX
   return (
-    <div>
-      <p>{userName} 님의 Review 미등록 리스트</p>
+    <ReveiwContainer>
+      <h1>{userName} 님의 Review 미등록 리스트</h1>
       <hr />
       <DatePicker
         todayButton="이번달로"
@@ -115,25 +116,17 @@ const Review = ({ reviewList }) => {
         isClearable
         placeholderText="날짜를 선택해주세요"
       />
-      <br />
-      <button onClick={handleSendDate}>날짜전달</button>
-      <hr />
-      {unReview.length === 0 ? (
-        <p>리스트가 없어요</p>
-      ) : (
-        <div>
-          <div
-            style={{
-              border: "1px solid coral",
-              padding: 8,
-              margin: "0 auto",
-              width: "80%",
-            }}
-          >
+      <button className="search-btn" onClick={handleSendDate}>
+        검색
+      </button>
+      <div className="unreview-list">
+        {unReview.length === 0 ? (
+          <p>리스트가 없어요</p>
+        ) : (
+          <>
             {unReview.map((item, index) => (
-              <div style={tempStyle} key={index}>
+              <div className="unreview-item" style={tempStyle} key={index}>
                 <span>{item.menu}</span>
-                <span> {/* */} </span>
                 <span>{item.paymentAt}</span>
                 <button
                   onClick={() => handleEnterReview(item)}
@@ -143,9 +136,9 @@ const Review = ({ reviewList }) => {
                 </button>
               </div>
             ))}
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </div>
       <Modal
         title="리뷰를 등록해 보아요"
         open={isModalOpen}
@@ -178,7 +171,7 @@ const Review = ({ reviewList }) => {
           <Radio value={3}>3점</Radio>
         </Radio.Group>
       </Modal>
-    </div>
+    </ReveiwContainer>
   );
 };
 
