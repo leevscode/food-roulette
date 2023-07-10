@@ -48,13 +48,11 @@ const CalculateChart = ({ user, month, year }) => {
 
   return (
     <>
-      <div className="p-6 mt-5 shadow rounded bg-white">
+      <div className="mt-5">
         <div
           style={{
-            height: "400px",
-            width: "500px",
-            display: "flex",
-            justifyContent: "center",
+            height: "540px",
+            width: "540px",
           }}
         >
           <ResponsivePie
@@ -79,6 +77,7 @@ const CalculateChart = ({ user, month, year }) => {
             arcLabel=""
             arcLinkLabel="label"
             arcLabelsSkipAngle={10}
+            arcLinkLabelsDiagonalLength={5}
             arcLabelsTextColor={{
               from: "color",
               modifiers: [["darker", 2]],

@@ -10,13 +10,13 @@ const App = () => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const options = [
-    { value: "1", label: "1월" },
-    { value: "2", label: "2월" },
-    { value: "3", label: "3월" },
-    { value: "4", label: "4월" },
-    { value: "5", label: "5월" },
-    { value: "6", label: "6월" },
-    { value: "7", label: "7월" },
+    { value: "1", label: "1월 소비내역" },
+    { value: "2", label: "2월 소비내역" },
+    { value: "3", label: "3월 소비내역" },
+    { value: "4", label: "4월 소비내역" },
+    { value: "5", label: "5월 소비내역" },
+    { value: "6", label: "6월 소비내역" },
+    { value: "7", label: "7월 소비내역" },
   ];
 
   const onMonthChange = value => {

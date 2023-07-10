@@ -158,7 +158,7 @@ const Schedule = () => {
                       <img
                         className="pepe-happy"
                         src="/images/happy.png"
-                        alt=""
+                        alt="절약"
                       />
                     </div>
                   ) : (
