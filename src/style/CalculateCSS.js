@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+export const CalculateChartText = styled.p`
+  z-index: 999;
+`;
+
 export const CalculateBg = styled.div`
   position: relative;
   margin: 0 auto;
