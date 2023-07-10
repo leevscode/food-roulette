@@ -19,6 +19,8 @@ const Schedule = () => {
   const [selectedScheduleTotal, setSelectedScheduleTotal] = useState(0);
   const [scheduleData, setScheduleData] = useState([]);
   const [CalendarDetail, setCalendarDetail] = useState([]);
+  // ipayment
+  const [iPayment, setIPayment] = useState(0);
 
   const getCalendarLoad = async () => {
     try {
@@ -26,6 +28,7 @@ const Schedule = () => {
       const data02 = await getCalendar(userId, year, month - 1);
       const data03 = await getCalendar(userId, year, month - 2);
       let copy = [...data01, ...data02, data03];
+      console.log(copy);
       setScheduleData(copy);
     } catch (err) {
       console.log(err);
@@ -46,6 +49,8 @@ const Schedule = () => {
 
   const onClickSetSchedule = _result => {
     console.log("날짜를 클릭", _result);
+    setIPayment(_result.ipayment);
+
     setSelectedSchedulePayment(_result.paymentAt);
     setSelectedScheduleTotal(_result.total);
     setSelectedSchedule(_result);
@@ -77,7 +82,7 @@ const Schedule = () => {
             onClickSetSchedule(result);
           }}
         >
-          <div style={{ width: "100%", color: "#59B2A2", fontweight: "bold" }}>
+          <div style={{ width: "100%", backgroundColor: "#7DFCD3", borderRadius:"20px", fontWeight: "bold" }}>
             {result.total}
           </div>
         </div>
@@ -152,15 +157,24 @@ const Schedule = () => {
                 <div className="calendar-scroll">
                   {/* DB를 이용한 목록 출력 */}
                   {CalendarDetail.length === 0 ? (
-                    <div className="calendar-nopay">
-                      돈을 절약 하셨군요 <br />
-                      축하드립니다
-                      <img
-                        className="pepe-happy"
-                        src="/images/happy.png"
-                        alt="절약"
-                      />
-                    </div>
+                    <>
+                      {iPayment !== 0 ? (
+                        <div className="calendar-review">
+                          리뷰를 <br/>
+                          등록 해주세요! <br />
+                        </div>
+                      ) : (
+                        <div className="calendar-nopay">
+                          돈을 절약 하셨군요. <br />
+                          축하드립니다
+                          <img
+                            className="pepe-happy"
+                            src="/images/happy.png"
+                            alt="절약"
+                          />
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <div>
                       {CalendarDetail.map((item, index) => (

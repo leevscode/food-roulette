@@ -14,9 +14,11 @@ const getCalendarDetail = async (_day, _iuser) => {
   }
 };
 
-const getCalculate = async (userId, month, setFunc) => {
+const getCalculate = async (userId, month, year, setFunc) => {
   try {
-    const res = await axios.get(`api/calculate/${userId}?month=${month}&year=2023`);
+    const res = await axios.get(
+      `api/calculate/${userId}?month=${month}&year=${year}`,
+    );
     const result = await res.data;
     // console.log(result);
     setFunc(result);
@@ -42,9 +44,14 @@ const getCalculateUser = async (_user, _month, _year) => {
   }
 };
 
-export const deleteCalendar = async () => {
+// 보류
+export const deleteCalendar = async item => {
   try {
-    const res = await axios.delete("");
+    const res = await axios.delete(
+      `/api/calender/${1}/detail?ipayment=${item.ipayment}&imanagement=${
+        item.imanagement
+      }`,
+    );
     const data = res.data;
     return data; // 삭제 결과 반환
   } catch (err) {
@@ -52,7 +59,5 @@ export const deleteCalendar = async () => {
     return {}; // 오류 발생 시 빈 객체 반환
   }
 };
-
-
 
 export { getCalculate, getCalculateUser, getCalendarDetail };

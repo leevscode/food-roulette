@@ -8,6 +8,13 @@
   line-height: 0.75em;
 }
 
+.calendar-review {
+  margin-top: 50%;
+  font-size: 50px;
+  justify-content: center;
+  text-align: center;
+}
+
 .react-calendar--doubleView {
   width: 700px;
 }
@@ -42,7 +49,7 @@
 
 .react-calendar button:enabled:hover {
   cursor: pointer;
-  background: #59b2a2;
+  background: #8CFCD3;
   opacity: 0.5;
 }
 
@@ -121,7 +128,7 @@
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: #e6e6e6;
+  background-color: #8CFCD3;
 }
 
 .react-calendar__tile--now {
@@ -166,18 +173,15 @@
   z-index: 2;
 }
 
-.calendar-day{
+.calendar-day {
   display: flex;
-  margin-top: 5px;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
   text-align: center;
   width: 100%;
-  border-radius: 8px;
   background-color: #bffff3;
   color: #333333;
+  font-size: 30px;
   padding: 10px;
-  border: 1px solid #333333;
 }
 
 .calendar-input {
@@ -201,7 +205,7 @@
 }
 
 .calendar-info-box:first-child {
-  background-color: #59B2A2;
+  background-color: #59b2a2;
   color: white;
 }
 
@@ -259,10 +263,10 @@
   justify-content: center;
   margin-top: 50px;
   text-align: center;
-  
 }
 
 .calendar-nopay {
+  font-size: 40px;
   margin-top: 40px;
   justify-content: center;
   text-align: center;

@@ -6,14 +6,16 @@ export const CalculateChartText = styled.p`
 
 export const CalculateBg = styled.div`
   position: relative;
+  color: white;
   margin: 0 auto;
-  border-radius: 30px;
-  width: 40%;
+  width: 750px;
   height: auto;
   min-height: 790px;
   max-height: 790px;
   padding-bottom: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  background-image: url("./images/chartinfo.png");
+  background-size: cover;
+  background-position: -26px;
   z-index: 5;
 `;
 

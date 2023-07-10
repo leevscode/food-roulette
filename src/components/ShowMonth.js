@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Form, Select } from "antd";
 import CalculateChart from "./CalculateChart";
+import ChartProgressBar from "./ChartProgressBar";
 
 const { Option } = Select;
 
-const App = () => {
+const ShowMonth = ({ setMonth }) => {
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("7");
 
   const options = [
     { value: "1", label: "1월 소비내역" },
@@ -20,6 +21,7 @@ const App = () => {
 
   const onMonthChange = value => {
     setSelectedOption(value);
+    setMonth(value);
   };
 
   return (
@@ -65,14 +67,19 @@ const App = () => {
         {selectedOption ? (
           <>
             <div>{`${selectedOption}월`}</div>
+            <ChartProgressBar
+              user={userId}
+              month={selectedOption}
+              year={2023}
+            />
             <CalculateChart user={userId} month={selectedOption} year={2023} />
           </>
         ) : (
-          <p>차트를 선택해주세요</p>
+          <p>7월 차트</p>
         )}
       </div>
     </div>
   );
 };
 
-export default App;
+export default ShowMonth;

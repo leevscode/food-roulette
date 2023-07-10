@@ -5,7 +5,7 @@ import ChartProgressBar from "./ChartProgressBar";
 
 const CalculateChart = ({ user, month, year }) => {
   const [data, setData] = useState([]);
-  const [hasData, setHasData] = useState(true); // 상태 변수 위치 수정
+  const [hasData, setHasData] = useState(true); 
 
   const colors = [
     "#DFFFF9",

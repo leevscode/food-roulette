@@ -22,52 +22,44 @@ import { getCalculate } from "../api/fetch3";
 const Calculate = () => {
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
   const [monthData, setMonthData] = useState({});
+
+  const [month, setMonth] = useState(7);
+
   const getCalculateData = async () => {
-    const data = await getCalculate(userId, 7, setMonthData);
+    const data = await getCalculate(userId, month, 2023, setMonthData);
     calculateProgress(data);
   };
   useEffect(() => {
     getCalculateData();
-  }, []);
+  }, [month]);
 
   const calculateProgress = _data => {
-    console.log(_data);
+    console.log("프로그래스 데이터 : ", _data);
     const percent = Math.floor(
       (_data.management.balance / _data.management.monthLimit) * 100,
     );
     setProgressPercent(percent);
-   // setMonthData(_data);
+    setMonthData(_data);
   };
 
   const [totalBalance, setTotalBalance] = useState(0);
   const [remainingBalance, setRemainingBalance] = useState(0);
   const [progressPercent, setProgressPercent] = useState(0);
 
-  // useEffect(() => {
-  //   setTotalBalance(monthData.management?.expense || 0);
-  //   console.log(monthData.management?.expense);
-  //   const calculateProgress = () => {
-  //     const percent = Math.floor((remainingBalance / totalBalance) * 100);
-  //     setProgressPercent(percent);
-  //   };
-  //   calculateProgress();
-  // }, [remainingBalance, totalBalance]);
-
   return (
     <CalculateBg>
       <>
-        {/* <Backgroundimg /> */}
         <Limit>
           <h1>이달의 한도</h1>
           <ProgressContainer>
-            <ProgressFill style={{ width: `100%` }}>
+            <ProgressFill style={{ width: `${progressPercent}%` }}>
               <ProgressText>{progressPercent && progressPercent}%</ProgressText>
               <ProgressFillInner></ProgressFillInner>
             </ProgressFill>
           </ProgressContainer>
         </Limit>
         <br />
-        <ShowMonth />
+        <ShowMonth setMonth={setMonth} />
       </>
     </CalculateBg>
   );
