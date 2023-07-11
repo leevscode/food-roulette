@@ -15,7 +15,7 @@ const Header = () => {
               <NavLink
                 to="/main"
                 className={({ isActive }) =>
-                  "" + (isActive ? "text-lime-500" : "text-white")
+                  isActive ? "text-lime-500" : "text-white"
                 }
               >
                 룰렛
@@ -25,7 +25,7 @@ const Header = () => {
               <NavLink
                 to="/menu"
                 className={({ isActive }) =>
-                  "" + (isActive ? "text-green-500" : "text-white")
+                  isActive ? "text-green-500" : "text-white"
                 }
               >
                 메뉴 설정
@@ -35,7 +35,7 @@ const Header = () => {
               <NavLink
                 to="/review"
                 className={({ isActive }) =>
-                  "" + (isActive ? "text-cyan-400" : "text-white")
+                  isActive ? "text-cyan-400" : "text-white"
                 }
               >
                 리뷰 등록
@@ -45,7 +45,7 @@ const Header = () => {
               <NavLink
                 to="/calendar"
                 className={({ isActive }) =>
-                  "" + (isActive ? "text-emerald-500" : "text-white")
+                  isActive ? "text-emerald-500" : "text-white"
                 }
               >
                 달력
@@ -55,7 +55,7 @@ const Header = () => {
               <NavLink
                 to="/calculate"
                 className={({ isActive }) =>
-                  "" + (isActive ? "text-teal-500" : "text-white")
+                  isActive ? "text-teal-500" : "text-white"
                 }
               >
                 소비 실적
@@ -65,7 +65,7 @@ const Header = () => {
           <div>
             <Link
               to="/"
-              className="text-white hover:text-indigo-600"
+              className="text-white hover:text-sky-400"
               onClick={() => {
                 localStorage.setItem(
                   "user",

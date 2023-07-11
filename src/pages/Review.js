@@ -6,22 +6,19 @@ import Modal from "antd/es/modal/Modal";
 import { Input, Radio } from "antd";
 import { ReveiwContainer } from "../style/ReviewCSS";
 
-const Review = ({ reviewList }) => {
+const Review = () => {
   const [unReview, setUnReveiw] = useState([]);
-  // console.log(reviewList);
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
   const [userName] = useState(
     JSON.parse(localStorage.getItem("user")).user_name,
   );
   const [reviewMenuInfo, setReviewMenuInfo] = useState({});
-  // patch 연결!!
+  // patch 연결
   const handleEnterReview = _item => {
     showModal();
-    console.log(_item);
     setReviewMenuInfo(_item);
   };
-  // datepicker - 미등록 리스트 불러오기
-  // const [selectedDate, setSelectedDate] = useState(null);
+  // datepicker
   const [selectedDate, setSelectedDate] = useState();
   const handleSendDate = async () => {
     console.log("state 변수", selectedDate);
@@ -41,6 +38,7 @@ const Review = ({ reviewList }) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
+  // 리뷰 작성
   const handleOk = async () => {
     const regex = /^[1-9]\d*$/; // 숫자만 허용하는 정규표현식
     if (!inputPoint || !inputPrice || !inputRestaurant) {
