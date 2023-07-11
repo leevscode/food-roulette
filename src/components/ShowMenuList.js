@@ -29,18 +29,9 @@ const ShowMenuList = ({
 
   return (
     <MenuShowContainer>
-      <div className="user-menu">
+      <div className="user-menu menu-list">
         <p>유저가 입력한 메뉴</p>
-        <div
-          style={{
-            border: "1px solid #776d61",
-            padding: 8,
-            // background: "#776d61",
-            background: "#b5e3d8",
-            maxHeight: 700,
-            overflowY: "scroll",
-          }}
-        >
+        <div>
           {userMenu.length === 0 ? (
             <span>* 메뉴를 입력해보아요</span>
           ) : (
@@ -67,17 +58,9 @@ const ShowMenuList = ({
         </div>
       </div>
 
-      <div className="common-menu">
+      <div className="common-menu menu-list">
         <p>추천메뉴</p>
-        <div
-          style={{
-            border: "1px solid #776d61",
-            padding: 8,
-            background: "#b5e3d8",
-            maxHeight: 700,
-            overflowY: "scroll",
-          }}
-        >
+        <div>
           {commonMenu.map(item => (
             <div key={item.iuserMenu}>
               <span style={{ fontSize: 32 }}>메뉴명 : {item.menu}</span>

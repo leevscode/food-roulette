@@ -12,9 +12,24 @@ export const HashTag = styled.div`
     margin-right: 4px;
   }
   & > button {
+    position: relative;
+    top: -3px;
+    width: 24px;
+    height: 24px;
     margin-left: 4px;
-    &::before {
-      content: "X";
+    background-color: transparent;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 16px;
+      background-color: #474747;
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
     }
   }
 `;
@@ -114,5 +129,24 @@ export const MenuShowContainer = styled.div`
   .user-menu button {
     background-color: #776d61;
     color: white;
+  }
+  .menu-list > div {
+    border: 1px solid #776d61;
+    padding: 8px;
+    background: #b5e3d8;
+    // background: #776d61;
+    max-height: 700px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #59b2a2;
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #7fffd4;
+      border-radius: 20px;
+    }
   }
 `;
