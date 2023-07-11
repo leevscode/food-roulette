@@ -40,14 +40,10 @@ body {
   line-height: 1.4;
   letter-spacing: -0.3px;
   word-break: keep-all;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 button {
   border: none;
   cursor: pointer;
 }
 
-.ant-switch.css-dev-only-do-not-override-12upa3x {
-  background-color: #7fffd4 !important;
-  margin: 0 6px;
-}

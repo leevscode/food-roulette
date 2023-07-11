@@ -6,21 +6,7 @@ const Header = () => {
     <>
       <header className="p-7 bg-stone-600">
         <div className="flex flex-wrap align-items-center justify-between">
-          <div>
-            <Link
-              to="/"
-              className="text-white hover:text-indigo-600"
-              onClick={() => {
-                localStorage.setItem(
-                  "user",
-                  JSON.stringify({ user_id: 0, user_name: "" }),
-                );
-                // localStorage.removeItem("user");
-              }}
-            >
-              로그아웃
-            </Link>
-          </div>
+          <div className="text-white">어서오세요</div>
           <ul className="flex items-center justify-center gap-4">
             <li>
               <NavLink
@@ -74,8 +60,18 @@ const Header = () => {
             </li>
           </ul>
           <div>
-            <Link to="/" className="text-white hover:text-rose-500">
-              한도
+            <Link
+              to="/"
+              className="text-white hover:text-indigo-600"
+              onClick={() => {
+                localStorage.setItem(
+                  "user",
+                  JSON.stringify({ user_id: 0, user_name: "" }),
+                );
+                // localStorage.removeItem("user");
+              }}
+            >
+              로그아웃
             </Link>
           </div>
         </div>
