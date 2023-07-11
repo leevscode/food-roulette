@@ -9,6 +9,7 @@ import Menu from "./pages/Menu";
 import Calculate from "./pages/Calculate";
 import NotFound from "./pages/NotFound";
 import Review from "./pages/Review";
+import About from "./pages/About";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -37,6 +38,7 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/calculate" element={<Calculate />} />
           <Route path="/review" element={<Review reviewList={reviewList} />} />
+          <Route path="/about" element={<About />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

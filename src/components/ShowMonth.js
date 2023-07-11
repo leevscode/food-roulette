@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Select } from "antd";
 import CalculateChart from "./CalculateChart";
-import ChartProgressBar from "./ChartProgressBar";
 
 const { Option } = Select;
 
@@ -67,11 +66,6 @@ const ShowMonth = ({ setMonth }) => {
         {selectedOption ? (
           <>
             <div>{`${selectedOption}월`}</div>
-            <ChartProgressBar
-              user={userId}
-              month={selectedOption}
-              year={2023}
-            />
             <CalculateChart user={userId} month={selectedOption} year={2023} />
           </>
         ) : (

@@ -58,6 +58,16 @@ const Header = () => {
                 소비 실적
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  "" + (isActive ? "text-teal-500" : "text-white")
+                }
+              >
+                제작자들
+              </NavLink>
+            </li>
           </ul>
           <div>
             <Link

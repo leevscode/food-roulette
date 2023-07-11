@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { getCalculate, getCalculateUser } from "../api/fetch3";
-import ChartProgressBar from "./ChartProgressBar";
+
 
 const CalculateChart = ({ user, month, year }) => {
   const [data, setData] = useState([]);
@@ -32,8 +32,6 @@ const CalculateChart = ({ user, month, year }) => {
     "pink",  
     "orange", 
   ];
-  
-  const limit = 500000;
 
   const getCalculateUserData = async () => {
     console.log(month);
@@ -121,7 +119,7 @@ const CalculateChart = ({ user, month, year }) => {
                 ]}
               />
             )}
-            <ChartProgressBar value={data.length} limit={limit} />
+    
           </div>
         ) : (
           <p>데이터가 없습니다.</p>
