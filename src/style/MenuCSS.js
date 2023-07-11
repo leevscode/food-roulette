@@ -51,9 +51,6 @@ export const MenuContainer = styled.div`
     color: white;
     font-size: 20px;
   }
-  /* button:hover {
-    box-shadow: 2px 2px 4px 0px rgb(177 172 172 / 50%);
-  } */
   .menu-area {
     display: flex;
     justify-content: space-between;

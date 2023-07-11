@@ -186,9 +186,12 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
             alt=""
           />
         </UserAmountArea>
-        <RouletteArea style={{ border: "1px solid red" }}>
-          <p>{userName || "user"} 님의 룰렛</p>
-          <hr />
+        <RouletteArea>
+          <h1>
+            <mark>{userName || "user"}</mark>
+            <span> {/* */} </span>
+            님의 룰렛
+          </h1>
           <Roulette
             checkedList={checkedList}
             searchedResult={searchedResult}
@@ -198,7 +201,6 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
         </RouletteArea>
 
         <SearchTagArea>
-          <p>해시태그 검색영역</p>
           <div className="search-tag">
             <p>해시태그 검색</p>
             <input
@@ -216,6 +218,7 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
                 <HashTag key={idx}>
                   <span>{item}</span>
                   <button
+                    className="hash-tag"
                     onClick={() => {
                       handleRemoveTag(idx);
                     }}
@@ -228,7 +231,7 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
           </div>
 
           <div className="search-result">
-            <p>검색결과 출력 영역</p>
+            <h3>검색결과 리스트</h3>
             {/* 일치하는 태그를 가지는 메뉴를 출력 */}
             <div className="check-area">
               {searchedResult.length === 0 ? (
@@ -250,14 +253,16 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
                 </div>
               )}
             </div>
-            <button onClick={handleMakeRoulette} disabled={!canCheck}>
-              룰렛생성
-            </button>
-            <br />
+            <div className="result">
+              <button onClick={handleMakeRoulette} disabled={!canCheck}>
+                룰렛생성
+              </button>
+              {/* <br />
             <button onClick={handleClearAllChecks} disabled={!canCheck}>
               체크전체해제
-            </button>
-            <span> {countCheck} / 8 </span>
+            </button> */}
+              <span> {countCheck} / 8 </span>
+            </div>
           </div>
         </SearchTagArea>
       </MainContainer>

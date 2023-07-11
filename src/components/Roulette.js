@@ -141,7 +141,7 @@ const Roulette = ({
           closable={false}
           maskClosable={false}
         >
-          <p>{data[prizeNumber].option}</p>
+          <p>{data[prizeNumber].option} 이(가) 나왔습니다!</p>
         </Modal>
       ) : null}
     </>

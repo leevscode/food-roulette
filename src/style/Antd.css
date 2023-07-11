@@ -1,0 +1,62 @@
+.ant-modal-root,
+.css-dev-only-do-not-override-12upa3x {
+  font-family: "omyu_pretty", "sans-serif";
+  font-size: 20px;
+}
+.ant-modal-content .ant-modal-body {
+  font-size: 24px;
+}
+
+.ant-switch.css-dev-only-do-not-override-12upa3x {
+  background-color: #7fffd4 !important;
+  margin: 0 6px;
+}
+.ant-modal-footer {
+  margin-top: 32px !important;
+}
+.ant-modal-footer button {
+  padding: 0 16px;
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-btn-default:not(
+    :disabled
+  ):hover {
+  color: black;
+  border-color: #b5e3d8;
+}
+.ant-btn-primary {
+  background-color: #776d61;
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-btn-primary:not(
+    :disabled
+  ):hover {
+  color: black;
+  background-color: #7fffd4;
+  border: 1px solid transparent !important;
+}
+.ant-radio .ant-radio-input {
+  background-color: #7fffd4 !important;
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-radio-wrapper
+  .ant-radio-checked
+  .ant-radio-inner {
+  border-color: #776d61;
+  background-color: #776d61;
+}
+.css-dev-only-do-not-override-12upa3x:hover {
+  border-color: #776d61 !important;
+  accent-color: #776d61 !important;
+}
+.css-dev-only-do-not-override-12upa3x[placeholder="식당"] {
+  margin-bottom: 14px;
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-input:focus,
+:where(.css-dev-only-do-not-override-12upa3x).ant-input-focused {
+  border-color: rgb(119, 109, 97);
+  box-shadow: 0 0 0 2px rgb(119, 109, 97 / 10%);
+}
+.ant-modal-header .ant-modal-title {
+  font-size: 24px;
+}
+.ant-select-selection-search-input[type="search"] {
+  font-size: 24px;
+}
