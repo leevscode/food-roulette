@@ -86,18 +86,18 @@ const Roulette = ({
           innerBorderWidth={[8]}
           radiusLineColor={["transparent"]}
           radiusLineWidth={[2]}
-          textColors={["#ffffff"]}
+          textColors={["#fefefe"]}
           fontSize={[21]}
           perpendicularText={[true]}
           backgroundColors={[
-            "rgb(246,110,100)",
-            "rgb(250,169,78)",
-            "rgb(251,224,93)",
-            "rgb(138,224,93)",
-            "rgb(80,220,240)",
-            "rgb(155,180,238)",
-            "rgb(180,140,238)",
-            "rgb(255,174,200)",
+            "rgb(181,227,216)",
+            "rgb(147,200,180)",
+            "rgb(102,160,145)",
+            "rgb(119,109,97)",
+            "rgb(143 131 117)",
+            "rgb(180,145,115)",
+            "rgb(133,190,150)",
+            "rgb(123,200,164)",
           ]}
           spinDuration={[0.5]}
           onStopSpinning={() => {

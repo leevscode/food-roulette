@@ -7,9 +7,6 @@ export const ReveiwContainer = styled.div`
     font-size: 42px;
     text-align: center;
     margin-bottom: 24px;
-    mark {
-      background: linear-gradient(180deg, white 60%, gold 40%);
-    }
   }
   hr {
     margin-bottom: 8px;

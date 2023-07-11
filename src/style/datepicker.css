@@ -803,7 +803,7 @@
 }
 .react-datepicker__close-icon::after {
   cursor: pointer;
-  background-color: #216ba5;
+  background-color: #776d61;
   color: #fff;
   border-radius: 50%;
   height: 16px;
@@ -886,4 +886,14 @@
 
 .react-datepicker__tab-loop {
   display: inline-block;
+}
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+  top: 7px;
+}
+.react-datepicker__month-text--keyboard-selected {
+  background-color: rgba(127, 255, 212, 0.4);
+}
+.react-datepicker__month-text--keyboard-selected:hover {
+  background-color: rgb(127, 255, 212);
 }
