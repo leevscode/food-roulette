@@ -1,12 +1,15 @@
 import React from "react";
 import { Link, Outlet, NavLink } from "react-router-dom";
+import { HeaderLogo } from "../style/HeaderCSS";
 
 const Header = () => {
   return (
     <>
       <header className="p-7 bg-stone-600">
         <div className="flex flex-wrap align-items-center justify-between">
-          <div className="text-white">어서오세요</div>
+          <HeaderLogo>
+            <img src="/images/mekkilogo.svg" alt="어서오세요" />
+          </HeaderLogo>
           <ul className="flex items-center justify-center gap-4">
             <li>
               <NavLink
