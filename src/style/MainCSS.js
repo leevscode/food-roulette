@@ -19,15 +19,25 @@ export const MainContainer = styled.div`
 `;
 
 export const UserAmountArea = styled.div`
-  width: 25%;
-  display: "flex";
-  flex-direction: "column";
-  justify-content: "space-between";
-  & > div {
+  width: 320px;
+  .bubble {
     width: 100%;
-    height: 70%;
-    background: url("/images/thinkbubble.png") no-repeat 50px;
-    background-size: contain;
+    height: 100px;
+    padding: 25px;
+    background: url("/images/thinkbubble.png") no-repeat center;
+    background-size: 380px 100px;
+  }
+  .answer {
+    padding-left: 70px;
+  }
+  .answera {
+    padding-left: 27px;
+    font-size: 22px;
+  }
+  .question {
+    padding-left: 96px;
+    background: url("/images/thinkbubblea.png") no-repeat center;
+    background-size: 380px 100px;
   }
 `;
 
@@ -36,9 +46,6 @@ export const RouletteArea = styled.div`
   text-align: center;
   h1 {
     font-size: 32px;
-    mark {
-      background: linear-gradient(180deg, white 60%, gold 40%);
-    }
   }
   button {
     border: 1px solid transparent;

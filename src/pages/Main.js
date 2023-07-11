@@ -166,19 +166,30 @@ const Main = ({ userName, setUserName, userId, setReviewList }) => {
         <UserAmountArea>
           <div>
             <p>
-              {consumeData.year}년 {consumeData.month}월 입니다
+              오늘은{" "}
+              <mark>
+                {consumeData.year}년 {consumeData.month}월
+              </mark>{" "}
+              입니다
             </p>
             <hr />
-            <p>이번 달 한도는 {monthLimit} 원으로 설정하셨습니다</p>
-            <p>이달의 지출은 {consumeData.expense}원 이군요</p>
-            <p>
-              사용할 수 있는 금액은? <br /> {consumeData.balance}원 입니다
-            </p>
-            <img
+            <div className="bubble question">이번 달 한도는?</div>
+            <div className="bubble answera">
+              <mark>{monthLimit}원</mark>으로 설정하셨습니다
+            </div>
+            <div className="bubble question">이달의 지출은?</div>
+            <div className="bubble answer">
+              <mark>{consumeData.expense}원</mark> 이군요
+            </div>
+            <div className="bubble question">사용할 수 있는 금액은?</div>
+            <div className="bubble answer">
+              <mark>{consumeData.balance}원</mark> 입니다
+            </div>
+            {/* <img
               style={{ transform: "scaleX(-1) rotate(60deg)" }}
               src="/images/thinkbubble.png"
               alt=""
-            />
+            /> */}
           </div>
           <img
             style={{ transform: "scaleX(-1)" }}
