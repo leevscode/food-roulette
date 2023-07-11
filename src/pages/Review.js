@@ -13,13 +13,6 @@ const Review = ({ reviewList }) => {
   const [userName] = useState(
     JSON.parse(localStorage.getItem("user")).user_name,
   );
-  const tempStyle = {
-    // margin: 4,
-    // padding: "8px 16px",
-    // border: "1px dotted red",
-    // display: "flex",
-    // justifyContent: "space-between",
-  };
   const [reviewMenuInfo, setReviewMenuInfo] = useState({});
   // patch 연결!!
   const handleEnterReview = _item => {
@@ -103,7 +96,10 @@ const Review = ({ reviewList }) => {
   // JSX
   return (
     <ReveiwContainer>
-      <h1>{userName} 님의 Review 미등록 리스트</h1>
+      <h1>
+        <mark>{userName}</mark>
+        님의 Review 미등록 리스트
+      </h1>
       <hr />
       <DatePicker
         todayButton="이번달로"
@@ -124,13 +120,18 @@ const Review = ({ reviewList }) => {
           <p>리스트가 없어요</p>
         ) : (
           <>
+            <div className="unreview-item unreview-index">
+              <span>메뉴</span>
+              <span className="idx">날짜</span>
+              <span className="idx">등록</span>
+            </div>
             {unReview.map((item, index) => (
-              <div className="unreview-item" style={tempStyle} key={index}>
+              <div className="unreview-item" key={index}>
                 <span>{item.menu}</span>
                 <span>{item.paymentAt}</span>
                 <button
+                  className="review-btn"
                   onClick={() => handleEnterReview(item)}
-                  style={{ border: "1px solid black" }}
                 >
                   리뷰등록
                 </button>

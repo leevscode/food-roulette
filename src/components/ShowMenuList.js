@@ -65,6 +65,7 @@ const ShowMenuList = ({
             <div key={item.iuserMenu}>
               <span style={{ fontSize: 32 }}>메뉴명 : {item.menu}</span>
               <span> {/* */} </span>
+              <br />
               <span>
                 태그들 :
                 {item.tags.map(item => (

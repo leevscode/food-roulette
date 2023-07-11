@@ -141,7 +141,7 @@ export const MenuShowContainer = styled.div`
       width: 10px;
     }
     &::-webkit-scrollbar-track {
-      background-color: #59b2a2;
+      background-color: #776d61;
       border-radius: 20px;
     }
     &::-webkit-scrollbar-thumb {
