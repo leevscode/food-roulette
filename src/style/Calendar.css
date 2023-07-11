@@ -49,8 +49,8 @@
 
 .react-calendar button:enabled:hover {
   cursor: pointer;
-  background: #8CFCD3;
-  opacity: 0.5;
+  background: rgba(119, 109, 97, 0.5);
+  /*opacity: 0.6;*/
 }
 
 .react-calendar__navigation {
@@ -128,7 +128,7 @@
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: #8CFCD3;
+  background-color: #8cfcd3;
 }
 
 .react-calendar__tile--now {
@@ -162,6 +162,16 @@
   background-color: #e6e6e6;
 }
 
+.calendar-review-move{
+  font-size: 40px;
+  margin-top: 50px;
+  border: 1px solid #000;
+  color: #ffffff;
+  border-radius: 5px;
+  background: #776d61
+  
+}
+
 .selected-schedule {
   position: absolute;
   top: 0;
@@ -178,8 +188,8 @@
   justify-content: center;
   text-align: center;
   width: 100%;
-  background-color: #bffff3;
-  color: #333333;
+  background-color: #b5e3d8;
+  color: black;
   font-size: 30px;
   padding: 10px;
 }
@@ -205,7 +215,7 @@
 }
 
 .calendar-info-box:first-child {
-  background-color: #59b2a2;
+  background-color: #776d61;
   color: white;
 }
 
@@ -277,7 +287,7 @@
   width: 250px;
   height: 250px;
   margin-top: 50px;
-  margin-left: 40px;
+  margin-left: 10px;
 }
 
 .calendar-scroll {

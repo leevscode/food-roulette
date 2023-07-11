@@ -6,7 +6,6 @@ export const CalculateChartText = styled.p`
 
 export const CalculateBg = styled.div`
   position: relative;
-  color: white;
   margin: 0 auto;
   width: 750px;
   height: auto;
@@ -17,6 +16,10 @@ export const CalculateBg = styled.div`
   background-size: cover;
   background-position: -26px;
   z-index: 5;
+  h1 {
+    color: white;
+    margin-top: -5px;
+  }
 `;
 
 export const Backgroundimg = styled.div`
@@ -58,7 +61,7 @@ export const ProgressContainer = styled.div`
 
 export const ProgressFill = styled.div`
   height: 100%;
-  background-color: #59b2a2;
+  background-color: #b5e3d8;
   border-radius: 5px;
 `;
 

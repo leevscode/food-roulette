@@ -72,7 +72,7 @@ export const IntroForm = styled.div`
 export const IntroButton = styled.button`
   margin-top: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  background-color: #4caf50;
+  background-color: #776d61;
   color: white;
   border-radius: 8px;
   padding: 8px 20px;

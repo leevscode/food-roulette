@@ -35,11 +35,16 @@ const Calculate = () => {
 
   const calculateProgress = _data => {
     console.log("프로그래스 데이터 : ", _data);
-    const percent = Math.floor(
-      (_data.management.balance / _data.management.monthLimit) * 100,
-    );
-    setProgressPercent(percent);
-    setMonthData(_data);
+    if (!_data.management) {
+      setProgressPercent(100);
+      return;
+    } else {
+      const percent = Math.floor(
+        (_data.management.balance / _data.management.monthLimit) * 100,
+      );
+      setProgressPercent(percent);
+      setMonthData(_data);
+    }
   };
 
   const [totalBalance, setTotalBalance] = useState(0);

@@ -5,6 +5,7 @@ import "../style/Calendar.css";
 import { getCalendar } from "../api/fetch";
 import { getCalendarDetail } from "../api/fetch3";
 import CalendarDetailList from "../components/CalendarDetailList";
+import { useNavigate } from "react-router-dom";
 
 const Schedule = () => {
   const userId = JSON.parse(localStorage.getItem("user")).user_id;
@@ -21,6 +22,7 @@ const Schedule = () => {
   const [CalendarDetail, setCalendarDetail] = useState([]);
   // ipayment
   const [iPayment, setIPayment] = useState(0);
+  const navigate = useNavigate();
 
   const getCalendarLoad = async () => {
     try {
@@ -82,7 +84,14 @@ const Schedule = () => {
             onClickSetSchedule(result);
           }}
         >
-          <div style={{ width: "100%", backgroundColor: "#7DFCD3", borderRadius:"20px", fontWeight: "bold" }}>
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "#7DFCD3",
+              borderRadius: "20px",
+              fontWeight: "bold",
+            }}
+          >
             {result.total}
           </div>
         </div>
@@ -112,7 +121,7 @@ const Schedule = () => {
               fontSize: 14,
             }}
           >
-            자료없음
+            자료 없음
           </div>
         </div>
       );
@@ -160,8 +169,14 @@ const Schedule = () => {
                     <>
                       {iPayment !== 0 ? (
                         <div className="calendar-review">
-                          리뷰를 <br/>
-                          등록 해주세요! <br />
+                          리뷰 등록을 기다리고 있어요
+                          <br />
+                          <button
+                            className="calendar-review-move"
+                            onClick={() => navigate("/review")}
+                          >
+                            리뷰 등록 하러 가기
+                          </button>
                         </div>
                       ) : (
                         <div className="calendar-nopay">
