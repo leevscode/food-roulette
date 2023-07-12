@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
 import { Dimmed, RouletteBox } from "../style/MainCSS";
 import Modal from "antd/es/modal/Modal";
@@ -70,6 +70,16 @@ const Roulette = ({
     setIsModalOpen(false);
     console.log("다시선택");
   };
+  const colorPalette = [
+    "rgb(181,227,216)",
+    "rgb(147,200,180)",
+    "rgb(102,160,145)",
+    "rgb(119,109,97)",
+    "rgb(143 131 117)",
+    "rgb(180,145,115)",
+    "rgb(133,190,150)",
+    "rgb(123,200,164)",
+  ];
 
   // JSX
   return (
@@ -89,16 +99,7 @@ const Roulette = ({
           textColors={["#fefefe"]}
           fontSize={[21]}
           perpendicularText={[true]}
-          backgroundColors={[
-            "rgb(181,227,216)",
-            "rgb(147,200,180)",
-            "rgb(102,160,145)",
-            "rgb(119,109,97)",
-            "rgb(143 131 117)",
-            "rgb(180,145,115)",
-            "rgb(133,190,150)",
-            "rgb(123,200,164)",
-          ]}
+          backgroundColors={colorPalette}
           spinDuration={[0.5]}
           onStopSpinning={() => {
             setStartSpin(false);

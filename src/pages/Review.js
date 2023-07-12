@@ -23,7 +23,7 @@ const Review = () => {
   const handleSendDate = async () => {
     console.log("state 변수", selectedDate);
     if (!selectedDate) {
-      alert("날짜를 입력해");
+      alert("날짜를 입력해주세요");
       return;
     } else {
       const year = selectedDate.getFullYear();
