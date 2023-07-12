@@ -52,6 +52,7 @@ export const MenuContainer = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 0 48px;
+    gap: 40px;
     .menu {
       width: 80%;
       .menu-switch {

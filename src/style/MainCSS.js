@@ -14,12 +14,13 @@ export const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  padding: 60px 32px;
+  padding: 50px 32px;
   height: 100%;
 `;
 
 export const UserAmountArea = styled.div`
   width: 320px;
+  margin-top: 50px;
   .bubble {
     width: 100%;
     height: 100px;
@@ -76,6 +77,7 @@ export const RouletteBox = styled.div`
 
 export const SearchTagArea = styled.div`
   width: 25%;
+  margin-top: 50px;
   & > div {
     border-radius: 24px;
     padding: 16px 20px;
