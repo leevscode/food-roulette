@@ -130,7 +130,7 @@ const Schedule = () => {
 
   return (
     <>
-      <div className="p-6 mt-5 bg-white flex justify-center gap-7">
+      <div className="p-6 mt-6 bg-white flex justify-center gap-7">
         <div>
           <h1>Calendar</h1>
           <div

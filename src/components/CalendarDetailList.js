@@ -15,9 +15,9 @@ const CalendarDetailList = ({ item }) => {
       <p className="calendar-info-box">장소 : {item.restaurant}</p>
       <h2 className="calendar-info-box">페페 스코어 : {item.reviewGrade}점</h2>
       <div className="pepe-score">
-        <img src="/images/1점.png" alt="울음" />
-        <img src="/images/2점.png" alt="무난" />
-        <img src="/images/3점.png" alt="행복" />
+        <img src="/images/1point.png" alt="울음" />
+        <img src="/images/2point.png" alt="무난" />
+        <img src="/images/3point.png" alt="행복" />
       </div>
       <Radio.Group
         className="pepe-score-raido"
