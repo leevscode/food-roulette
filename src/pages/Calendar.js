@@ -89,7 +89,6 @@ const Schedule = () => {
               width: "100%",
               backgroundColor: "#7DFCD3",
               borderRadius: "20px",
-              fontWeight: "bold",
             }}
           >
             {result.total}

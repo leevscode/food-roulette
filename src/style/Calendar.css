@@ -128,7 +128,7 @@
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: #8cfcd3;
+  background-color: #9b958e;
 }
 
 .react-calendar__tile--now {
@@ -162,14 +162,13 @@
   background-color: #e6e6e6;
 }
 
-.calendar-review-move{
+.calendar-review-move {
   font-size: 40px;
   margin-top: 40px;
   border: 1px solid #000;
   color: #ffffff;
   border-radius: 5px;
-  background: #776d61
-  
+  background: #776d61;
 }
 
 .selected-schedule {
@@ -302,7 +301,7 @@
   width: 10px;
 }
 .calendar-scroll::-webkit-scrollbar-track {
-  background-color: #59b2a2;
+  background-color: #776d61;
   border-radius: 20px;
 }
 

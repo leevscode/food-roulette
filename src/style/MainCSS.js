@@ -116,6 +116,19 @@ export const SearchTagArea = styled.div`
     }
     .check-area {
       margin-bottom: 8px;
+      max-height: 500px;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: #776d61;
+        border-radius: 20px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #7fffd4;
+        border-radius: 20px;
+      }
       input {
         accent-color: #776d61;
       }
