@@ -49,7 +49,7 @@ const LimitSetting = ({
   };
 
   const btstyle = {
-    background: "aqua",
+    background: "#7FFFD4",
     borderRadius: 10,
     padding: "8px 80px",
   };
@@ -63,7 +63,13 @@ const LimitSetting = ({
       limitPrice.current.value = null;
       return false;
     } else {
-      postMonthLimit(userId, price, setMonthLimit, setConsumeData, setMonthLimitId);
+      postMonthLimit(
+        userId,
+        price,
+        setMonthLimit,
+        setConsumeData,
+        setMonthLimitId,
+      );
       setShowLimitSetting(true);
     }
     console.log(price);
