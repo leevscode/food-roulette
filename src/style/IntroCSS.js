@@ -6,7 +6,7 @@ export const IntroBox = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("/images/Intro.png") no-repeat center;
+  background: url("/images/intro.png") no-repeat center;
   background-size: cover;
 `;
 

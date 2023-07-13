@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Aboutbg = styled.div`
   padding: 400px;
-  background: url("/images/Intro.png") no-repeat center;
+  background: url("/images/intro.png") no-repeat center;
   background-size: cover;
   background-position: center -245px;
   opacity: 0.8;
