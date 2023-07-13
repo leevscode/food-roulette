@@ -64,7 +64,7 @@ const Roulette = ({
     console.log("winning menu id = imenu", winningMenuId);
 
     postWinningMenu(winningMenuId, monthLimitId, setReviewList);
-    navigate("/review");
+    navigate("/calendar");
   };
   const handleCancel = () => {
     setIsModalOpen(false);

@@ -9,7 +9,6 @@
 - React 18
 - React Router 6
 - axios
-- anime.js
 - React Calendar
 - Nivo Chart
 - Tailwind
