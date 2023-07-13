@@ -56,3 +56,6 @@
 .ant-select-selection-search-input[type="search"] {
   font-size: 24px !important;
 }
+.ant-radio-inner {
+  border-color: #776d61 !important;
+}
