@@ -2,6 +2,7 @@
 
 ## 1. 프로젝트 정보
 - [Notion](https://https://www.notion.so/5a4803f1d9fa47589ad95ee06e7c7dbd)
+- [FE_Notion](https://orchid-carpet-4d1.notion.site/FE-a254b8da3ec14ecbb0f5f070599e81a6)
 - [Figma](https://www.figma.com/file/f6eZH5AMFETsVi7rraPMmL/Untitled?type=design&node-id=0%3A1&t=PNFMKNQ8rN3gToUo-1)
 - [Canba](https://www.canva.com/design/DAFn7epFDNc/yS3NMGHExnrP95tK7zTr0Q/view?utm_content=DAFn7epFDNc&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel)
 - [Vercel](https://)
