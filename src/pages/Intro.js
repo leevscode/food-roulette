@@ -10,6 +10,7 @@ import {
   IntroButton,
 } from "../style/IntroCSS";
 import axios from "axios";
+import { axiosInstance } from "../api/fetch";
 
 const Intro = ({ setUserName, setUserId }) => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Intro = ({ setUserName, setUserId }) => {
     };
     // try...catch
     try {
-      const res = await axios.post("/api", userNameData, { headers });
+      const res = await axiosInstance.post("/api", userNameData, { headers });
       const result = res.data;
       console.log(result);
       console.log("인트로 Result : ", result);
