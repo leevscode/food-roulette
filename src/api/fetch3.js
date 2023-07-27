@@ -1,8 +1,9 @@
 import axios from "axios";
+import { axiosInstance } from "./fetch";
 
 const getCalendarDetail = async (_day, _iuser) => {
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `/api/calendar/${_iuser}/detail?paymentAt=${_day}`,
     );
     const data = await res.data;
@@ -16,8 +17,8 @@ const getCalendarDetail = async (_day, _iuser) => {
 
 const getCalculate = async (userId, month, year, setFunc) => {
   try {
-    const res = await axios.get(
-      `api/calculate/${userId}?month=${month}&year=${year}`,
+    const res = await axiosInstance.get(
+      `/api/calculate/${userId}?month=${month}&year=${year}`,
     );
     const result = await res.data;
     // console.log(result);
@@ -31,8 +32,8 @@ const getCalculate = async (userId, month, year, setFunc) => {
 
 const getCalculateUser = async (_user, _month, _year) => {
   try {
-    const res = await axios.get(
-      `api/calculate/${_user}?month=${_month}&year=${_year}`,
+    const res = await axiosInstance.get(
+      `/api/calculate/${_user}?month=${_month}&year=${_year}`,
     );
     const result = await res.data;
     console.log(result);
@@ -47,7 +48,7 @@ const getCalculateUser = async (_user, _month, _year) => {
 // 보류
 export const deleteCalendar = async item => {
   try {
-    const res = await axios.delete(
+    const res = await axiosInstance.delete(
       `/api/calender/${1}/detail?ipayment=${item.ipayment}&imanagement=${
         item.imanagement
       }`,
