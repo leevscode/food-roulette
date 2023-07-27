@@ -2,7 +2,8 @@ import axios from "axios";
 const axiosInstance = axios.create({
   // baseURL: "http://192.168.0.144:5003",
   // baseURL: "http://localhost:5003",
-  baseURL: process.env.REACT_APP_API_URL,
+  // baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "https://port-0-food-roulette-be-rt92alkjme1ys.sel4.cloudtype.app",
   timeout: 1000,
 });
 
