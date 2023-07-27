@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosInstance } from "./fetch';
 // 오늘 날짜 불러오기
 // const date = new Date();
 // const year = date.getFullYear();
@@ -8,7 +9,7 @@ import axios from "axios";
 // 전체 메뉴 불러오기
 export const getAllMenu = async (setFunc, _id) => {
   try {
-    const res = await axios.get(`/api/menu/${_id}`);
+    const res = await axiosInstance.get(`/api/menu/${_id}`);
     const result = res.data;
     setFunc(result);
     console.log(result);
@@ -19,7 +20,7 @@ export const getAllMenu = async (setFunc, _id) => {
 // 사용자가 입력한 메뉴 불러오기
 export const getUserMenu = async (setFunc, _id) => {
   try {
-    const res = await axios.get(`/api/menu/${_id}/user`);
+    const res = await axiosInstance.get(`/api/menu/${_id}/user`);
     const result = res.data;
     setFunc(result);
     console.log(result);
@@ -31,7 +32,7 @@ export const getUserMenu = async (setFunc, _id) => {
 // 공통메뉴 불러오기
 export const getCommonMenu = async setFunc => {
   try {
-    const res = await axios.get("/api/menu/common");
+    const res = await axiosInstance.get("/api/menu/common");
     const result = res.data;
     setFunc(result);
     console.log(result);
@@ -46,7 +47,7 @@ export const searchMenuItem = async (_tags, setFunc, user_id) => {
     tags: _tags,
   };
   try {
-    const res = await axios.post(`/api/main/${user_id}/menu`, data, {
+    const res = await axiosInstance.post(`/api/main/${user_id}/menu`, data, {
       headers,
     });
     const result = res.data;
@@ -66,7 +67,7 @@ export const postMenuItem = async (user_id, menu, tags) => {
     tags: tags,
   };
   try {
-    const res = await axios.post("/api/menu", data, { headers });
+    const res = await axiosInstance.post("/api/menu", data, { headers });
     const result = res.data;
     console.log(result);
     return result;
@@ -77,7 +78,7 @@ export const postMenuItem = async (user_id, menu, tags) => {
 // 메뉴 아이템 삭제
 export const deleteMenuItem = async (_userId, _menuId) => {
   try {
-    const res = await axios.delete(`/api/menu/${_userId}?iuserMenu=${_menuId}`); 
+    const res = await axiosInstance.delete(`/api/menu/${_userId}?iuserMenu=${_menuId}`); 
     const result = res.data;
     console.log(result);
     return result;
@@ -89,7 +90,7 @@ export const deleteMenuItem = async (_userId, _menuId) => {
 export const getMonthLimit = async (_userId, setFunc, setData) => {
   try {
     console.log("넘겨진 ID 값은 ? ", _userId);
-    const res = await axios.get(`/api/main/${_userId}`);
+    const res = await axiosInstance.get(`/api/main/${_userId}`);
     const result = await res.data;
     console.log(res);
     console.log("result", result);
@@ -115,7 +116,7 @@ export const postWinningMenu = async (
     imanagement: monthLimitId,
   };
   try {
-    const res = await axios.post(`/api/main`, postData, {
+    const res = await axiosInstance.post(`/api/main`, postData, {
       headers,
     });
     const result = res.data;
@@ -130,8 +131,8 @@ export const getUnReviewList = async (_userId, setFunc, year, month) => {
   console.log(year, month);
   try {
     //http://192.168.0.144:5003/api/review/1?year=2023&month=07
-    const res = await axios.get(
-      `api/review/${_userId}?year=${year}&month=${month}`,
+    const res = await axiosInstance.get(
+      `/api/review/${_userId}?year=${year}&month=${month}`,
     );
     const result = res.data;
     console.log(res);
@@ -168,7 +169,7 @@ export const patchUnReviewMenu = async (
 
   console.log("patch 명령", _userId, patchData);
   try {
-    const res = await axios.patch(`api/review/${_userId}`, patchData, {
+    const res = await axiosInstance.patch(`/api/review/${_userId}`, patchData, {
       headers,
     });
     const result = res.data;
@@ -193,7 +194,7 @@ export const postMonthLimit = async (
     monthLimit: limitPrice,
   };
   try {
-    const res = await axios.post(`/api/main/${_userId}/plan`, postData, {
+    const res = await axiosInstance.post(`/api/main/${_userId}/plan`, postData, {
       headers,
     });
     const result = res.data;
