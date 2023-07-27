@@ -2,12 +2,13 @@ import axios from "axios";
 const axiosInstance = axios.create({
   // baseURL: "http://192.168.0.144:5003",
   // baseURL: "http://localhost:5003",
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 1000,
 });
 
 const getCalendar = async (_iuser, _year, _month) => {
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `/api/calendar/${_iuser}?year=${_year}&month=${_month}`,
     );
     const data = await res.data;
@@ -35,7 +36,7 @@ export const postMenus = async _data => {
   console.log(_data);
   const headers = { "Content-Type": "application/json" };
   try {
-    const res = await axios.post("/api/menu/2", _data, headers);
+    const res = await axiosInstance.post("/api/menu/2", _data, headers);
     const data = res.data;
     console.log(data);
   } catch (error) {
