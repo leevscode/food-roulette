@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosInstance } from "./fetch';
+import { axiosInstance } from "./fetch";
 // 오늘 날짜 불러오기
 // const date = new Date();
 // const year = date.getFullYear();
