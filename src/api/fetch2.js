@@ -77,7 +77,7 @@ export const postMenuItem = async (user_id, menu, tags) => {
 // 메뉴 아이템 삭제
 export const deleteMenuItem = async (_userId, _menuId) => {
   try {
-    const res = await axios.delete(`/api/menu/${_userId}?iuserMenu=${_menuId}`); 
+    const res = await axios.delete(`/api/menu/${_userId}?iuserMenu=${_menuId}`);
     const result = res.data;
     console.log(result);
     return result;
