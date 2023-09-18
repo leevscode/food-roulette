@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 
 const getCalendar = async (_iuser, _year, _month) => {
   try {
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `/api/calendar/${_iuser}?year=${_year}&month=${_month}`,
     );
     const data = await res.data;
@@ -36,7 +36,7 @@ export const postMenus = async _data => {
   console.log(_data);
   const headers = { "Content-Type": "application/json" };
   try {
-    const res = await axios.post("/api/menu/2", _data, headers);
+    const res = await axiosInstance.post("/api/menu/2", _data, headers);
     const data = res.data;
     console.log(data);
   } catch (error) {
