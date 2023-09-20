@@ -9,12 +9,12 @@ const banner = () => {
         width={200}
         height={200}
       /> */}
-      <img
+      {/* <img
         src="/images/green.png"
         alt="그린컴퓨터아트학원"
         width={270}
         height={270}
-      />
+      /> */}
     </div>
   );
 };
